@@ -1,0 +1,41 @@
+.header {
+  padding-top: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  &__block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 112px;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    font-weight: 500;
+
+    a {
+      &:hover {
+        color: var(--f56e0f);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 1px;
+      }
+    }
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+}

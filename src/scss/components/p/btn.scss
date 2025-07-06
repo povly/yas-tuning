@@ -1,0 +1,12 @@
+.p-btn {
+  padding: 20px 36px;
+  font-weight: 500;
+  font-size: 20px;
+  border: 1px solid var(--f5f5f5);
+  border-radius: 75px;
+
+  &_orange {
+    background: var(--f56e0f);
+    border-color: var(--f56e0f);
+  }
+}

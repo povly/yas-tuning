@@ -1,0 +1,78 @@
+doctype html
+html(lang='ru')
+  head
+    block variables
+
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+    title #{ title || 'Vite App' }
+    meta(
+      name='description',
+      content=description
+    )
+
+    if libsCss
+      each css in libsCss
+        if isDev
+          link(rel='stylesheet', href=`/src/scss/libs/${css}.scss`)
+        else
+          link(rel='stylesheet', href=`css/libs/${css}.css?v=${Date.now()}`)
+
+    //- Main CSS will be injected by Vite
+    if isDev
+      link(rel='stylesheet', href='/src/scss/main.scss')
+    else
+      link(rel='stylesheet', href=`css/main.css?v=${Date.now()}`)
+
+    //- Page-specific CSS
+    if pageCss
+      each css in pageCss
+        if isDev
+          link(rel='stylesheet', href=`/src/scss/pages/${css}.scss`)
+        else
+          link(rel='stylesheet', href=`css/${css}.css?v=${Date.now()}`)
+
+    //- Block CSS
+    if blocks
+      each block in blocks
+        if isDev
+          link(rel='stylesheet', href=`/src/scss/blocks/${block}.scss`)
+        else
+          link(rel='stylesheet', href=`css/blocks/${block}.css?v=${Date.now()}`)
+
+  body
+    block header
+
+    main
+      block content
+
+    block footer
+
+    if isDev
+      script(type='module', src='/src/js/libs/lazyload.min.js')
+    else
+      script(type='module', src=`js/libs/lazyload.min.js?v=${Date.now()}`)
+    script.
+      document.addEventListener('DOMContentLoaded', function() {var lazyLoadInstance = new LazyLoad();});
+
+    if libsJs
+      each script in libsJs
+        if isDev
+          script(type='module', src=`/src/js/libs/${script}.js`)
+        else
+          script(type='module', src=`js/libs/${script}.js?v=${Date.now()}`)
+
+    //- Main JavaScript
+    if isDev
+      script(type='module', src='/src/js/main.js')
+    else
+      script(type='module', src=`js/main.js?v=${Date.now()}`)
+
+    //- Page-specific JavaScript
+    if pageJs
+      each script in pageJs
+        if isDev
+          script(type='module', src=`/src/js/${script}.js`)
+        else
+          script(type='module', src=`js/${script}.js?v=${Date.now()}`)

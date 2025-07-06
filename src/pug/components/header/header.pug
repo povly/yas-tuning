@@ -1,0 +1,24 @@
+header.header
+  .container
+    .header__block
+      a.header__logo(href='/')
+        +img({
+          src: '/images/header/logo.png',
+          width: 70,
+          height: 70,
+          alt: '',
+        })
+      .header__right
+        nav
+          ul.header__nav
+            li
+              a(href='/') About
+            li
+              a(href='/') Catalog
+            li
+              a(href='/') FAQ
+            li
+              a(href='/') Contacts
+        .header__btns
+          a(href='#!').p-btn Login
+          a(href='#!').p-btn.p-btn_orange Registration

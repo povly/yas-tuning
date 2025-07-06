@@ -1,0 +1,44 @@
+.h-first {
+  position: relative;
+  padding: 0;
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__block {
+    padding-top: 199px;
+    min-height: 904px;
+    position: relative;
+  }
+
+  &__title {
+    span {
+      display: block;
+
+      &:nth-child(2) {
+        font-size: 120px;
+        line-height: 60%;
+        margin-top: 24px;
+      }
+    }
+  }
+
+  &__text {
+    position: absolute;
+
+    &_right {
+      top: 144px;
+      right: 0;
+      width: 293px;
+    }
+
+    &_left {
+      left: 0;
+      bottom: 108px;
+      width: 272px;
+    }
+  }
+}
