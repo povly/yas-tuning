@@ -83,11 +83,27 @@ b {
 
 .section {
   padding: 60px 0;
-  
+
   &__title {
     font-weight: 700;
     font-size: 72px;
     line-height: 100%;
     text-transform: uppercase;
+
+    &_center {
+      text-align: center;
+    }
   }
+}
+
+.htmx-indicator {
+  display: none;
+}
+
+.htmx-request .htmx-indicator {
+  display: inline-block;
+}
+
+.htmx-request.htmx-indicator {
+  display: inline-block;
 }

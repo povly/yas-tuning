@@ -53,6 +53,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
+    "htmx.org": "^2.0.6",
     "normalize.css": "^8.0.1",
     "swiper": "^11.2.8",
     "vanilla-lazyload": "^19.1.3"

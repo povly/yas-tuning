@@ -1,0 +1,10 @@
+mixin hCarItem(img, title, classes)
+  .h-car__item(class=classes)
+    .h-car__item-img
+      +img({
+        src: img,
+        width: 58,
+        height: 58,
+        lazy: true,
+      })
+    .h-car__item-title=title

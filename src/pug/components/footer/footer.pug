@@ -1,4 +1,44 @@
 footer.footer
   .container
-    p &copy; 2024 ViteApp. Все права защищены.
-    p Создано с помощью Vite + Pug + Sass
+    .footer__top
+      .footer__logo
+        +img({
+          src: '/images/footer/logo.webp',
+          width: 92,
+          height: 86,
+          lazy: true,
+        })
+      nav.footer__nav
+        ul
+          li
+            a(href="#!") About
+          li
+            a(href="#!") Last files
+          li
+            a(href="#!") Catalog
+          li
+            a(href="#!") FAQ
+    .footer__center
+      .footer__items
+        .footer__item
+          p Name: YASTUNING OÜ (14016370) VAT ID EE102354272
+          p Country: Estonia
+          p City: Tallinn
+          p Post Code: 11414
+          p Address: st Pae 25-47
+          p Email: info@yastuning.com
+        .footer__item
+          p Name: YASTUNING OÜ (14016370) VAT ID EE102354272
+          p Country: Estonia
+          p City: Tallinn
+          p Post Code: 11414
+          p Address: st Pae 25-47
+          p Email: info@yastuning.com
+        .footer__item
+          p Name: YASTUNING OÜ (14016370) VAT ID EE102354272
+          p Country: Estonia
+          p City: Tallinn
+          p Post Code: 11414
+          p Address: st Pae 25-47
+          p Email: info@yastuning.com
+      .footer__img

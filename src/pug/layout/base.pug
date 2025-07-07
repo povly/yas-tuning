@@ -51,8 +51,10 @@ html(lang='ru')
 
     if isDev
       script(type='module', src='/src/js/libs/lazyload.min.js')
+      script(type='module', src='/src/js/libs/htmx.js')
     else
       script(type='module', src=`js/libs/lazyload.min.js?v=${Date.now()}`)
+      script(type='module', src=`js/libs/htmx.js?v=${Date.now()}`)
     script.
       document.addEventListener('DOMContentLoaded', function() {var lazyLoadInstance = new LazyLoad();});
 
