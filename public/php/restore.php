@@ -1,10 +1,15 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
+// Включаем output buffering
+ob_start();
+
+if (!headers_sent()) {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Headers: Content-Type');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $email = $_POST['email'] ?? '';
+  $email = isset($_POST['email']) ? $_POST['email'] : '';
 
   $general_error = '';
   $success = false;
@@ -45,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="/login.html" class="auth__btn p-btn p-btn_orange">Log in</a>
     </form>
   <?php else: ?>
-    <form class="auth__form" hx-post="/build/php/restore.php" hx-swap="outerHTML">
+    <form class="auth__form" hx-post="/php/restore.php" hx-swap="outerHTML">
       <div class="auth__title">Restore password</div>
       <div class="auth__subtitle">Enter your email to restore password</div>
 
@@ -65,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
   <?php endif; ?>
 <?php
+// Отправляем буферизованный вывод
+ob_end_flush();
 } else {
   echo '<div class="auth__error">Invalid request method</div>';
 }

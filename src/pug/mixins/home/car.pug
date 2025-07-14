@@ -3,7 +3,7 @@ mixin hCarItem(img, title, classes)
     button(
       type="button"
       class="h-car__item-link"
-      hx-post="/build/php/car-handler.php"
+      hx-post="/php/car-handler.php"
       hx-target="#car-section"
       hx-vals='js:{action:"select_brand", brand_id:this.closest(".h-car__item").dataset.carBrandId, brand_name:this.closest(".h-car__item").dataset.carBrandName, brand_img:this.querySelector("img").src}'
     )

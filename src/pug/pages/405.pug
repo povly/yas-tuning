@@ -1,0 +1,24 @@
+extends ../layout/base
+
+//- Include mixins
+include ../mixins/picture
+include ../mixins/video
+include ../mixins/iframe
+
+block variables
+  - var title = '405';
+  - var description = '';
+  - var pageCss = ['index'];  // Страничные стили /pages/index.scss
+  //- - var pageJs = ['pages/auth'];
+  - var blocks = ['server-error'];
+  //- - var libsJs = ['swiper']; -- Сюда добавляем скрипты библиотек для страницы
+  //- - var libsCss = ['swiper']; -- Сюда добавляем стили библиотек для страницы
+
+block header
+  include ../components/header/header
+
+block content
+  include ../blocks/405
+
+//- block footer
+//-   include ../components/footer/footer

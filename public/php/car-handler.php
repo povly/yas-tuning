@@ -1,19 +1,25 @@
 <?php
-session_start();
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, GET');
-header('Access-Control-Allow-Headers: Content-Type');
+// Включаем output buffering
+ob_start();
 
-// Получаем параметры из POST запроса
-$action = $_POST['action'] ?? $_GET['action'] ?? '';
-$brand_id = intval($_POST['brand_id'] ?? $_GET['brand_id'] ?? 0);
-$brand_name = $_POST['brand_name'] ?? $_GET['brand_name'] ?? '';
-$brand_img = $_POST['brand_img'] ?? $_GET['brand_img'] ?? '';
-$model = $_POST['model'] ?? $_GET['model'] ?? '';
-$year = $_POST['year'] ?? $_GET['year'] ?? '';
-$car_id = $_POST['car_id'] ?? $_GET['car_id'] ?? '';
-$filter_type = $_POST['filter_type'] ?? $_GET['filter_type'] ?? '';
-$motor = $_POST['motor'] ?? $_GET['motor'] ?? '';
+// Проверяем, не были ли уже отправлены headers
+if (!headers_sent()) {
+    session_start();
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, GET');
+    header('Access-Control-Allow-Headers: Content-Type');
+}
+
+// Получаем параметры из POST запроса (PHP 5.6 совместимо)
+$action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
+$brand_id = intval(isset($_POST['brand_id']) ? $_POST['brand_id'] : (isset($_GET['brand_id']) ? $_GET['brand_id'] : 0));
+$brand_name = isset($_POST['brand_name']) ? $_POST['brand_name'] : (isset($_GET['brand_name']) ? $_GET['brand_name'] : '');
+$brand_img = isset($_POST['brand_img']) ? $_POST['brand_img'] : (isset($_GET['brand_img']) ? $_GET['brand_img'] : '');
+$model = isset($_POST['model']) ? $_POST['model'] : (isset($_GET['model']) ? $_GET['model'] : '');
+$year = isset($_POST['year']) ? $_POST['year'] : (isset($_GET['year']) ? $_GET['year'] : '');
+$car_id = isset($_POST['car_id']) ? $_POST['car_id'] : (isset($_GET['car_id']) ? $_GET['car_id'] : '');
+$filter_type = isset($_POST['filter_type']) ? $_POST['filter_type'] : (isset($_GET['filter_type']) ? $_GET['filter_type'] : '');
+$motor = isset($_POST['motor']) ? $_POST['motor'] : (isset($_GET['motor']) ? $_GET['motor'] : '');
 
 // Сохраняем состояние в сессии
 if ($action && $action !== 'reset') {
@@ -32,7 +38,7 @@ if ($action && $action !== 'reset') {
 }
 
 // Восстанавливаем состояние из сессии если параметры не переданы
-$saved_state = $_SESSION['car_state'] ?? [];
+$saved_state = isset($_SESSION['car_state']) ? $_SESSION['car_state'] : array();
 if (!$brand_id && isset($saved_state['brand_id'])) {
     $brand_id = $saved_state['brand_id'];
     $brand_name = $saved_state['brand_name'];
@@ -125,24 +131,24 @@ function loadCarData($type, $params) {
 function renderBreadcrumbs($brand_name = '', $model = '', $year = '', $motor = '', $brand_id = 0, $brand_img = '') {
     echo '<ul class="h-car__breadcrumbs active">';
     echo '<li class="h-car__breadcrumb h-car__breadcrumb_wagens">';
-    echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"back_to_brands"}\'>Waganes</button>';
+    echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"back_to_brands"}\'>Waganes</button>';
     echo '</li>';
 
     if ($brand_name) {
         echo '<li class="h-car__breadcrumb h-car__breadcrumb_brand">';
-        echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"to_brand","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$brand_img.'"}\'>'.htmlspecialchars($brand_name).'</button>';
+        echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"to_brand","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$brand_img.'"}\'>'.htmlspecialchars($brand_name).'</button>';
         echo '</li>';
     }
 
     if ($model) {
         echo '<li class="h-car__breadcrumb h-car__breadcrumb_model">';
-        echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"to_model","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$brand_img.'","model":"'.$model.'"}\'>'.htmlspecialchars($model).'</button>';
+        echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"to_model","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$brand_img.'","model":"'.$model.'"}\'>'.htmlspecialchars($model).'</button>';
         echo '</li>';
     }
 
     if ($year) {
         echo '<li class="h-car__breadcrumb h-car__breadcrumb_year">';
-        echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"to_year","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$brand_img.'","model":"'.$model.'","year":"'.$year.'"}\'>'.htmlspecialchars($year).'</button>';
+        echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"to_year","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$brand_img.'","model":"'.$model.'","year":"'.$year.'"}\'>'.htmlspecialchars($year).'</button>';
         echo '</li>';
     }
 
@@ -173,7 +179,7 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
         echo '<ul class="h-car__list">';
         foreach ($data as $item) {
             echo '<li class="h-car__list-li">';
-            echo '<button type="button" class="h-car__list-link" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_model","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.htmlspecialchars($item['model']).'"}\'>'.htmlspecialchars($item['model']).'</button>';
+            echo '<button type="button" class="h-car__list-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_model","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.htmlspecialchars($item['model']).'"}\'>'.htmlspecialchars($item['model']).'</button>';
             echo '</li>';
         }
         echo '</ul>';
@@ -185,7 +191,7 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
             foreach ($models_data as $item) {
                 $selected_class = ($item['model'] === $model) ? ' selected' : '';
                 echo '<li class="h-car__list-li">';
-                echo '<button type="button" class="h-car__list-link'.$selected_class.'" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_model","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.htmlspecialchars($item['model']).'"}\'>'.htmlspecialchars($item['model']).'</button>';
+                echo '<button type="button" class="h-car__list-link'.$selected_class.'" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_model","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.htmlspecialchars($item['model']).'"}\'>'.htmlspecialchars($item['model']).'</button>';
                 echo '</li>';
             }
             echo '</ul>';
@@ -207,7 +213,7 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
             echo '<ul class="h-car__list">';
             foreach ($data as $item) {
                 echo '<li class="h-car__list-li">';
-                echo '<button type="button" class="h-car__list-link" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_year","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.$model.'","year":"'.htmlspecialchars($item['year']).'"}\'>'.htmlspecialchars($item['year']).'</button>';
+                echo '<button type="button" class="h-car__list-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_year","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.$model.'","year":"'.htmlspecialchars($item['year']).'"}\'>'.htmlspecialchars($item['year']).'</button>';
                 echo '</li>';
             }
             echo '</ul>';
@@ -219,7 +225,7 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
                 foreach ($years_data as $item) {
                     $selected_class = ($item['year'] === $year) ? ' selected' : '';
                     echo '<li class="h-car__list-li">';
-                    echo '<button type="button" class="h-car__list-link'.$selected_class.'" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_year","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.$model.'","year":"'.htmlspecialchars($item['year']).'"}\'>'.htmlspecialchars($item['year']).'</button>';
+                    echo '<button type="button" class="h-car__list-link'.$selected_class.'" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_year","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.$model.'","year":"'.htmlspecialchars($item['year']).'"}\'>'.htmlspecialchars($item['year']).'</button>';
                     echo '</li>';
                 }
                 echo '</ul>';
@@ -241,7 +247,7 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
         echo '<ul class="h-car__list">';
         foreach ($data as $item) {
             echo '<li class="h-car__list-li">';
-            echo '<button type="button" class="h-car__list-link" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_engine","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.$model.'","year":"'.$year.'","car_id":"'.htmlspecialchars($item['id']).'","motor":"'.htmlspecialchars($item['motor'].' '.$item['hp']).'"}\'>'.
+            echo '<button type="button" class="h-car__list-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_engine","brand_id":"'.$brand_id.'","brand_name":"'.$brand_name.'","brand_img":"'.$img.'","model":"'.$model.'","year":"'.$year.'","car_id":"'.htmlspecialchars($item['id']).'","motor":"'.htmlspecialchars($item['motor'].' '.$item['hp']).'"}\'>'.
                  '<span>'.htmlspecialchars($item['motor']).'</span><span>'.htmlspecialchars($item['hp']).'</span></button>';
             echo '</li>';
         }
@@ -262,7 +268,7 @@ function renderCarData($data, $active_filter = '') {
 
     $types = array_keys($grouped);
     if (!$active_filter || !in_array($active_filter, $types)) {
-        $active_filter = $types[0] ?? '';
+        $active_filter = count($types) > 0 ? $types[0] : '';
     }
 
     echo '<div class="h-car__data active">';
@@ -414,7 +420,7 @@ function renderAllBrands($showAll = false) {
         $activeClass = $isActive ? ' active' : '';
 
         echo '<div class="h-car__item'.$activeClass.'" data-car-brand-id="'.$brand['id'].'" data-car-brand-name="'.htmlspecialchars($brand['name']).'">';
-        echo '<button type="button" class="h-car__item-link" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_brand","brand_id":"'.$brand['id'].'","brand_name":"'.htmlspecialchars($brand['name']).'","brand_img":"'.htmlspecialchars($brand['img']).'"}\' >';
+        echo '<button type="button" class="h-car__item-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_brand","brand_id":"'.$brand['id'].'","brand_name":"'.htmlspecialchars($brand['name']).'","brand_img":"'.htmlspecialchars($brand['img']).'"}\' >';
         echo '<div class="h-car__item-img">';
         echo '<img src="'.htmlspecialchars($brand['img']).'" alt="'.htmlspecialchars($brand['name']).'" width="58" height="58" loading="lazy">';
         echo '</div>';
@@ -427,7 +433,7 @@ function renderAllBrands($showAll = false) {
 
     // Показываем кнопку "Show more" только если не все элементы активны
     if (!$showAll) {
-        echo '<button type="button" class="h-car__btn p-btn p-btn_orange p-btn_center active" hx-post="/build/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"show_more_brands"}\'>Show more</button>';
+        echo '<button type="button" class="h-car__btn p-btn p-btn_orange p-btn_center active" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"show_more_brands"}\'>Show more</button>';
     }
 }
 
@@ -500,7 +506,7 @@ switch ($action) {
         break;
 
     case 'select_engine':
-        $motor = $_POST['motor'] ?? '';
+        $motor = isset($_POST['motor']) ? $_POST['motor'] : '';
         $car_data = loadCarData('info', ['car_id' => $car_id]);
         echo '<div class="h-car__title section__title section__title_center">choose your car</div>';
         renderBreadcrumbs($brand_name, $model, $year, $motor, $brand_id, $brand_img);
@@ -513,4 +519,7 @@ switch ($action) {
         renderInitialState();
         break;
 }
+
+// Отправляем буферизованный вывод
+ob_end_flush();
 ?>

@@ -1,12 +1,17 @@
 <?php
-session_start();
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
+// Включаем output buffering
+ob_start();
+
+if (!headers_sent()) {
+    session_start();
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Headers: Content-Type');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Получаем данные формы
-  $step = (int)($_POST['step'] ?? 1);
+  $step = (int)(isset($_POST['step']) ? $_POST['step'] : 1);
   $is_company = isset($_POST['is_company']) ? true : false;
 
   // Инициализируем сессию для регистрации если её нет
@@ -134,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </picture>
     </div>
 
-          <form class="auth__form" hx-post="/build/php/register.php" hx-swap="outerHTML" hx-target="closest .auth__item">
+          <form class="auth__form" hx-post="/php/register.php" hx-swap="outerHTML" hx-target="closest .auth__item">
         <div class="auth__title">REGISTRATION</div>
 
         <!-- Поле для отслеживания шага -->
@@ -293,6 +298,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
   </div>
 <?php
+// Отправляем буферизованный вывод
+ob_end_flush();
 } else {
   echo '<div class="auth__error">Invalid request method</div>';
 }
