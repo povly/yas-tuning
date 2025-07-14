@@ -1,0 +1,65 @@
+.auth
+  .auth__bg.auth__bg-left.img_full
+    +picture({
+      src: '/images/auth/bg.png',
+      width: 1031,
+      height: 920,
+      formats: [
+        {
+          type: 'avif',
+          src: '/images/auth/bg.avif',
+        },
+        {
+          type: 'webp',
+          src: '/images/auth/bg.webp',
+        },
+      ]
+    })
+  .auth__bg.auth__bg-right.img_full
+    +picture({
+      src: '/images/auth/mask.png',
+      width: 687,
+      height: 920,
+      formats: [
+        {
+          type: 'avif',
+          src: '/images/auth/mask.avif',
+        },
+        {
+          type: 'webp',
+          src: '/images/auth/mask.webp',
+        },
+      ]
+    })
+  .container
+    .auth__item
+      .auth__item-bg.img_full
+        +picture({
+          src: '/images/auth/form.png',
+          width: 893,
+          height: 579,
+          formats: [
+            {
+              type: 'avif',
+              src: '/images/auth/form.avif',
+            },
+            {
+              type: 'webp',
+              src: '/images/auth/form.webp',
+            },
+          ]
+        })
+      form.auth__form(hx-post="/build/php/auth.php" hx-swap="outerHTML")
+        .auth__title Log in
+        .auth__subtitle Don't have an account? <a href="#!">Sign up</a>
+        .auth__inputs
+          .auth__input
+            label(for='email').auth__label
+              span Email*
+              a(href='/restore.html') Forgot password?
+            input.auth__input-field(type='email' id='email' name='email' required)
+          .auth__input
+            label(for='password').auth__label
+              span Password*
+            input.auth__input-field(type='password' id='password' name='password' required)
+        button.auth__btn.p-btn.p-btn_orange(type='submit') Log in

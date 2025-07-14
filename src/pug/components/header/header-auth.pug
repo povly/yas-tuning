@@ -1,0 +1,20 @@
+header.header
+  .container
+    .header__block
+      a.header__logo(href='/')
+        +picture({
+          src: '/images/auth/logo.png',
+          width: 92,
+          height: 86,
+          alt: '',
+          formats: [
+            {
+              type: 'avif',
+              src: '/images/auth/logo.avif',
+            },
+            {
+              type: 'webp',
+              src: '/images/auth/logo.webp',
+            },
+          ]
+        })

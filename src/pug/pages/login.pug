@@ -1,0 +1,24 @@
+extends ../layout/base
+
+//- Include mixins
+include ../mixins/picture
+include ../mixins/video
+include ../mixins/iframe
+
+block variables
+  - var title = 'Login';
+  - var description = '';
+  - var pageCss = ['index'];  // Страничные стили /pages/index.scss
+  //- - var pageJs = ['pages/auth'];
+  - var blocks = ['auth'];
+  //- - var libsJs = ['swiper']; -- Сюда добавляем скрипты библиотек для страницы
+  //- - var libsCss = ['swiper']; -- Сюда добавляем стили библиотек для страницы
+
+block header
+  include ../components/header/header-auth
+
+block content
+  include ../blocks/login
+
+//- block footer
+//-   include ../components/footer/footer

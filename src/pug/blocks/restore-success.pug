@@ -1,0 +1,49 @@
+.auth
+  .auth__bg.auth__bg-left.img_full
+    +picture({
+      src: '/images/auth/bg.png',
+      width: 1031,
+      height: 920,
+      formats: [
+        {
+          type: 'avif',
+          src: '/images/auth/bg.avif',
+        },
+        {
+          type: 'webp',
+          src: '/images/auth/bg.webp',
+        },
+      ]
+    })
+  .auth__bg.auth__bg-right.img_full
+    +picture({
+      src: '/images/auth/mask.png',
+      width: 687,
+      height: 920,
+      formats: [
+        {
+          type: 'avif',
+          src: '/images/auth/mask.avif',
+        },
+        {
+          type: 'webp',
+          src: '/images/auth/mask.webp',
+        },
+      ]
+    })
+  .container
+    .auth__item
+      .auth__item-bg
+        <svg width="893" height="579" viewBox="0 0 893 579" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M863 0C879.569 0 893 13.4315 893 30V549C893 565.569 879.569 579 863 579H30C13.4315 579 1.75169e-07 565.569 0 549V30C3.67251e-06 13.4315 13.4315 0 30 0H863ZM30 20C24.4772 20 20 24.4772 20 30V549C20 554.523 24.4772 559 30 559H347.117C352.184 559 356.45 555.21 357.048 550.179L388 289.5L418.673 31.1787C419.379 25.2304 414.732 20 408.742 20H30Z" fill="#F5F5F5"/>
+        </svg>
+      form.auth__form
+        .auth__title Restore reset
+        .auth__restore
+          .auth__restore-svg
+            <svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="80" height="80" rx="40" fill="#3BD503"/>
+            <path d="M57.2217 30L36.7836 50.4381C36.3696 50.852 35.8081 51.0845 35.2227 51.0845C34.6372 51.0845 34.0757 50.852 33.6617 50.4381L23 39.7764" stroke="#F5F5F5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          .auth__restore-text Your password has been successfully reset
+        a(href='/login.html').auth__btn.p-btn.p-btn_orange Login

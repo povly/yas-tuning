@@ -1,0 +1,15 @@
+extends ../layout/base
+
+//- Include mixins
+include ../mixins/picture
+include ../mixins/video
+include ../mixins/iframe
+
+block variables
+  - var title = 'Registration Step 3 Company - YAS Tuning';
+  - var pageCss = ['index'];  // Страничные стили /pages/index.scss
+  //- - var pageJs = ['pages/auth'];
+  - var blocks = ['auth'];
+
+block content
+  include ../blocks/register-step3-company

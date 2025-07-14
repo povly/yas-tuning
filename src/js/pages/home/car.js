@@ -1,34 +1,47 @@
+// Инициализация компонента выбора автомобиля при загрузке DOM
 document.addEventListener('DOMContentLoaded', function () {
+  // Находим все секции с автомобилями на странице
   const carSections = document.querySelectorAll('.h-car');
   if (!carSections.length) return;
 
+  // Инициализируем каждую секцию отдельно
   carSections.forEach((carSection) => {
     initCarSection(carSection);
     initShowMoreButton(carSection);
   });
 
+  /**
+   * Инициализация кнопки "Показать больше" для списка брендов
+   * @param {HTMLElement} carSection - DOM элемент секции автомобилей
+   */
   function initShowMoreButton(carSection) {
     const btn = carSection.querySelector('.h-car__btn');
     const items = carSection.querySelectorAll('.h-car__item');
     if (btn && items.length) {
       btn.addEventListener('click', function () {
+        // Показываем все скрытые элементы брендов
         items.forEach((item) => {
           item.classList.add('active');
         });
+        // Удаляем кнопку после показа всех элементов
         btn.remove();
       });
     }
   }
 
+  /**
+   * Основная функция инициализации логики выбора автомобиля
+   * @param {HTMLElement} carSection - DOM элемент секции автомобилей
+   */
   function initCarSection(carSection) {
-    // Конфигурация шагов
+    // Конфигурация шагов выбора автомобиля (модель -> год -> двигатель)
     const STEPS_CONFIG = {
       model: {
-        next: 'year',
-        selector: '.h-car__step_model',
-        ajaxKey: 'models',
-        updateFn: updateModelStep,
-        clearAfter: true,
+        next: 'year', // Следующий шаг после выбора модели
+        selector: '.h-car__step_model', // CSS селектор для шага модели
+        ajaxKey: 'models', // Ключ для AJAX запроса
+        updateFn: updateModelStep, // Функция обновления шага
+        clearAfter: true, // Очищать ли последующие шаги
       },
       year: {
         next: 'motor',
@@ -38,31 +51,38 @@ document.addEventListener('DOMContentLoaded', function () {
         clearAfter: true,
       },
       motor: {
-        next: null,
+        next: null, // Последний шаг
         selector: '.h-car__step_motor',
         ajaxKey: 'engines',
         updateFn: updateEngineStep,
-        clearAfter: false,
+        clearAfter: false, // Не очищаем, т.к. последний шаг
       },
     };
 
+    // Порядок элементов в хлебных крошках
     const BREADCRUMB_ORDER = ['wagens', 'brand', 'model', 'year', 'motor'];
 
-    // Состояние
+    // Состояние текущего выбора пользователя
     const state = {
-      currentBrand: null,
-      currentModel: null,
-      currentYear: null,
-      currentCarId: null,
+      currentBrand: null, // Выбранный бренд {id, name, img}
+      currentModel: null, // Выбранная модель (строка)
+      currentYear: null, // Выбранный год (строка)
+      currentCarId: null, // ID выбранного автомобиля
     };
 
-    // Универсальная функция для AJAX запросов
+    /**
+     * Универсальная функция для AJAX запросов к серверу
+     * @param {string} endpoint - Конечная точка API (models, years, engines, info)
+     * @param {Object} data - Данные для отправки на сервер
+     * @returns {Promise} Promise с JSON ответом от сервера
+     */
     function makeAjaxRequest(endpoint, data) {
       const loading = document.getElementById('loading');
 
-      // Показываем загрузку
+      // Показываем индикатор загрузки
       if (loading) loading.classList.add('active');
 
+      // Подготавливаем данные формы для отправки
       const formData = new FormData();
       Object.entries(data).forEach(([key, value]) => {
         formData.append(key, value);
@@ -78,12 +98,18 @@ document.addEventListener('DOMContentLoaded', function () {
           throw error;
         })
         .finally(() => {
-          // Скрываем загрузку
+          // Скрываем индикатор загрузки независимо от результата
           if (loading) loading.classList.remove('active');
         });
     }
 
-    // Универсальная функция для обновления шагов
+    /**
+     * Универсальная функция для обновления шагов выбора
+     * @param {string} stepType - Тип шага (model, year, motor)
+     * @param {Array} data - Массив данных для отображения
+     * @param {string} title - Заголовок шага
+     * @param {string|null} img - URL изображения логотипа
+     */
     function updateStep(stepType, data, title, img = null) {
       const config = STEPS_CONFIG[stepType];
       if (!config) return;
@@ -91,12 +117,13 @@ document.addEventListener('DOMContentLoaded', function () {
       const step = carSection.querySelector(config.selector);
       if (!step) return;
 
-      // Обновляем заголовок и изображение
+      // Обновляем заголовок и логотип бренда
       const logoTitle = step.querySelector('.h-car__logo-title');
       const logoImgContainer = step.querySelector('.h-car__logo-img');
 
       if (logoTitle) logoTitle.textContent = title;
       if (logoImgContainer && img) {
+        // Создаем изображение из шаблона
         const template = document.getElementById('h-car__logo-img');
         const clone = template.content.cloneNode(true);
         const imgElement = clone.querySelector('img');
@@ -106,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         logoImgContainer.appendChild(clone);
       }
 
-      // Обновляем список
+      // Обновляем список опций для выбора
       const list = step.querySelector('.h-car__list');
       if (list) {
         list.innerHTML = '';
@@ -117,12 +144,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Создание элементов списка
+    /**
+     * Создание DOM элементов списка для каждого шага
+     * @param {string} stepType - Тип шага (model, year, motor)
+     * @param {Object} item - Объект с данными элемента
+     * @returns {DocumentFragment} Клонированный шаблон элемента списка
+     */
     function createListItem(stepType, item) {
       const template = document.getElementById('h-car__list-li');
       const clone = template.content.cloneNode(true);
       const link = clone.querySelector('.h-car__list-link');
 
+      // Заполняем элемент в зависимости от типа шага
       switch (stepType) {
         case 'model':
           link.textContent = item.model;
@@ -131,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
           link.textContent = item.year;
           break;
         case 'motor':
+          // Для двигателя сохраняем ID и показываем мотор + мощность
           link.dataset.carId = item.id;
           link.innerHTML = `<span>${item.motor}</span><span>${item.hp}</span>`;
           break;
@@ -139,54 +173,70 @@ document.addEventListener('DOMContentLoaded', function () {
       return clone;
     }
 
-    // Обработчики кликов
+    // Маппинг селекторов на обработчики кликов
     const clickHandlers = {
-      '.h-car__item': handleBrandClick,
-      '.h-car__step_model .h-car__list-link': handleModelClick,
-      '.h-car__step_year .h-car__list-link': handleYearClick,
-      '.h-car__step_motor .h-car__list-link': handleEngineClick,
-      '.h-car__data-link': handleDataFilterClick,
-      '.h-car__breadcrumb-link': handleBreadcrumbClick,
+      '.h-car__item': handleBrandClick, // Клик по бренду
+      '.h-car__step_model .h-car__list-link': handleModelClick, // Клик по модели
+      '.h-car__step_year .h-car__list-link': handleYearClick, // Клик по году
+      '.h-car__step_motor .h-car__list-link': handleEngineClick, // Клик по двигателю
+      '.h-car__data-link': handleDataFilterClick, // Клик по фильтру данных
+      '.h-car__breadcrumb-link': handleBreadcrumbClick, // Клик по хлебным крошкам
     };
 
-    // Главный обработчик событий
+    /**
+     * Делегированный обработчик событий для всех кликов в секции
+     * Использует паттерн "Event Delegation" для оптимизации
+     */
     carSection.addEventListener('click', function (e) {
+      // Проверяем каждый зарегистрированный селектор
       for (const [selector, handler] of Object.entries(clickHandlers)) {
         const target = e.target.closest(selector);
         if (target) {
           e.preventDefault();
           e.stopPropagation();
           handler(target);
-          break;
+          break; // Прерываем после первого совпадения
         }
       }
     });
 
+    /**
+     * Обработчик клика по бренду автомобиля
+     * @param {HTMLElement} carItem - DOM элемент бренда
+     */
     function handleBrandClick(carItem) {
+      // Извлекаем данные бренда из data-атрибутов
       const brandId = carItem.dataset.carBrandId;
       const brandName = carItem.dataset.carBrandName;
       const brandImg = carItem.querySelector('img').src;
 
+      // Сохраняем выбранный бренд в состоянии
       state.currentBrand = { id: brandId, name: brandName, img: brandImg };
 
-      // Скрываем список брендов и кнопку
-      hideElement('.h-car__items');
-      hideElement('.h-car__btn');
-      showElement('.h-car__breadcrumbs');
-      updateBreadcrumb('brand', brandName);
-      showElement('.h-car__steps');
-      showStep('model');
+      // Переходим к следующему этапу выбора
+      hideElement('.h-car__items'); // Скрываем список брендов
+      hideElement('.h-car__btn'); // Скрываем кнопку "Показать больше"
+      showElement('.h-car__breadcrumbs'); // Показываем навигацию
+      updateBreadcrumb('brand', brandName); // Обновляем хлебные крошки
+      showElement('.h-car__steps'); // Показываем шаги выбора
+      showStep('model'); // Активируем шаг выбора модели
 
+      // Загружаем модели для выбранного бренда
       loadData('models', { type: 'models', brand_id: brandId }).then((data) =>
         updateModelStep(data, brandName, brandImg)
       );
     }
 
+    /**
+     * Обработчик клика по модели автомобиля
+     * @param {HTMLElement} modelLink - DOM элемент модели
+     */
     function handleModelClick(modelLink) {
       const model = modelLink.textContent.trim();
-      state.currentModel = model;
-      updateBreadcrumb('model', model);
+      state.currentModel = model; // Сохраняем выбранную модель
+      updateBreadcrumb('model', model); // Обновляем навигацию
 
+      // Загружаем годы выпуска для выбранной модели
       loadData('years', {
         type: 'years',
         brand_id: state.currentBrand.id,
@@ -194,11 +244,16 @@ document.addEventListener('DOMContentLoaded', function () {
       }).then((data) => updateYearStep(data, model));
     }
 
+    /**
+     * Обработчик клика по году выпуска
+     * @param {HTMLElement} yearLink - DOM элемент года
+     */
     function handleYearClick(yearLink) {
       const year = yearLink.textContent.trim();
-      state.currentYear = year;
-      updateBreadcrumb('year', year);
+      state.currentYear = year; // Сохраняем выбранный год
+      updateBreadcrumb('year', year); // Обновляем навигацию
 
+      // Загружаем типы двигателей для выбранного года
       loadData('engines', {
         type: 'engines',
         brand_id: state.currentBrand.id,
@@ -207,42 +262,60 @@ document.addEventListener('DOMContentLoaded', function () {
       }).then((data) => updateEngineStep(data, year));
     }
 
+    /**
+     * Обработчик клика по типу двигателя (финальный выбор)
+     * @param {HTMLElement} engineLink - DOM элемент двигателя
+     */
     function handleEngineClick(engineLink) {
       const carId = engineLink.dataset.carId;
       const motor = engineLink.querySelector('span:first-child').textContent.trim();
       const hp = engineLink.querySelector('span:last-child').textContent.trim();
 
+      // Сохраняем ID выбранного автомобиля
       state.currentCarId = carId;
-      updateBreadcrumb('motor', `${motor} ${hp}`);
-      hideElement('.h-car__steps');
+      updateBreadcrumb('motor', `${motor} ${hp}`); // Обновляем навигацию
+      hideElement('.h-car__steps'); // Скрываем шаги выбора
 
+      // Загружаем подробную информацию о выбранном автомобиле
       loadData('info', { type: 'info', car_id: carId }).then((data) =>
         updateDataSection(data)
       );
     }
 
+    /**
+     * Обработчик клика по фильтрам данных (вкладки с результатами)
+     * @param {HTMLElement} dataLink - DOM элемент фильтра
+     */
     function handleDataFilterClick(dataLink) {
+      // Убираем активный класс со всех фильтров
       carSection.querySelectorAll('.h-car__data-link').forEach((link) => {
         link.classList.remove('active');
       });
+      // Устанавливаем активный класс на выбранный фильтр
       dataLink.classList.add('active');
 
       const filterType = dataLink.textContent.trim().toLowerCase();
-      filterCarData(filterType);
+      filterCarData(filterType); // Переключаем отображение данных
     }
 
+    /**
+     * Обработчик клика по элементам навигации (хлебные крошки)
+     * @param {HTMLElement} breadcrumbLink - DOM элемент навигации
+     */
     function handleBreadcrumbClick(breadcrumbLink) {
       const breadcrumb = breadcrumbLink.closest('.h-car__breadcrumb');
       if (!breadcrumb) return;
 
+      // Маппинг классов навигации на действия
       const breadcrumbActions = {
-        'h-car__breadcrumb_wagens': () => resetToInitialState(),
-        'h-car__breadcrumb_brand': () => navigateToStep('model'),
-        'h-car__breadcrumb_model': () => navigateToStep('year'),
-        'h-car__breadcrumb_year': () => navigateToStep('motor'),
-        'h-car__breadcrumb_motor': () => navigateToStep('motor'),
+        'h-car__breadcrumb_wagens': () => resetToInitialState(), // Возврат к началу
+        'h-car__breadcrumb_brand': () => navigateToStep('model'), // К выбору модели
+        'h-car__breadcrumb_model': () => navigateToStep('year'), // К выбору года
+        'h-car__breadcrumb_year': () => navigateToStep('motor'), // К выбору двигателя
+        'h-car__breadcrumb_motor': () => navigateToStep('motor'), // Остаемся на двигателе
       };
 
+      // Выполняем соответствующее действие
       for (const [className, action] of Object.entries(breadcrumbActions)) {
         if (breadcrumb.classList.contains(className)) {
           action();
@@ -251,27 +324,39 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Навигация к шагу
+    /**
+     * Навигация к определенному шагу выбора
+     * @param {string} stepType - Тип шага (model, year, motor)
+     */
     function navigateToStep(stepType) {
+      // Проверяем наличие необходимых данных для каждого шага
       const requiredStates = {
-        model: () => state.currentBrand,
-        year: () => state.currentBrand && state.currentModel,
+        model: () => state.currentBrand, // Для модели нужен только бренд
+        year: () => state.currentBrand && state.currentModel, // Для года нужен бренд и модель
         motor: () =>
-          state.currentBrand && state.currentModel && state.currentYear,
+          state.currentBrand && state.currentModel && state.currentYear, // Для двигателя нужно все
       };
 
+      // Если не хватает данных - прерываем
       if (!requiredStates[stepType]()) return;
 
+      // Показываем интерфейс выбора и активируем нужный шаг
       showElement('.h-car__steps');
       showStep(stepType);
-      clearStepsAfter(stepType);
-      clearDataSection();
-      clearBreadcrumbsAfter(stepType);
+      clearStepsAfter(stepType); // Очищаем последующие шаги
+      clearDataSection(); // Очищаем данные результата
+      clearBreadcrumbsAfter(stepType); // Очищаем навигацию после текущего шага
     }
 
-    // Загрузка данных с обработкой
+    /**
+     * Загрузка данных с автоматической очисткой
+     * @param {string} endpoint - Конечная точка API
+     * @param {Object} params - Параметры запроса
+     * @returns {Promise} Promise с данными
+     */
     function loadData(endpoint, params) {
       return makeAjaxRequest(endpoint, params).then((data) => {
+        // Для всех запросов кроме 'info' очищаем последующие шаги
         if (endpoint !== 'info') {
           clearStepsAfter(
             endpoint === 'models'
@@ -286,19 +371,38 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // Специфичные функции обновления (упрощенные)
+    /**
+     * Специфичные функции обновления шагов (обёртки над updateStep)
+     */
+
+    /**
+     * Обновление шага выбора модели
+     * @param {Array} models - Список моделей
+     * @param {string} brandName - Название бренда
+     * @param {string} brandImg - URL изображения бренда
+     */
     function updateModelStep(models, brandName, brandImg) {
       updateStep('model', models, brandName, brandImg);
     }
 
+    /**
+     * Обновление шага выбора года
+     * @param {Array} years - Список годов
+     * @param {string} model - Название модели
+     */
     function updateYearStep(years, model) {
       updateStep('year', years, model, state.currentBrand?.img);
-      showStep('year');
+      showStep('year'); // Показываем шаг года
     }
 
+    /**
+     * Обновление шага выбора двигателя
+     * @param {Array} engines - Список двигателей
+     * @param {string} year - Год выпуска
+     */
     function updateEngineStep(engines, year) {
       updateStep('motor', engines, year, state.currentBrand?.img);
-      showStep('motor');
+      showStep('motor'); // Показываем шаг двигателя
     }
 
     function updateDataSection(data) {
@@ -379,12 +483,23 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Утилиты
+    /**
+     * Вспомогательные функции (утилиты)
+     */
+
+    /**
+     * Показать элемент (добавить класс active)
+     * @param {string} selector - CSS селектор элемента
+     */
     function showElement(selector) {
       const element = carSection.querySelector(selector);
       if (element) element.classList.add('active');
     }
 
+    /**
+     * Скрыть элемент (убрать класс active)
+     * @param {string} selector - CSS селектор элемента
+     */
     function hideElement(selector) {
       const element = carSection.querySelector(selector);
       if (element) element.classList.remove('active');
@@ -452,27 +567,29 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    /**
+     * Полный сброс к начальному состоянию (возврат к списку брендов)
+     */
     function resetToInitialState() {
-      // Сбрасываем состояние
+      // Сбрасываем все сохранённые данные выбора
       Object.keys(state).forEach((key) => (state[key] = null));
 
-      // Убираем выделение с брендов
+      // Убираем выделение с элементов брендов
       carSection.querySelectorAll('.h-car__item').forEach((item) => {
         item.classList.remove('selected');
       });
 
-      // Показываем список брендов и кнопку обратно
-      showElement('.h-car__items');
-      showElement('.h-car__btn');
-      // Скрываем блоки
-      hideElement('.h-car__breadcrumbs');
-      hideElement('.h-car__steps');
+      // Возвращаем интерфейс в начальное состояние
+      showElement('.h-car__items'); // Показываем список брендов
+      showElement('.h-car__btn'); // Показываем кнопку "Показать больше"
+      hideElement('.h-car__breadcrumbs'); // Скрываем навигацию
+      hideElement('.h-car__steps'); // Скрываем шаги выбора
 
-      // Очищаем все шаги и данные
-      Object.keys(STEPS_CONFIG).forEach(clearStep);
-      clearDataSection();
+      // Полная очистка всех данных
+      Object.keys(STEPS_CONFIG).forEach(clearStep); // Очищаем все шаги
+      clearDataSection(); // Очищаем результаты
 
-      // Очищаем breadcrumbs
+      // Очищаем текст в навигации (кроме первого элемента "wagens")
       BREADCRUMB_ORDER.slice(1).forEach((type) => updateBreadcrumb(type, ''));
     }
   }
