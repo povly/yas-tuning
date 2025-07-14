@@ -96,20 +96,20 @@ b {
   }
 }
 
-.htmx-indicator {
-  display: none;
-}
+// .htmx-indicator {
+//   display: none;
+// }
 
-.htmx-request .htmx-indicator {
-  display: inline-block;
-}
+// .htmx-request .htmx-indicator {
+//   display: inline-block;
+// }
 
-.htmx-request.htmx-indicator {
-  display: inline-block;
-}
+// .htmx-request.htmx-indicator {
+//   display: inline-block;
+// }
 
 #loading {
-  display: block;
+  display: none;
   width: 50px;
   height: 50px;
   border: 3px solid rgba(255, 255, 255, .3);
@@ -117,6 +117,10 @@ b {
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;
   margin: 0 auto;
+
+  &.active {
+    display: block;
+  }
 }
 
 @keyframes spin {

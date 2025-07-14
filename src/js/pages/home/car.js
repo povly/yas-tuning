@@ -58,6 +58,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Универсальная функция для AJAX запросов
     function makeAjaxRequest(endpoint, data) {
+      const loading = document.getElementById('loading');
+
+      // Показываем загрузку
+      if (loading) loading.classList.add('active');
+
       const formData = new FormData();
       Object.entries(data).forEach(([key, value]) => {
         formData.append(key, value);
@@ -71,6 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch((error) => {
           console.error(`Error loading ${endpoint}:`, error);
           throw error;
+        })
+        .finally(() => {
+          // Скрываем загрузку
+          if (loading) loading.classList.remove('active');
         });
     }
 
@@ -231,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'h-car__breadcrumb_brand': () => navigateToStep('model'),
         'h-car__breadcrumb_model': () => navigateToStep('year'),
         'h-car__breadcrumb_year': () => navigateToStep('motor'),
+        'h-car__breadcrumb_motor': () => navigateToStep('motor'),
       };
 
       for (const [className, action] of Object.entries(breadcrumbActions)) {
@@ -246,7 +256,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const requiredStates = {
         model: () => state.currentBrand,
         year: () => state.currentBrand && state.currentModel,
-        motor: () => state.currentBrand && state.currentModel && state.currentYear,
+        motor: () =>
+          state.currentBrand && state.currentModel && state.currentYear,
       };
 
       if (!requiredStates[stepType]()) return;
@@ -266,8 +277,8 @@ document.addEventListener('DOMContentLoaded', function () {
             endpoint === 'models'
               ? 'model'
               : endpoint === 'years'
-              ? 'year'
-              : 'motor'
+                ? 'year'
+                : 'motor'
           );
           clearDataSection();
         }
@@ -357,9 +368,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const contents = carSection.querySelectorAll('.h-car__data-content');
       const filters = carSection.querySelectorAll('.h-car__data-link');
 
-      contents.forEach(content => content.classList.remove('active'));
+      contents.forEach((content) => content.classList.remove('active'));
 
-      const activeIndex = Array.from(filters).findIndex(filter =>
+      const activeIndex = Array.from(filters).findIndex((filter) =>
         filter.classList.contains('active')
       );
 
@@ -432,7 +443,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const currentIndex = stepTypes.indexOf(stepType);
 
       stepTypes.forEach((step, index) => {
-        const stepElement = carSection.querySelector(STEPS_CONFIG[step].selector);
+        const stepElement = carSection.querySelector(
+          STEPS_CONFIG[step].selector
+        );
         if (stepElement) {
           stepElement.classList.toggle('active', index <= currentIndex);
         }
@@ -441,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function resetToInitialState() {
       // Сбрасываем состояние
-      Object.keys(state).forEach(key => state[key] = null);
+      Object.keys(state).forEach((key) => (state[key] = null));
 
       // Убираем выделение с брендов
       carSection.querySelectorAll('.h-car__item').forEach((item) => {
@@ -460,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function () {
       clearDataSection();
 
       // Очищаем breadcrumbs
-      BREADCRUMB_ORDER.slice(1).forEach(type => updateBreadcrumb(type, ''));
+      BREADCRUMB_ORDER.slice(1).forEach((type) => updateBreadcrumb(type, ''));
     }
   }
 });
