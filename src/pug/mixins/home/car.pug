@@ -1,10 +1,17 @@
-mixin hCarItem(img, title, classes, attrs)
-  a(href="#choose-your-car").h-car__item(class=classes)&attributes(attributes)
-    .h-car__item-img
-      +img({
-        src: img,
-        width: 58,
-        height: 58,
-        lazy: true,
-      })
-    .h-car__item-title=title
+mixin hCarItem(img, title, classes)
+  .h-car__item(class=classes)&attributes(attributes)
+    button(
+      type="button"
+      class="h-car__item-link"
+      hx-post="/build/php/car-handler.php"
+      hx-target="#car-section"
+      hx-vals='js:{action:"select_brand", brand_id:this.closest(".h-car__item").dataset.carBrandId, brand_name:this.closest(".h-car__item").dataset.carBrandName, brand_img:this.querySelector("img").src}'
+    )
+      .h-car__item-img
+        +img({
+          src: img,
+          width: 58,
+          height: 58,
+          lazy: true,
+        })
+      .h-car__item-title=title
