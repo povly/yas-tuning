@@ -1,9 +1,12 @@
 include ../../mixins/home/car
-.h-car.section
+.h-car.section(id="choose-your-car")
   .container
     .h-car__title.section__title.section__title_center choose your car
-    .h-car__items
-      +hCarItem('/images/home/car/alfa.webp', 'Alfa Romeo', 'active')
+    .h-car__items.active
+      +hCarItem('/images/home/car/alfa.webp', 'Alfa Romeo', 'active')(
+        data-car-brand-id="1"
+        data-car-brand-name="Alfa Romeo"
+      )
       +hCarItem('/images/home/car/alpina.webp', 'Alpina', 'active')
       +hCarItem('/images/home/car/alpine.webp', 'Alpine', 'active')
       +hCarItem('/images/home/car/ariel.webp', 'Ariel Motors', 'active')
@@ -75,4 +78,50 @@ include ../../mixins/home/car
       +hCarItem('/images/home/car/volvo.webp', 'Volvo')
       +hCarItem('/images/home/car/west.webp', 'Westfield')
       +hCarItem('/images/home/car/wiesm.webp', 'Wiesmann')
-    button(type="button").h-car__btn.p-btn.p-btn_orange.p-btn_center Show more
+    button(type="button").h-car__btn.active.p-btn.p-btn_orange.p-btn_center Show more
+    ul.h-car__breadcrumbs
+      li.h-car__breadcrumb.h-car__breadcrumb_wagens
+        a(href="#choose-your-car").h-car__breadcrumb-link Waganes
+      li.h-car__breadcrumb.h-car__breadcrumb_brand
+        a(href="#choose-your-car").h-car__breadcrumb-link
+      li.h-car__breadcrumb.h-car__breadcrumb_model
+        a(href="#choose-your-car").h-car__breadcrumb-link
+      li.h-car__breadcrumb.h-car__breadcrumb_year
+        a(href="#choose-your-car").h-car__breadcrumb-link
+      li.h-car__breadcrumb.h-car__breadcrumb_motor
+        a(href="#choose-your-car").h-car__breadcrumb-link
+    .h-car__steps
+      .h-car__step.h-car__step_model
+        .h-car__logo
+          .h-car__logo-img
+          .h-car__logo-title
+        ul.h-car__list
+      .h-car__step.h-car__step_year
+        .h-car__logo
+          .h-car__logo-img
+          .h-car__logo-title
+        ul.h-car__list
+      .h-car__step.h-car__step_motor
+        .h-car__logo
+          .h-car__logo-img
+          .h-car__logo-title
+        ul.h-car__list
+    .h-car__data
+      ul.h-car__data-list
+      .h-car__data-contents
+template#h-car__logo-img
+  .h-car__logo-img
+    img(src="" width="58" height="58" loading="lazy")
+template#h-car__list-li
+  li.h-car__list-li
+    a(href="#choose-your-car").h-car__list-link
+template#h-car__data-content
+  .h-car__data-content
+    table(width="100%" border="0" cellspacing="0" cellpadding="0").h-car__table
+      thead
+        tr
+          th
+          th Original
+          th After tuning
+          th Difference
+      tbody

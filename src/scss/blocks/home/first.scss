@@ -6,6 +6,33 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    &-car {
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      top: 144px;
+      z-index: 1;
+      width: max-content;
+    }
+
+    &-light {
+      &-left,
+      &-right {
+        position: absolute;
+        opacity: 0;
+      }
+
+      &-left {
+        left: -201px;
+        top: -103px;
+      }
+
+      &-right {
+        right: -201px;
+        top: -103px;
+      }
+    }
   }
 
   &__block {
@@ -17,11 +44,25 @@
   &__title {
     span {
       display: block;
+      width: max-content;
 
       &:nth-child(2) {
         font-size: 120px;
         line-height: 60%;
         margin-top: 24px;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: -260px;
+          width: 1118px;
+          height: 118px;
+          background-image: url('/images/home/first/title-svg.svg');
+          background-repeat: no-repeat;
+        }
       }
     }
   }

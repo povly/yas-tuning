@@ -1,5 +1,5 @@
-mixin hCarItem(img, title, classes)
-  .h-car__item(class=classes)
+mixin hCarItem(img, title, classes, attrs)
+  a(href="#choose-your-car").h-car__item(class=classes)&attributes(attributes)
     .h-car__item-img
       +img({
         src: img,

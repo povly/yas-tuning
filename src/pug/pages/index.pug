@@ -9,7 +9,7 @@ block variables
   - var title = 'Главная';
   - var description = '';
   - var pageCss = ['index'];  // Страничные стили /pages/index.scss
-  //- - var pageJs = ['pages/home/trust', 'pages/home/lab', 'pages/home/faq']; -- Сюда добавляем скрипты для страницы (из блока)
+  - var pageJs = ['pages/home/car', 'pages/home/links'];
   //- - var blocks = []; -- Сюда добавляем блоки для страницы (из блока)
   //- - var libsJs = ['swiper']; -- Сюда добавляем скрипты библиотек для страницы
   //- - var libsCss = ['swiper']; -- Сюда добавляем стили библиотек для страницы
@@ -25,3 +25,10 @@ block content
 
 block footer
   include ../components/footer/footer
+  script.
+    var carAjax = {
+      models: '/build/php/get-data-from-price-model.php',
+      years: '/build/php/get-data-from-price-model.php',
+      engines: '/build/php/get-data-from-price-model.php',
+      info: '/build/php/get-data-from-price-model.php',
+    };

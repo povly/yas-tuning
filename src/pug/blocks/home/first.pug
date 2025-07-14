@@ -1,10 +1,30 @@
 .h-first.section
-  .h-first__bg.img_full
-    +img({
-      src: '/images/home/first/bg.webp',
-      width: 1440,
-      height: 904,
-    })
+  .h-first__bg
+    .h-first__bg-img.img_full
+      +img({
+        src: '/images/home/first/bg.webp',
+        width: 1440,
+        height: 904,
+      })
+    .h-first__bg-car
+      .h-first__bg-car-main
+        +img({
+          src: '/images/home/first/car.avif',
+          width: 1048,
+          height: 570,
+        })
+      .h-first__bg-light-left
+        +img({
+          src: '/images/home/first/light-left.avif',
+          width: 706,
+          height: 746,
+        })
+      .h-first__bg-light-right
+        +img({
+          src: '/images/home/first/light-right.avif',
+          width: 706,
+          height: 746,
+        })
   .container
     .h-first__block
       .h-first__title.section__title
