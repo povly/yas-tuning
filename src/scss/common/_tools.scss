@@ -139,3 +139,17 @@ b {
     transform: rotate(360deg);
   }
 }
+
+.color {
+  &_green {
+    color: #5eff24;
+  }
+
+  &_yellow {
+    color: #f5cf0f;
+  }
+
+  &_red {
+    color: #ff2f00;
+  }
+}

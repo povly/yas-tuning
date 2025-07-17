@@ -1,0 +1,365 @@
+.user
+  .container
+    .user__header
+      a.header__logo(href='/')
+        +img({
+          src: '/images/header/logo.webp',
+          width: 70,
+          height: 70,
+          alt: '',
+        })
+
+      .user__top-actions
+        .user__time-info
+          .user__time-block
+            .user__time
+              .user__current-time 19:25
+              .user__current-date 06.05.2025
+            .user__office-time Office close - 22-00
+        .user__actions
+          button.user__recharge-btn.p-btn.p-btn_orange Recharge account
+          .user__icon-actions
+            .user__icon-btn.user__icon-btn--search
+              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.15 18.375L11.6375 12.8625C11.2 13.2125 10.6969 13.4896 10.1281 13.6937C9.55938 13.8979 8.95417 14 8.3125 14C6.72292 14 5.37775 13.4493 4.277 12.348C3.17625 11.2467 2.62558 9.9015 2.625 8.3125C2.62442 6.7235 3.17508 5.37833 4.277 4.277C5.37892 3.17567 6.72408 2.625 8.3125 2.625C9.90092 2.625 11.2464 3.17567 12.3489 4.277C13.4514 5.37833 14.0018 6.7235 14 8.3125C14 8.95417 13.8979 9.55937 13.6938 10.1281C13.4896 10.6969 13.2125 11.2 12.8625 11.6375L18.375 17.15L17.15 18.375ZM8.3125 12.25C9.40625 12.25 10.3361 11.8673 11.102 11.102C11.8679 10.3367 12.2506 9.40683 12.25 8.3125C12.2494 7.21817 11.8668 6.28863 11.102 5.52388C10.3373 4.75913 9.40742 4.37617 8.3125 4.375C7.21758 4.37383 6.28804 4.75679 5.52388 5.52388C4.75971 6.29096 4.37675 7.2205 4.375 8.3125C4.37325 9.4045 4.75621 10.3343 5.52388 11.102C6.29154 11.8697 7.22108 12.2523 8.3125 12.25Z" fill="#F5F5F5"/>
+              </svg>
+              form().user__search-container
+                .user__search-arrow
+                  <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.3782 1.24719C11.1765 0.141069 12.8235 0.141072 13.6218 1.24719L22.7023 13.8296C23.6569 15.1523 22.7118 17 21.0806 17H2.91943C1.28822 17 0.343069 15.1523 1.29767 13.8296L10.3782 1.24719Z" fill="#F5F5F5" />
+                  </svg>
+                .user__search
+                  input(type="text" placeholder="BMW")
+                  button.user__search-btn
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M21.5 23.25L13.625 15.375C13 15.875 12.2813 16.2708 11.4688 16.5625C10.6563 16.8542 9.79167 17 8.875 17C6.60417 17 4.6825 16.2133 3.11 14.64C1.5375 13.0667 0.750834 11.145 0.750001 8.875C0.749167 6.605 1.53583 4.68333 3.11 3.11C4.68417 1.53667 6.60583 0.75 8.875 0.75C11.1442 0.75 13.0663 1.53667 14.6413 3.11C16.2163 4.68333 17.0025 6.605 17 8.875C17 9.79167 16.8542 10.6562 16.5625 11.4688C16.2708 12.2812 15.875 13 15.375 13.625L23.25 21.5L21.5 23.25ZM8.875 14.5C10.4375 14.5 11.7658 13.9533 12.86 12.86C13.9542 11.7667 14.5008 10.4383 14.5 8.875C14.4992 7.31167 13.9525 5.98375 12.86 4.89125C11.7675 3.79875 10.4392 3.25167 8.875 3.25C7.31083 3.24833 5.98292 3.79542 4.89125 4.89125C3.79958 5.98708 3.2525 7.315 3.25 8.875C3.2475 10.435 3.79458 11.7633 4.89125 12.86C5.98792 13.9567 7.31583 14.5033 8.875 14.5Z" fill="#F56E0F" />
+                    </svg>
+            .user__icon-btn.user__icon-btn--notifications
+              svg(width="17" height="17" viewBox="0 0 17 17" fill="none")
+                path(d="M14.6116 11.3326C14.5565 11.2662 14.5024 11.1997 14.4493 11.1357C13.7188 10.2521 13.2769 9.71889 13.2769 7.2177C13.2769 5.92277 12.9671 4.86027 12.3565 4.0634C11.9062 3.47471 11.2976 3.02813 10.4954 2.69809C10.4851 2.69234 10.4759 2.68481 10.4682 2.67584C10.1797 1.70963 9.39011 1.0625 8.4996 1.0625C7.60909 1.0625 6.81985 1.70963 6.53132 2.67484C6.52363 2.6835 6.51454 2.6908 6.50442 2.69643C4.63243 3.46707 3.72267 4.94561 3.72267 7.2167C3.72267 9.71889 3.2814 10.2521 2.55026 11.1347C2.49714 11.1988 2.44302 11.2638 2.3879 11.3316C2.24553 11.5033 2.15532 11.7122 2.12796 11.9335C2.1006 12.1549 2.13722 12.3795 2.23351 12.5807C2.43837 13.0123 2.87499 13.2803 3.37337 13.2803H13.6295C14.1255 13.2803 14.5592 13.0126 14.7647 12.583C14.8614 12.3817 14.8984 12.157 14.8712 11.9354C14.8441 11.7137 14.754 11.5045 14.6116 11.3326ZM8.4996 15.9375C8.9794 15.9371 9.45014 15.8069 9.86191 15.5606C10.2737 15.3143 10.6111 14.9612 10.8384 14.5387C10.8491 14.5184 10.8544 14.4957 10.8538 14.4728C10.8531 14.4499 10.8466 14.4276 10.8348 14.408C10.8229 14.3884 10.8062 14.3721 10.7863 14.3609C10.7663 14.3496 10.7438 14.3437 10.7209 14.3438H6.27898C6.25604 14.3437 6.23348 14.3495 6.21348 14.3608C6.19348 14.372 6.17673 14.3882 6.16486 14.4078C6.15299 14.4275 6.14641 14.4498 6.14575 14.4727C6.14509 14.4957 6.15038 14.5184 6.1611 14.5387C6.38839 14.9611 6.72577 15.3142 7.13748 15.5605C7.54918 15.8068 8.01986 15.9371 8.4996 15.9375Z" fill="#F5F5F5")
+              .user__icon-btn-badge#notifications-badge(
+                  hx-get="/build/php/notifications-count.php"
+                  hx-trigger="notifications-updated from:body"
+                  hx-swap="outerHTML"
+                ) 2
+              .user__notifications-popup
+                .user__notifications-arrow
+                  <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.3782 1.24719C11.1765 0.141069 12.8235 0.141072 13.6218 1.24719L22.7023 13.8296C23.6569 15.1523 22.7118 17 21.0806 17H2.91943C1.28822 17 0.343069 15.1523 1.29767 13.8296L10.3782 1.24719Z" fill="#F5F5F5" />
+                  </svg>
+                .user__notifications-content
+                  .user__notification-item(
+                    data-id="1"
+                    data-read="false"
+                    hx-post="/build/php/notifications.php"
+                    hx-trigger="click"
+                    hx-vals='{"id": "1"}'
+                    hx-target="this"
+                    hx-swap="outerHTML"
+                  )
+                    .user__notification-header
+                      .user__notification-status
+                        .user__notification-dot
+                      .user__notification-title New ticket for order № 28012024-3
+                    .user__notification-meta
+                      .user__notification-time Friday, 16:35
+                      .user__notification-ago 2 hours ago
+                    .user__notification-desc инфо о машине, о пользователе, опции отключения инфо о машине, о пользователе, опции отключения инфо о машине инфо....
+
+                  .user__notifications-separator
+
+                  .user__notification-item(
+                    data-id="2"
+                    data-read="false"
+                    hx-post="/build/php/notifications.php"
+                    hx-trigger="click"
+                    hx-vals='{"id": "2"}'
+                    hx-target="this"
+                    hx-swap="outerHTML"
+                  )
+                    .user__notification-header
+                      .user__notification-status
+                        .user__notification-dot
+                      .user__notification-title Order № 28012024-3 has been accepted
+                    .user__notification-meta
+                      .user__notification-time Friday, 14:35
+                      .user__notification-ago 4 hours ago
+
+                  .user__notifications-separator
+
+                  .user__notification-item(
+                    data-id="3"
+                    data-read="true"
+                  )
+                    .user__notification-header
+                      .user__notification-title Order № 28012024-3 completed
+                    .user__notification-meta
+                      .user__notification-time Friday, 14:35
+                      .user__notification-ago 4 hours ago
+
+                  .user__notifications-separator
+
+                  .user__notification-item(
+                    data-id="4"
+                    data-read="true"
+                  )
+                    .user__notification-header
+                      .user__notification-title Order № 28012024-3 canceled
+                    .user__notification-meta
+                      .user__notification-time Friday, 12:35
+                      .user__notification-ago 6 hours ago
+            a(href="#!").user__icon-btn
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M4.16667 3.33333C4.16667 2.44928 4.51786 1.60143 5.14298 0.976311C5.7681 0.351189 6.61594 0 7.5 0C8.38406 0 9.2319 0.351189 9.85702 0.976311C10.4821 1.60143 10.8333 2.44928 10.8333 3.33333C10.8333 4.21739 10.4821 5.06523 9.85702 5.69036C9.2319 6.31548 8.38406 6.66667 7.5 6.66667C6.61594 6.66667 5.7681 6.31548 5.14298 5.69036C4.51786 5.06523 4.16667 4.21739 4.16667 3.33333ZM4.16667 8.33333C3.0616 8.33333 2.00179 8.77232 1.22039 9.55372C0.438987 10.3351 0 11.3949 0 12.5C0 13.163 0.263392 13.7989 0.732233 14.2678C1.20107 14.7366 1.83696 15 2.5 15H12.5C13.163 15 13.7989 14.7366 14.2678 14.2678C14.7366 13.7989 15 13.163 15 12.5C15 11.3949 14.561 10.3351 13.7796 9.55372C12.9982 8.77232 11.9384 8.33333 10.8333 8.33333H4.16667Z" fill="#F5F5F5"/>
+              </svg>
+            a(href="#!").user__icon-btn.user__icon-btn--logout
+              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.375 18.375C3.89375 18.375 3.48192 18.2038 3.1395 17.8614C2.79708 17.519 2.62558 17.1068 2.625 16.625V4.375C2.625 3.89375 2.7965 3.48192 3.1395 3.1395C3.4825 2.79708 3.89433 2.62558 4.375 2.625H9.625C9.87292 2.625 10.0809 2.709 10.2489 2.877C10.4169 3.045 10.5006 3.25267 10.5 3.5C10.4994 3.74733 10.4154 3.95529 10.248 4.12387C10.0806 4.29246 9.87292 4.37617 9.625 4.375H4.375V16.625H9.625C9.87292 16.625 10.0809 16.709 10.2489 16.877C10.4169 17.045 10.5006 17.2527 10.5 17.5C10.4994 17.7473 10.4154 17.9553 10.248 18.1239C10.0806 18.2925 9.87292 18.3762 9.625 18.375H4.375ZM15.0281 11.375H8.75C8.50208 11.375 8.29442 11.291 8.127 11.123C7.95958 10.955 7.87558 10.7473 7.875 10.5C7.87442 10.2527 7.95842 10.045 8.127 9.877C8.29558 9.709 8.50325 9.625 8.75 9.625H15.0281L13.3875 7.98438C13.2271 7.82396 13.1469 7.62708 13.1469 7.39375C13.1469 7.16042 13.2271 6.95625 13.3875 6.78125C13.5479 6.60625 13.7521 6.51496 14 6.50737C14.2479 6.49979 14.4594 6.58379 14.6344 6.75938L17.7625 9.8875C17.9375 10.0625 18.025 10.2667 18.025 10.5C18.025 10.7333 17.9375 10.9375 17.7625 11.1125L14.6344 14.2406C14.4594 14.4156 14.2517 14.4996 14.0114 14.4926C13.771 14.4856 13.5631 14.3943 13.3875 14.2188C13.2271 14.0437 13.1507 13.8361 13.1582 13.5957C13.1658 13.3554 13.2495 13.1547 13.4094 12.9938L15.0281 11.375Z" fill="#F5F5F5"/>
+              </svg>
+
+    .user__content
+      .user__content-left
+        .user__sidebar
+          .user__menu
+            .user__menu-item.user__menu-item--active
+              span Orders
+            .user__menu-item
+              span Tickets
+            .user__menu-item
+              span Invoices
+            .user__menu-item
+              span Credit statistic
+
+        .user__schedule
+          .user__schedule-item
+            .user__schedule-day Monday
+            .user__schedule-time 10:00 — 22:00
+          .user__schedule-item
+            .user__schedule-day Tuesday
+            .user__schedule-time 10:00 — 22:00
+          .user__schedule-item
+            .user__schedule-day Wednesday
+            .user__schedule-time 10:00 — 22:00
+          .user__schedule-item
+            .user__schedule-day Thursday
+            .user__schedule-time 10:00 — 22:00
+          .user__schedule-item
+            .user__schedule-day Friday
+            .user__schedule-time 10:00 — 22:00
+          .user__schedule-item
+            .user__schedule-day Saturday
+            .user__schedule-time 10:00 — 15:00
+          .user__schedule-item.user__schedule-item--closed
+            .user__schedule-day Sunday
+            .user__schedule-time Not working
+
+      .user__main
+        .user__stats
+          .user__stat
+            | Load: <span class="color_yellow">average</span>
+          .user__stat
+            | Balance: 317 YT
+        .user__main-header
+          h2.user__title Ordered files
+          button.user__new-order-btn.p-btn.p-btn_orange New order
+
+        .user__table-container
+          table.user__table
+            thead
+              tr
+                th Order №
+                th Information
+                th Order status
+                th Priority
+                th Price, YT
+                th Original file
+                th Modificated file
+                th Tickets
+            tbody
+              tr.user__order-row(
+                hx-get="/build/php/order-details.php?id=28012024-3"
+                hx-target="#order-modal-container"
+                hx-trigger="click"
+              )
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--pending Pending
+                td
+                  .user__priority.user__priority--urgent 1-2 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn Create
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--pending Pending
+                td
+                  .user__priority.user__priority--urgent 1-2 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn Create
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--completed Сompleted
+                td
+                  .user__priority.user__priority--urgent 1-2 hours
+                td 100
+                td
+                  a(href="#!").user__download.user__download--active Download
+                td
+                  a(href="#!").user__download.user__download--active Download
+                td
+                  .user__ticket-btn.user__ticket-btn--open Open
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--pending Pending
+                td
+                  .user__priority 12-48 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn Create
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--progress In progress
+                td
+                  .user__priority.user__priority--medium 2-4 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn Create
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--canceled Сanceled
+                td
+                  .user__priority.user__priority--slow 4-12 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn.user__ticket-btn--open Open
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--pending Pending
+                td
+                  .user__priority.user__priority--urgent 1-2 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn Create
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--pending Pending
+                td
+                  .user__priority.user__priority--urgent 1-2 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn Create
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--completed Сompleted
+                td
+                  .user__priority.user__priority--urgent 1-2 hours
+                td 100
+                td
+                  a(href="#!").user__download.user__download--active Download
+                td
+                  a(href="#!").user__download.user__download--active Download
+                td
+                  .user__ticket-btn.user__ticket-btn--open Open
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--pending Pending
+                td
+                  .user__priority 12-48 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn Create
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--progress In progress
+                td
+                  .user__priority.user__priority--medium 2-4 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn Create
+              tr
+                td 28012024-3
+                td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                td
+                  .user__status.user__status--canceled Сanceled
+                td
+                  .user__priority.user__priority--slow 4-12 hours
+                td 100
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  button.user__download.user__download--disabled Download
+                td
+                  .user__ticket-btn.user__ticket-btn--open Open
+
+        .user__pagination
+          span.user__pagination-item.user__pagination-item--active 1
+          a(href="#!").user__pagination-item 2
+          a(href="#!").user__pagination-item 3
+          a(href="#!").user__pagination-item 4
+          a(href="#!").user__pagination-item 5
+          a(href="#!").user__pagination-item 6
+          a(href="#!").user__pagination-item 7
+          a(href="#!").user__pagination-item 8
+          a(href="#!").user__pagination-item 9
+          a(href="#!").user__pagination-item 10
+          span.user__pagination-item .....
+// Контейнер для модального окна заказа
+#order-modal-container
