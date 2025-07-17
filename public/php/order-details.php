@@ -109,9 +109,9 @@ $orderData = [
               <div class="order-detail-modal__label">Modified file</div>
               <div class="order-detail-modal__value">
                 <?php if ($orderData['status'] == 'Completed'): ?>
-                  <a class="user__download user__download--active" href="#!">Download</a>
+                  <a class="user__download user__download-with-bg user__download-with-bg--active" href="#!">File output</a>
                 <?php else: ?>
-                  <button class="user__download user__download--disabled">Download</button>
+                  <button class="user__download user__download-with-bg user__download-with-bg--disabled">File output</button>
                 <?php endif; ?>
               </div>
             </div>

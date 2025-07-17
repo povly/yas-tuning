@@ -403,6 +403,7 @@
     letter-spacing: -0.02em;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: max-content;
 
     &--disabled {
       letter-spacing: -0.02em;
@@ -427,6 +428,22 @@
 
     &--active::after {
       background: url("/images/user/icons/download-orange.svg") center/contain no-repeat;
+    }
+
+    &-with-bg {
+      padding: 6px;
+      background: var(--f56e0f);
+      border-radius: 6px;
+
+      &::after {
+        background: url("/images/user/icons/download-white.svg") center/contain no-repeat;
+      }
+
+      &--disabled {
+        &::after {
+          background: url("/images/user/icons/download.svg") center/contain no-repeat;
+        }
+      }
     }
   }
 
