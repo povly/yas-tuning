@@ -19,3 +19,11 @@ block content
 
 block footer
   include ../components/footer/footer
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('htmx:beforeSwap', function(evt) {
+        if (evt.detail.target.id === 'order-modal-container') {
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
