@@ -53,6 +53,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
+    "chart.js": "^4.5.0",
     "htmx.org": "^2.0.6",
     "normalize.css": "^8.0.1",
     "swiper": "^11.2.8",

@@ -13,24 +13,26 @@ document.addEventListener('DOMContentLoaded', () => {
     searchBtn.classList.toggle('active');
   });
 
-  // Уведомления
-  notificationsBtn.addEventListener('click', () => {
-    notificationsBtn.classList.toggle('active');
-  });
+  if (notificationsBtn){
+    // Уведомления
+    notificationsBtn.addEventListener('click', () => {
+      notificationsBtn.classList.toggle('active');
+    });
+  }
 
   // Закрытие при клике вне блоков
   document.addEventListener('click', (e) => {
     const isClickInsideSearch =
       searchBtn.contains(e.target) || searchContainer.contains(e.target);
     const isClickInsideNotifications =
-      notificationsBtn.contains(e.target) ||
-      notificationsPopup.contains(e.target);
+    notificationsBtn && notificationsBtn.contains(e.target) ||
+    notificationsPopup && notificationsPopup.contains(e.target);
 
     if (!isClickInsideSearch) {
       searchBtn.classList.remove('active');
     }
 
-    if (!isClickInsideNotifications) {
+    if (!isClickInsideNotifications && notificationsBtn) {
       notificationsBtn.classList.remove('active');
     }
   });
@@ -40,9 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
     e.stopPropagation();
   });
 
-  notificationsPopup.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
+  if (notificationsPopup){
+    notificationsPopup.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
 
   const files = document.querySelectorAll('.user__file');
   if (files[0]) {
@@ -72,44 +76,44 @@ document.addEventListener('DOMContentLoaded', () => {
         locale: {
           months: {
             short: [
-              'Янв',
-              'Фев',
-              'Мар',
-              'Апр',
-              'Май',
-              'Июн',
-              'Июл',
-              'Авг',
-              'Сен',
-              'Окт',
-              'Ноя',
-              'Дек',
+              'Jan',
+              'Feb',
+              'Mar',
+              'Apr',
+              'May',
+              'Jun',
+              'Jul',
+              'Aug',
+              'Sep',
+              'Oct',
+              'Nov',
+              'Dec',
             ],
             long: [
-              'Январь',
-              'Февраль',
-              'Март',
-              'Апрель',
-              'Май',
-              'Июнь',
-              'Июль',
-              'Август',
-              'Сентябрь',
-              'Октябрь',
-              'Ноябрь',
-              'Декабрь',
+              'January',
+              'February',
+              'March',
+              'April',
+              'May',
+              'June',
+              'July',
+              'August',
+              'September',
+              'October',
+              'November',
+              'December',
             ],
           },
           weekdays: {
-            short: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+            short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             long: [
-              'Воскресенье',
-              'Понедельник',
-              'Вторник',
-              'Среда',
-              'Четверг',
-              'Пятница',
-              'Суббота',
+              'Sunday',
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
             ],
           },
         },

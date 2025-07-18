@@ -42,6 +42,7 @@
     left: 50%;
     transform: translateX(-50%);
     display: none;
+    z-index: 5;
   }
 
   &__search-arrow {
@@ -145,6 +146,11 @@
 
     &:hover {
       background: rgb(245 245 245 / 10%);
+    }
+
+    &.active {
+      background: #F56E0F;
+      border-color: #F56E0F;
     }
 
     &-badge {
@@ -294,6 +300,7 @@
     background: #1c1b20;
     border-collapse: collapse;
     border-radius: 24px;
+    overflow: hidden;
 
     :is(th, td) {
       font-size: 14px;
@@ -326,7 +333,7 @@
 
     th {
       font-weight: 400;
-      padding: 16px 8px;
+      padding: 16px 6px;
 
       &:nth-child(1) {
         width: 121px;
@@ -425,6 +432,42 @@
 
         &:nth-child(2){
           text-align: center;
+        }
+      }
+    }
+
+    &_superadmin {
+      &-payments {
+        th {
+          &:nth-child(2){
+            width: 221px;
+          }
+
+          &:nth-child(3){
+            width: 243px;
+          }
+
+          &:nth-child(4){
+            width: 146px;
+          }
+
+          &:nth-child(5){
+            width: 123px;
+          }
+
+          &:nth-child(6){
+            width: 76px;
+          }
+
+          &:nth-child(7){
+            width: 163px;
+          }
+        }
+
+        td {
+          &:nth-child(2){
+            text-align: center;
+          }
         }
       }
     }
@@ -1130,6 +1173,157 @@
 
     &-pay {
       margin-top: 24px;
+    }
+
+  }
+
+  &__set {
+    &-priority {
+      position: relative;
+
+      &.active {
+        .user__set-priority-abs {
+          display: block;
+        }
+      }
+
+      &-abs {
+        position: absolute;
+        top: 100%;
+        margin-top: 17px;
+        z-index: 5;
+        background: #1c1b20;
+        border-radius: 20px;
+        padding: 40px 20px 20px 20px;
+        width: max-content;
+        min-width: 257px;
+        display: none;
+      }
+
+      &-save {
+        margin-top: 20px;
+      }
+
+      &-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        cursor: pointer;
+      }
+
+      &-items {
+        display: grid;
+        gap: 6px;
+      }
+
+      &-item {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        font-weight: 500;
+        font-size: 16px;
+
+        input {
+          font-size: 14px;
+          line-height: 129%;
+          background: var(--f5f5f5);
+          border: 1px solid var(--999999);
+          border-radius: 6px;
+          padding: 10px 12px;
+          outline: none;
+        }
+      }
+
+      &-title {
+        min-width: 90px;
+
+        input {
+          width: 117px;
+        }
+      }
+
+      &-price {
+        min-width: 42px;
+        text-align: right;
+
+        input {
+          text-align: center;
+          padding-left: 6px;
+          padding-right: 6px;
+          width: 61px;
+        }
+      }
+
+      &-square {
+        flex-shrink: 0;
+        border: 1px solid var(--f56e0f);
+        border-radius: 2px;
+        width: 20px;
+        height: 20px;
+        margin-right: -12px;
+      }
+
+      &-edit {
+        cursor: pointer;
+        margin-left: auto;
+
+        &:hover {
+          path {
+            fill: #F56E0F;
+          }
+        }
+      }
+    }
+  }
+
+  &__payments {
+    &-block {
+      background: var(--303038);
+      padding: 20px;
+      border-radius: 24px;
+      overflow: hidden;
+      margin-top: 24px;
+      position: relative;
+    }
+
+    &-title {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 100%;
+    }
+
+    &-stats {
+      margin-top: 30px;
+    }
+
+    &-bottom {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+      margin-top: 30px;
+      justify-content: space-between;
+
+      .user {
+        &__date {
+          margin-bottom: 0;
+        }
+
+        &__stats {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &-right {
+      flex-shrink: 0;
+    }
+
+    &-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
   }
 }
