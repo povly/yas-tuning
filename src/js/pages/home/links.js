@@ -9,13 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = item.querySelector('.h-links__item-content');
 
         btn.addEventListener('click', () => {
-          const activeItem = link.querySelector('.h-links__items .h-links__item.active');
+          const activeItem = link.querySelector(
+            '.h-links__items .h-links__item.active'
+          );
 
           if (activeItem && activeItem !== item) {
             activeItem.classList.remove('active');
-            activeItem.querySelector('.h-links__item-content').style.height = '';
+            activeItem.querySelector('.h-links__item-content').style.height =
+              '';
           }
-          
+
           item.classList.toggle('active');
 
           if (item.classList.contains('active')) {

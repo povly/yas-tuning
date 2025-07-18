@@ -17,10 +17,9 @@
     font-size: var(--error-title-size, 320px);
     line-height: 100%;
     text-transform: uppercase;
-    color: var(--999999);
     backdrop-filter: blur(6px);
-    background: linear-gradient(139.74deg, rgba(217, 217, 217, 0.5) 0%, rgba(115, 115, 115, 0) 120.308%);
-    -webkit-background-clip: text;
+    background: linear-gradient(139.74deg, rgb(217 217 217 / 50%) 0%, rgb(115 115 115 / 0%) 120.308%);
+    background-clip: text;
     -webkit-text-stroke: 4px transparent;
     color: transparent;
     text-align: center;
@@ -30,11 +29,11 @@
   }
 
   &__item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgb(255 255 255 / 10%);
     border-radius: 20px;
     padding: 40px 90px;
     backdrop-filter: blur(5.400000095367432px);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgb(255 255 255 / 8%);
     max-width: var(--error-item-width, 639px);
     width: 100%;
     margin: 0 auto;
