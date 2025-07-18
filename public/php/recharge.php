@@ -1,4 +1,4 @@
-<form class="user__recharge" id="user__recharge" hx-post="/php/recharge.php" hx-trigger="change" hx-target="this" hx-swap="outerHTML" hx-validate="true">
+<form class="user__recharge" id="user__recharge" hx-post="/php/recharge.php" hx-trigger="submit" hx-target="this" hx-swap="outerHTML" hx-validate="true">
   <div class="user__order-top">
     <div class="user__order-left">
       <div class="user__breadcrumbs"><a href="#!">Invoices</a><span class="separator">/</span><span class="current">Recharge account</span></div>
@@ -11,7 +11,7 @@
       <div class="user__recharge-title">Choose from the proposed tariffs</div>
       <div class="user__recharge-radios">
         <label class="user__recharge-radio">
-          <input type="radio" name="pod" value="premium-1" required="">
+          <input type="radio" name="pod" value="premium-1" required="" hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML" class="">
           <div class="user__recharge-radio-item">
             <div class="user__recharge-radio-title">Premium</div>
             <div class="user__recharge-radio-desc">(10%&nbsp;DISCOUNT)</div>
@@ -26,7 +26,7 @@
           </div>
         </label>
         <label class="user__recharge-radio">
-          <input type="radio" name="pod" value="premium-2" required="">
+          <input type="radio" name="pod" value="premium-2" required="" hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML">
           <div class="user__recharge-radio-item">
             <div class="user__recharge-radio-title">Premium</div>
             <div class="user__recharge-radio-desc">(20%&nbsp;DISCOUNT)</div>
@@ -41,7 +41,7 @@
           </div>
         </label>
         <label class="user__recharge-radio">
-          <input type="radio" name="pod" value="premium-3" required="">
+          <input type="radio" name="pod" value="premium-3" required="" hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML">
           <div class="user__recharge-radio-item">
             <div class="user__recharge-radio-title">Premium</div>
             <div class="user__recharge-radio-desc">(30%&nbsp;DISCOUNT)</div>
@@ -92,6 +92,7 @@
         <label class="user__payment-label" for="payment-3"><span class="user__payment-svg"><img width="66" height="18" src="/images/user/payments/paypal.png" alt="PayPal" loading="lazy"></span><span class="user__payment-title">PayPal</span></label>
       </div>
     </div>
-    <button class="user__recharge-btn p-btn p-btn_orange" type="submit">Pay</button>
+    <button class="user__recharge-pay p-btn p-btn_orange" type="submit">Pay</button>
   </div>
+
 </form>

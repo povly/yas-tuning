@@ -15,5 +15,5 @@
       <label class="user__payment-label" for="payment-3"><span class="user__payment-svg"><img width="66" height="18" src="/images/user/payments/paypal.png" alt="PayPal" loading="lazy"></span><span class="user__payment-title">PayPal</span></label>
     </div>
   </div>
-  <button class="user__recharge-btn p-btn p-btn_orange" type="submit">Pay</button>
+  <button class="user__recharge-pay p-btn p-btn_orange" type="submit">Pay</button>
 </div>
