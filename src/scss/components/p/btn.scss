@@ -15,6 +15,11 @@
     color: var(--f56e0f);
   }
 
+  &_white {
+    background: var(--f5f5f5);
+    color: #272727;
+  }
+
   &_orange {
     background: var(--f56e0f);
     border-color: var(--f56e0f);
@@ -23,6 +28,13 @@
       background: var(--f5f5f5);
       color: var(--f56e0f);
       border-color: var(--f5f5f5);
+    }
+
+    &-second {
+      &:hover {
+        background: #f59543;
+        color: var(--f5f5f5);
+      }
     }
   }
 

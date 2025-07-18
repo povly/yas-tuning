@@ -1,0 +1,29 @@
+extends ../layout/base
+
+//- Include mixins
+include ../mixins/picture
+include ../mixins/video
+include ../mixins/iframe
+
+block variables
+  - var title = 'INVOICES';
+  - var description = '';
+  - var pageCss = ['index', 'user'];  // Страничные стили /pages/index.scss
+  - var pageJs = ['pages/user'];
+  //- - var blocks = ['user'];
+  //- - var libsJs = ['swiper']; -- Сюда добавляем скрипты библиотек для страницы
+  //- - var libsCss = ['swiper']; -- Сюда добавляем стили библиотек для страницы
+
+block content
+  include ../blocks/user/invoices
+
+block footer
+  include ../components/footer/footer
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('htmx:beforeSwap', function(evt) {
+        if (evt.detail.target.id === 'order-modal-container') {
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });

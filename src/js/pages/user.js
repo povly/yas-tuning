@@ -44,4 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
   notificationsPopup.addEventListener('click', (e) => {
     e.stopPropagation();
   });
+
+  const files = document.querySelectorAll('.user__file');
+  if (files[0]){
+    files.forEach((file)=>{
+      const fileInput = file.querySelector('input');
+      const fileTitle = file.querySelector('.user__file-title');
+
+      fileInput.addEventListener('change', () => {
+        const fileName = fileInput.files[0].name;
+        if (file){
+          fileTitle.textContent = fileName;
+        }
+      });
+    })
+  }
 });
