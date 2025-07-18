@@ -219,15 +219,16 @@ header('Content-Type: text/html; charset=utf-8');
     <div class="user__payment-items">
       <div class="user__payment-item">
         <input type="radio" name="payment" id="payment-1">
-        <label class="user__payment-label" for="payment-1"><span class="user__payment-svg"><img class="lazy entered loaded" width="30" height="30" src="/images/user/payments/credits.png" data-src="/images/user/payments/credits.png" alt="Credits" loading="lazy" data-ll-status="loaded"></span><span class="user__payment-title">Credits</span></label>
+        <label class="user__payment-label" for="payment-1">
+          <span class="user__payment-svg"><img class="lazy" width="30" height="30" src="/images/user/payments/credits.png" alt="Credits" loading="lazy"></span><span class="user__payment-title">Credits</span></label>
       </div>
       <div class="user__payment-item">
         <input type="radio" name="payment" id="payment-2">
-        <label class="user__payment-label" for="payment-2"><span class="user__payment-svg"><img class="lazy entered loaded" width="30" height="27" src="/images/user/payments/credit-card.png" data-src="/images/user/payments/credit-card.png" alt="Credit card" loading="lazy" data-ll-status="loaded"></span><span class="user__payment-title">Credit card</span></label>
+        <label class="user__payment-label" for="payment-2"><span class="user__payment-svg"><img width="30" height="27" src="/images/user/payments/credit-card.png" alt="Credit card" loading="lazy"></span><span class="user__payment-title">Credit card</span></label>
       </div>
       <div class="user__payment-item">
         <input type="radio" name="payment" id="payment-3">
-        <label class="user__payment-label" for="payment-3"><span class="user__payment-svg"><img class="lazy entered loaded" width="66" height="18" src="/images/user/payments/paypal.png" data-src="/images/user/payments/paypal.png" alt="PayPal" loading="lazy" data-ll-status="loaded"></span><span class="user__payment-title">PayPal</span></label>
+        <label class="user__payment-label" for="payment-3"><span class="user__payment-svg"><img width="66" height="18" src="/images/user/payments/paypal.png" alt="PayPal" loading="lazy"></span><span class="user__payment-title">PayPal</span></label>
       </div>
     </div>
   </div>

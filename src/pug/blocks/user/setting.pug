@@ -1,0 +1,85 @@
+.user
+  .container
+    include ../../templates/user/header.pug
+
+    .user__content
+      include ../../templates/user/sidebar.pug
+      .user__main
+        .user__main-header
+          .user__main-header-left
+            h2.user__title User setting
+          .user__main-header-right
+        form(hx-post="/php/user-settings.php" hx-trigger="submit" hx-validate).user__settings
+          .user__inputs
+            .user__input
+              .user__input-label First name
+              .user__input-el
+                input(type="text"
+                name="first-name"
+                value=""
+                required
+                )
+            .user__input
+              .user__input-label Last name
+              .user__input-el
+                input(type="text" name="last-name" value="" required
+                )
+            .user__input
+              .user__input-label Email
+              .user__input-el
+                input(type="email" name="email" value="" required
+                )
+            .user__input
+              .user__input-label Country
+              .user__input-el
+                input(type="text" name="country" value="" required
+                )
+            .user__input
+              .user__input-label Address
+              .user__input-el
+                input(type="text" name="Address" value="" required
+                )
+            .user__input
+              .user__input-label Phone number
+              .user__input-el
+                input(type="tel" name="tel" value="" required
+                )
+            .user__input
+              .user__input-label Zip code
+              .user__input-el
+                input(type="text" name="zip-code" value="" required
+                )
+            .user__input
+              .user__input-label EVC number
+              .user__input-el
+                input(type="text" name="evc-number" value="" required
+                )
+            .user__input.user__input_col-1#is_company_block
+              .user__checkbox
+                input(type="checkbox" name="is_company" id="is_company" hx-include="this" hx-get="/build/php/is_company.php" hx-trigger="change" hx-target="#is_company_fields" hx-swap="innerHTML")
+                label.user__checkbox-label(for="is_company")
+                  .user__checkbox-square
+                  .user__checkbox-title Is company?
+            .user__input.user__input_col-1#is_company_fields
+            .user__input.user__input_col-1
+              button.p-btn.p-btn_orange Update
+        form(hx-post="/php/user-settings.php" hx-trigger="submit" hx-validate).user__settings
+          .user__title.user__settings-title CHANGE PASSWORD
+          .user__inputs
+            .user__input
+              .user__input-label New password
+              .user__input-el
+                input(type="password"
+                name="password"
+                value=""
+                required
+                )
+            .user__input
+              .user__input-label Confirm password
+              .user__input-el
+                input(type="password" name="confirm-password" value="" required
+                )
+            .user__input.user__input_col-1
+              button.p-btn.p-btn_orange Update
+// Контейнер для модального окна заказа
+#order-modal-container

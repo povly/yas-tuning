@@ -422,7 +422,7 @@
 
       td {
         padding: 16px;
-        
+
         &:nth-child(2){
           text-align: center;
         }
@@ -777,6 +777,7 @@
   &__inputs {
     display: grid;
     gap: 16px;
+    width: 100%;
   }
 
   &__input {
@@ -792,6 +793,12 @@
 
       &-down-2 {
         grid-row: span 3;
+      }
+    }
+
+    &_col {
+      &-1 {
+        grid-column: span 2;
       }
     }
 
@@ -1005,6 +1012,124 @@
       .vc {
         display: block;
       }
+    }
+  }
+
+  &__settings {
+    margin-top: 40px;
+
+    .user {
+      &__inputs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 24px;
+      }
+    }
+
+    &-title {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__recharge {
+    &-block {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    &-title {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 100%;
+      margin-bottom: 20px;
+    }
+
+    &-radios {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 24px;
+      gap: 24px;
+    }
+
+    &-radio {
+      input {
+        display: none;
+
+        &:checked {
+          ~ .user__recharge-radio-item {
+            background: var(--f56e0f);
+            color: var(--f5f5f5);
+
+            --radio-title: var(--f5f5f5);
+            --radio-desc: var(--f5f5f5);
+            --radio-svg-path: var(--f5f5f5);
+          }
+        }
+      }
+
+
+      &-item {
+        background: var(--f5f5f5);
+        border-radius: 20px;
+        padding: 20px 18px;
+        font-size: 20px;
+        line-height: 120%;
+        color: #1b1b1c;
+      }
+
+      &-title {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 114%;
+        text-transform: uppercase;
+        color: var(--radio-title, var(--f56e0f));
+        margin-bottom: 16px;
+      }
+
+      &-desc {
+        margin-top: 16px;
+        font-weight: 500;
+        color: var(--radio-desc, var(--f56e0f));
+      }
+    }
+
+    &-price {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+
+      &-svg {
+        flex-shrink: 0;
+        cursor: pointer;
+
+        path {
+          fill: var(--radio-svg-path, #F56E0F);
+        }
+      }
+    }
+
+    &-amount {
+      background: var(--f5f5f5);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 137%;
+      color: #1b1b1c;
+      border-radius: 20px;
+      padding: 20px 18px;
+
+      &-title {
+        margin-bottom: 10px;
+      }
+
+      &-input {
+        margin-bottom: 24px;
+      }
+    }
+
+    &-btn {
+      margin-top: 24px;
     }
   }
 }

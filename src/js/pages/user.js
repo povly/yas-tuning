@@ -130,9 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 year: 'numeric',
               }) +
               ' - ' +
-            new Date(selectedDates[0]).toLocaleDateString('ru-RU', {
+              new Date(selectedDates[0]).toLocaleDateString('ru-RU', {
                 day: 'numeric',
-              month: 'numeric',
+                month: 'numeric',
                 year: 'numeric',
               });
             input.value =
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 year: 'numeric',
               }) +
               ' - ' +
-            new Date(selectedDates[0]).toLocaleDateString('ru-RU', {
+              new Date(selectedDates[0]).toLocaleDateString('ru-RU', {
                 day: 'numeric',
                 month: 'numeric',
                 year: 'numeric',

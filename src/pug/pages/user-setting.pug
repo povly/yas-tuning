@@ -1,0 +1,29 @@
+extends ../layout/base
+
+//- Include mixins
+include ../mixins/picture
+include ../mixins/video
+include ../mixins/iframe
+
+block variables
+  - var title = 'USER SETTING';
+  - var description = '';
+  - var pageCss = ['index', 'user'];  // Страничные стили /pages/index.scss
+  - var pageJs = ['pages/user'];
+  //- - var blocks = ['user'];
+  - var libsJs = ['vanilla-calendar-pro'];
+  - var libsCss = ['vanilla-calendar-pro'];
+
+block content
+  include ../blocks/user/setting
+
+block footer
+  include ../components/footer/footer
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('htmx:beforeSwap', function(evt) {
+        if (evt.detail.target.id === 'order-modal-container') {
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
