@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 year: 'numeric',
               }) +
               ' - ' +
-              new Date(selectedDates[0]).toLocaleDateString('ru-RU', {
+              new Date(selectedDates[1]).toLocaleDateString('ru-RU', {
                 day: 'numeric',
                 month: 'numeric',
                 year: 'numeric',
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 year: 'numeric',
               }) +
               ' - ' +
-              new Date(selectedDates[0]).toLocaleDateString('ru-RU', {
+              new Date(selectedDates[1]).toLocaleDateString('ru-RU', {
                 day: 'numeric',
                 month: 'numeric',
                 year: 'numeric',
@@ -170,5 +170,32 @@ document.addEventListener('DOMContentLoaded', () => {
         date.classList.toggle('active');
       });
     });
+  }
+
+  const selects = document.querySelectorAll('.user-select');
+  if (selects[0]){
+    selects.forEach((select)=>{
+      const current = select.querySelector('.user-select__current');
+      const title = select.querySelector('.user-select__current-title');
+      const input = select.querySelector('input');
+
+      current.addEventListener('click', () => {
+        select.classList.toggle('active');
+      });
+
+      const options = select.querySelectorAll('.user-select__option');
+      options.forEach((option) => {
+        option.addEventListener('click', () => {
+          // if (select.classList.contains('user-select_status')){
+          //   current.innerHTML = option.innerHTML;
+          // } else {
+          //   title.textContent = option.textContent;
+          // }
+          title.textContent = option.textContent;
+          input.value = option.dataset.value;
+          select.classList.remove('active');
+        });
+      });
+    })
   }
 });

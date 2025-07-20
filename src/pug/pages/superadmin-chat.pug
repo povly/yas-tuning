@@ -1,0 +1,109 @@
+extends ../layout/base
+
+//- Include mixins
+include ../mixins/picture
+include ../mixins/video
+include ../mixins/iframe
+
+block variables
+  - var title = 'superadmin chat';
+  - var description = '';
+  - var pageCss = ['index', 'user'];  // Страничные стили /pages/index.scss
+  - var pageJs = ['pages/user', 'pages/superadmin/chat'];
+  - var libsJs = ['swiper'];
+
+
+block content
+  include ../blocks/superadmin/tickets
+
+block footer
+  include ../components/footer/footer
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('htmx:beforeSwap', function(evt) {
+        if (evt.detail.target.id === 'order-modal-container') {
+          document.body.style.overflow = 'hidden';
+        }
+      });
+
+      let ws;
+      function initChat() {
+          ws = new WebSocket("ws://localhost:8080");
+          ws.onmessage = receiveChatMessage;
+      }
+      initChat();
+
+      function sendMessage(form) {
+        if (!ws) { alert('Socket not ready'); return false; }
+        let fileInput = form.querySelector('input[type="file"]');
+        let file = fileInput.files[0];
+        let text = form.message.value.trim();
+        let formData = new FormData(form);
+
+        if (text) {
+          ws.send(JSON.stringify(formData));
+          createMessage(`<p>${text}</p>`, getCurrentTime(), '_read', '_right');
+        }
+
+        if (file) {
+          //- fetch(form.dataset.actionFile, {
+          //-   method: 'POST',
+          //-   body: formData
+          //- })
+          //- .then(res => res.json())
+          //- .then(obj => {
+          //-   ws.send(JSON.stringify(obj));
+          //- });
+
+          addMessageWithImage(form, file);
+        }
+
+        form.reset();
+        return false;
+      }
+
+      function createMessage(content, time, status = '_unread', className = ''){
+        let template = document.querySelector('#template-chat-message');
+        let clone = template.content.cloneNode(true);
+
+        let message = clone.querySelector('.user__chat-message');
+        let cloneContent = message.querySelector('.user__chat-message-text');
+        let meta = message.querySelector('.user__chat-meta');
+        let metaTime = meta.querySelector('.user__chat-meta-time');
+        let metaStatus = meta.querySelector('.user__chat-meta-status');
+
+        cloneContent.innerHTML = content;
+        message.classList.add(className);
+        metaTime.innerHTML = time;
+        metaStatus.classList.add(status);
+
+        let chatMessages = document.getElementById('chat-messages');
+        chatMessages.appendChild(clone);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+      function getCurrentTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+      }
+      function receiveChatMessage(event) {
+          let data = JSON.parse(event.data); // если сервер шлёт JSON
+          createMessage(event.data.message, event.data.time, '_unread', '_left');
+      }
+      function addMessageWithImage(form, file){
+        let reader = new FileReader();
+
+
+        reader.onload = function(e) {
+          let img = `
+            <img src="${e.target.result}" width="254" height="100">
+          `;
+
+          createMessage(img, getCurrentTime(), '_read', '_right')
+        };
+
+        reader.readAsDataURL(file);
+      }
+      window.sendMessage = sendMessage;
+    });

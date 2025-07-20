@@ -6,6 +6,8 @@ yarn-error.log*
 pnpm-debug.log*
 modules
 
+*vendor
+
 # Build outputs
 build/
 dist/

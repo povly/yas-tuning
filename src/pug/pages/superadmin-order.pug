@@ -1,24 +1,24 @@
-extends ../../layout/base
+extends ../layout/base
 
 //- Include mixins
-include ../../mixins/picture
-include ../../mixins/video
-include ../../mixins/iframe
+include ../mixins/picture
+include ../mixins/video
+include ../mixins/iframe
 
 block variables
-  - var title = 'superadmin SETTING';
+  - var title = 'Ordered files';
   - var description = '';
   - var pageCss = ['index', 'user'];  // Страничные стили /pages/index.scss
   - var pageJs = ['pages/user'];
   //- - var blocks = ['user'];
-  - var libsJs = ['vanilla-calendar-pro'];
-  - var libsCss = ['vanilla-calendar-pro'];
+  //- - var libsJs = ['swiper']; -- Сюда добавляем скрипты библиотек для страницы
+  //- - var libsCss = ['swiper']; -- Сюда добавляем стили библиотек для страницы
 
 block content
-  include ../../blocks/superadmin/setting
+  include ../blocks/superadmin/order
 
 block footer
-  include ../../components/footer/footer
+  include ../components/footer/footer
   script.
     document.addEventListener('DOMContentLoaded', function() {
       document.addEventListener('htmx:beforeSwap', function(evt) {
