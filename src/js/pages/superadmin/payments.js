@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const span = document.createElement('span');
         span.style.background = colors.backgroundColor;
         span.style.borderColor = colors.borderColor;
-        span.style.borderWidth = '2px';
+        span.style.borderWidth = '1px';
         span.style.marginRight = '10px';
         span.style.height = '10px';
         span.style.width = '10px';
@@ -106,58 +106,63 @@ document.addEventListener('DOMContentLoaded', () => {
     tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
   };
 
-  const ctx = document.querySelector('#user__payments-canvas');
-  new Chart(ctx, {
-    type: 'line',
-    maintainAspectRatio: false,
-    responsive: false,
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      datasets: [{
-        label: '',
-        data: JSON.parse(ctx.dataset.sets),
-        borderColor: '#F5F5F5',
-        showLine: true,
-        pointRadius: 5,
-        pointHoverRadius: 5,
-        pointStyle: 'circle',
-        backgroundColor: '#F5F5F5'
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 1
-      }
-    },
-    options: {
-      scales: {
-        y: {
-          display: false,
-        },
-        x: {
-          grid: {
+  function updateChartJS(){
+    const ctx = document.querySelector('#user__payments-canvas');
+    new Chart(ctx, {
+      type: 'line',
+      maintainAspectRatio: false,
+      responsive: false,
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: '',
+          data: JSON.parse(ctx.dataset.sets),
+          borderColor: '#F5F5F5',
+          showLine: true,
+          pointRadius: 5,
+          pointHoverRadius: 5,
+          pointStyle: 'circle',
+          backgroundColor: '#F5F5F5'
+        }]
+      },
+      elements: {
+        line: {
+          borderWidth: 1
+        }
+      },
+      options: {
+        scales: {
+          y: {
             display: false,
           },
-          ticks: {
-            color: '#F5F5F5',
-            font: {
-              size: 14
+          x: {
+            grid: {
+              display: false,
             },
+            ticks: {
+              color: '#F5F5F5',
+              font: {
+                size: 14
+              },
+            }
+          },
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: false,
+            position: 'nearest',
+            external: externalTooltipHandler
           }
-        },
-      },
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          enabled: false,
-          position: 'nearest',
-          external: externalTooltipHandler
         }
       }
-    }
-  });
+    });
+  }
+  updateChartJS();
+
+  window.updateChartJS = updateChartJS;
 
 
 });

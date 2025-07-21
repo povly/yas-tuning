@@ -1,0 +1,257 @@
+.user
+  .container
+    include ../../templates/superadmin/header.pug
+
+    .user__content
+      include ../../templates/user/sidebar.pug
+      .user__main
+        .user__main-header
+          .user__main-header-left
+            .user__breadcrumbs
+              a(href="#!") Users
+              span.separator /
+              span.current User profile
+            h2.user__title USER profile
+          .user__main-header-right
+        .user__table-container
+          .user__profile
+            .user__profile-title Aliaksandr Yanukovich
+            .user__profile-list
+              ul
+                li Email: Aliaksandr@mail.ru
+                li Country: Tallin
+                li Address: Tallin
+                li Phone number: +7 999 99 99
+                li Zip code: 123456
+                li EVC number: 123456
+              ul
+                li Company name: Aliaksandr
+                li Company ID: 123456
+                li Company address: Tallin
+                li Vat: 123456
+              ul
+                li DIscount: 10%
+                li Role: user
+            .user__profile-btns
+              button.user__profile-btns-crud
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 20C8.61667 20 7.31667 19.7373 6.1 19.212C4.88334 18.6867 3.825 17.9743 2.925 17.075C2.025 16.1757 1.31267 15.1173 0.788001 13.9C0.263335 12.6827 0.000667933 11.3827 1.26582e-06 10C-0.000665401 8.61733 0.262001 7.31733 0.788001 6.1C1.314 4.88267 2.02633 3.82433 2.925 2.925C3.82367 2.02567 4.882 1.31333 6.1 0.788C7.318 0.262667 8.618 0 10 0C11.382 0 12.682 0.262667 13.9 0.788C15.118 1.31333 16.1763 2.02567 17.075 2.925C17.9737 3.82433 18.6863 4.88267 19.213 6.1C19.7397 7.31733 20.002 8.61733 20 10C19.998 11.3827 19.7353 12.6827 19.212 13.9C18.6887 15.1173 17.9763 16.1757 17.075 17.075C16.1737 17.9743 15.1153 18.687 13.9 19.213C12.6847 19.739 11.3847 20.0013 10 20ZM10 18C10.9 18 11.7667 17.8543 12.6 17.563C13.4333 17.2717 14.2 16.8507 14.9 16.3L3.7 5.1C3.15 5.8 2.729 6.56667 2.437 7.4C2.145 8.23333 1.99933 9.1 2 10C2 12.2333 2.775 14.125 4.325 15.675C5.875 17.225 7.76667 18 10 18ZM16.3 14.9C16.85 14.2 17.271 13.4333 17.563 12.6C17.855 11.7667 18.0007 10.9 18 10C18 7.76667 17.225 5.875 15.675 4.325C14.125 2.775 12.2333 2 10 2C9.1 2 8.23333 2.14567 7.4 2.437C6.56667 2.72833 5.8 3.14933 5.1 3.7L16.3 14.9Z" fill="#615C58" />
+                </svg>
+              button.user__profile-btns-crud
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 2.25H3C2.17157 2.25 1.5 2.92157 1.5 3.75V4.5C1.5 5.32843 2.17157 6 3 6H21C21.8284 6 22.5 5.32843 22.5 4.5V3.75C22.5 2.92157 21.8284 2.25 21 2.25Z" fill="#D75538" />
+                  <path d="M3.49031 7.50001C3.43761 7.49972 3.38544 7.51055 3.33721 7.53178C3.28898 7.55301 3.24576 7.58416 3.21038 7.62322C3.17499 7.66227 3.14824 7.70834 3.13186 7.75843C3.11548 7.80852 3.10984 7.8615 3.11531 7.91391L4.34859 19.7527C4.34833 19.7561 4.34833 19.7595 4.34859 19.763C4.41303 20.3105 4.67628 20.8154 5.08837 21.1817C5.50046 21.548 6.0327 21.7502 6.58406 21.75H17.4164C17.9676 21.75 18.4996 21.5477 18.9115 21.1814C19.3234 20.8151 19.5865 20.3104 19.6509 19.763V19.7531L20.8823 7.91391C20.8878 7.8615 20.8822 7.80852 20.8658 7.75843C20.8494 7.70834 20.8226 7.66227 20.7873 7.62322C20.7519 7.58416 20.7087 7.55301 20.6604 7.53178C20.6122 7.51055 20.56 7.49972 20.5073 7.50001H3.49031ZM15.1556 15.9698C15.2269 16.0391 15.2837 16.1219 15.3228 16.2133C15.3618 16.3048 15.3823 16.403 15.383 16.5024C15.3837 16.6019 15.3646 16.7004 15.3269 16.7924C15.2891 16.8844 15.2335 16.9679 15.1632 17.0382C15.0929 17.1085 15.0093 17.1641 14.9173 17.2018C14.8253 17.2395 14.7267 17.2585 14.6273 17.2577C14.5279 17.257 14.4296 17.2365 14.3382 17.1974C14.2468 17.1583 14.1641 17.1015 14.0948 17.0302L12.0005 14.9358L9.90562 17.0302C9.76432 17.1675 9.57467 17.2436 9.37766 17.2422C9.18065 17.2408 8.9921 17.162 8.85276 17.0227C8.71342 16.8834 8.63448 16.6949 8.633 16.4979C8.63151 16.3009 8.70761 16.1112 8.84484 15.9698L10.9397 13.875L8.84484 11.7802C8.70761 11.6388 8.63151 11.4491 8.633 11.2521C8.63448 11.0551 8.71342 10.8666 8.85276 10.7273C8.9921 10.588 9.18065 10.5092 9.37766 10.5078C9.57467 10.5064 9.76432 10.5826 9.90562 10.7198L12.0005 12.8142L14.0948 10.7198C14.2361 10.5826 14.4258 10.5064 14.6228 10.5078C14.8198 10.5092 15.0084 10.588 15.1477 10.7273C15.287 10.8666 15.366 11.0551 15.3675 11.2521C15.3689 11.4491 15.2928 11.6388 15.1556 11.7802L13.0608 13.875L15.1556 15.9698Z" fill="#D75538" />
+                </svg>
+            a(href="#!").user__profile-edit.p-btn.p-btn_orange Edit
+          .user__stats.user__profile-stats
+            .user__stat Orders: 10
+          .user__tabs
+            button(type="button" hx-trigger="userTabSelected" hx-target="#user__tabs-content" hx-get="/php/superadmin/user-profile-order.php?id=1&type=order").user__tab.active Orders
+            button(type="button" hx-trigger="userTabSelected" hx-target="#user__tabs-content" hx-get="/php/superadmin/user-profile-payments.php?id=1&type=payments").user__tab Payments
+          .user__tabs-content#user__tabs-content
+            table.user__table
+              thead
+                tr
+                  th Order №
+                  th Information
+                  th Order status
+                  th Priority
+                  th Price, YT
+                  th Original file
+                  th Modificated file
+                  th Tickets
+              tbody
+                tr.user__order-row(
+                  hx-get="/php/order-details.php?id=28012024-3"
+                  hx-target="#order-modal-container"
+                  hx-trigger="click"
+                )
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--pending Pending
+                  td
+                    .user__priority.user__priority--urgent 1-2 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn Create
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--pending Pending
+                  td
+                    .user__priority.user__priority--urgent 1-2 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn Create
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--completed Сompleted
+                  td
+                    .user__priority.user__priority--urgent 1-2 hours
+                  td 100
+                  td
+                    a(href="#!").user__download.user__download--active Download
+                  td
+                    a(href="#!").user__download.user__download--active Download
+                  td
+                    .user__ticket-btn.user__ticket-btn--open Open
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--pending Pending
+                  td
+                    .user__priority 12-48 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn Create
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--progress In progress
+                  td
+                    .user__priority.user__priority--medium 2-4 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn Create
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--canceled Сanceled
+                  td
+                    .user__priority.user__priority--slow 4-12 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn.user__ticket-btn--open Open
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--pending Pending
+                  td
+                    .user__priority.user__priority--urgent 1-2 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn Create
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--pending Pending
+                  td
+                    .user__priority.user__priority--urgent 1-2 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn Create
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--completed Сompleted
+                  td
+                    .user__priority.user__priority--urgent 1-2 hours
+                  td 100
+                  td
+                    a(href="#!").user__download.user__download--active Download
+                  td
+                    a(href="#!").user__download.user__download--active Download
+                  td
+                    .user__ticket-btn.user__ticket-btn--open Open
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--pending Pending
+                  td
+                    .user__priority 12-48 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn Create
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--progress In progress
+                  td
+                    .user__priority.user__priority--medium 2-4 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn Create
+                tr
+                  td 28012024-3
+                  td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
+                  td
+                    .user__status.user__status--canceled Сanceled
+                  td
+                    .user__priority.user__priority--slow 4-12 hours
+                  td 100
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    button.user__download.user__download--disabled Download
+                  td
+                    .user__ticket-btn.user__ticket-btn--open Open
+            .user__pagination
+              a.user__pagination-item.user__pagination-item_arrow
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.90344 14.8191C8.1043 14.6182 8.21714 14.3457 8.21714 14.0616C8.21714 13.7775 8.1043 13.505 7.90344 13.3041L2.59987 8.00054L7.90344 2.69697C8.09861 2.4949 8.20661 2.22425 8.20417 1.94333C8.20172 1.6624 8.08904 1.39367 7.89039 1.19502C7.69174 0.996368 7.42301 0.883689 7.14209 0.881248C6.86116 0.878806 6.59052 0.9868 6.38844 1.18197L0.327373 7.24304C0.126511 7.44396 0.0136728 7.71644 0.0136728 8.00054C0.0136728 8.28465 0.126511 8.55712 0.327372 8.75804L6.38844 14.8191C6.58937 15.02 6.86184 15.1328 7.14594 15.1328C7.43005 15.1328 7.70252 15.02 7.90344 14.8191Z" fill="#F56E0F" />
+                </svg>
+              span.user__pagination-item.user__pagination-item--active 1
+              a(href="#!").user__pagination-item 2
+              a(href="#!").user__pagination-item 3
+              a(href="#!").user__pagination-item 4
+              a(href="#!").user__pagination-item 5
+              a(href="#!").user__pagination-item 6
+              a(href="#!").user__pagination-item 7
+              a(href="#!").user__pagination-item 8
+              a(href="#!").user__pagination-item 9
+              a(href="#!").user__pagination-item 10
+              span.user__pagination-item .....
+              a.user__pagination-item.user__pagination-item_arrow
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.09656 1.18089C0.895696 1.38181 0.782858 1.65428 0.782858 1.93839C0.782858 2.22249 0.895696 2.49496 1.09656 2.69589L6.40013 7.99946L1.09656 13.303C0.901388 13.5051 0.793394 13.7758 0.795835 14.0567C0.798276 14.3376 0.910957 14.6063 1.10961 14.805C1.30826 15.0036 1.57699 15.1163 1.85791 15.1188C2.13884 15.1212 2.40948 15.0132 2.61156 14.818L8.67263 8.75696C8.87349 8.55604 8.98633 8.28356 8.98633 7.99946C8.98633 7.71535 8.87349 7.44288 8.67263 7.24196L2.61156 1.18089C2.41063 0.980025 2.13816 0.867187 1.85406 0.867187C1.56995 0.867187 1.29748 0.980025 1.09656 1.18089Z" fill="#F56E0F" />
+                </svg>
+// Контейнер для модального окна заказа
+#order-modal-container

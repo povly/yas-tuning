@@ -63,113 +63,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const dates = document.querySelectorAll('.user__date');
-  if (dates[0]) {
-    dates.forEach((date) => {
-      const input = date.querySelector('.user__date-input');
-      const title = date.querySelector('.user__date-title');
-      const item = date.querySelector('.user__date-item');
-      const _calendar = date.querySelector('.user__date-calendar');
+  document.addEventListener('click', function (event) {
+    const item = event.target.closest('.user__date-item');
+    if (!item) return;
 
-      const calendar = new Calendar(_calendar, {
-        type: 'multiple',
-        locale: {
-          months: {
-            short: [
-              'Jan',
-              'Feb',
-              'Mar',
-              'Apr',
-              'May',
-              'Jun',
-              'Jul',
-              'Aug',
-              'Sep',
-              'Oct',
-              'Nov',
-              'Dec',
-            ],
-            long: [
-              'January',
-              'February',
-              'March',
-              'April',
-              'May',
-              'June',
-              'July',
-              'August',
-              'September',
-              'October',
-              'November',
-              'December',
-            ],
-          },
-          weekdays: {
-            short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            long: [
-              'Sunday',
-              'Monday',
-              'Tuesday',
-              'Wednesday',
-              'Thursday',
-              'Friday',
-              'Saturday',
-            ],
-          },
+    const dateElement = item.closest('.user__date');
+    if (!dateElement) return;
+
+    initCalendar(dateElement);
+    dateElement.classList.toggle('active');
+  });
+
+  function initCalendar(dateElement) {
+    if (dateElement.dataset.calendarInitialized) return;
+
+    const input = dateElement.querySelector('.user__date-input');
+    const title = dateElement.querySelector('.user__date-title');
+    const _calendar = dateElement.querySelector('.user__date-calendar');
+
+    const calendar = new Calendar(_calendar, {
+      type: 'multiple',
+      locale: {
+        months: {
+          short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          long: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         },
-        displayMonthsCount: 2,
-        monthsToSwitch: 2,
-        displayDatesOutside: false,
-        disableDatesPast: true,
-        enableEdgeDatesOnly: true,
-        selectionDatesMode: 'multiple-ranged',
-        onClickDate(self, event) {
-          const selectedDates = self.context.selectedDates;
+        weekdays: {
+          short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        }
+      },
+      displayMonthsCount: 2,
+      monthsToSwitch: 2,
+      displayDatesOutside: false,
+      disableDatesPast: true,
+      enableEdgeDatesOnly: true,
+      selectionDatesMode: 'multiple-ranged',
+      onClickDate(self, event) {
+        const selectedDates = self.context.selectedDates;
+        if (selectedDates.length !== 2) return;
 
-          if (selectedDates.length == 2) {
-            title.textContent =
-              new Date(selectedDates[0]).toLocaleDateString('ru-RU', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-              }) +
-              ' - ' +
-              new Date(selectedDates[1]).toLocaleDateString('ru-RU', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-              });
-            input.value =
-              new Date(selectedDates[0]).toLocaleDateString('ru-RU', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-              }) +
-              ' - ' +
-              new Date(selectedDates[1]).toLocaleDateString('ru-RU', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-              });
+        const formatOptions = { day: 'numeric', month: 'numeric', year: 'numeric' };
+        const dateStr1 = new Date(selectedDates[0]).toLocaleDateString('ru-RU', formatOptions);
+        const dateStr2 = new Date(selectedDates[1]).toLocaleDateString('ru-RU', formatOptions);
 
-            date.classList.remove('active');
+        title.textContent = `${dateStr1} - ${dateStr2}`;
+        input.value = `${dateStr1} - ${dateStr2}`;
 
-            date.dispatchEvent(
-              new CustomEvent('userDateSelected', {
-                detail: {
-                  value: input.value,
-                },
-              })
-            );
-          }
-        },
-      });
-      calendar.init();
-
-      item.addEventListener('click', () => {
-        date.classList.toggle('active');
-      });
+        dateElement.classList.remove('active');
+        dateElement.dispatchEvent(new CustomEvent('userDateSelected', {
+          detail: { value: input.value }
+        }));
+      }
     });
+
+    calendar.init();
+    dateElement.dataset.calendarInitialized = 'true';
   }
 
   const selects = document.querySelectorAll('.user-select');
@@ -186,14 +135,31 @@ document.addEventListener('DOMContentLoaded', () => {
       const options = select.querySelectorAll('.user-select__option');
       options.forEach((option) => {
         option.addEventListener('click', () => {
-          // if (select.classList.contains('user-select_status')){
-          //   current.innerHTML = option.innerHTML;
-          // } else {
-          //   title.textContent = option.textContent;
-          // }
           title.textContent = option.textContent;
           input.value = option.dataset.value;
           select.classList.remove('active');
+        });
+      });
+    })
+  }
+
+  const tabs = document.querySelectorAll('.user__tabs');
+  if (tabs[0]){
+    tabs.forEach((tab)=>{
+      const btns = tab.querySelectorAll('.user__tab');
+      btns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const activeBtn = tab.querySelector('.user__tab.active');
+          if (activeBtn && activeBtn !== btn) {
+            activeBtn.classList.remove('active');
+          }
+          btn.classList.add('active');
+
+          btn.dispatchEvent(new CustomEvent('userTabSelected', {
+            detail: {
+              tab: btn
+             }
+          }));
         });
       });
     })

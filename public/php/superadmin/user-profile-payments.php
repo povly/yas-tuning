@@ -1,0 +1,100 @@
+<div class="user__stats user__payments-stats">
+  <div class="user__stat">Last 30 days: 356 YT</div>
+  <div class="user__stat">Last 365 days: 3000 YT</div>
+  <div class="user__stat">All time: 5000 YT</div>
+</div>
+
+<div class="user__payments-block">
+  <div class="user__payments-title">Monthly revenue</div>
+  <div class="user__payment-canvas-block">
+    <canvas class="user__payments-canvas" width="1046" height="278" data-sets="[15,59,80,25,125,110,40,70,120,160,140,30]" id="user__payments-canvas"></canvas>
+  </div>
+</div>
+<script>
+  updateChartJS();
+</script>
+<div class="user__payments-bottom">
+  <div class="user__payments-left">
+    <div class="user__date" hx-get="/php/superadmin/invoices.php" hx-target="#user__table_superadmin-payments" hx-swapp="outerHTML" hx-trigger="userDateSelected">
+      <div class="user__date-item">
+        <input class="user__date-input" type="hidden" name="date">
+        <div class="user__date-icon"><svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.5 2H14.25V1.25C14.25 1.05109 14.171 0.860322 14.0303 0.71967C13.8897 0.579018 13.6989 0.5 13.5 0.5C13.3011 0.5 13.1103 0.579018 12.9697 0.71967C12.829 0.860322 12.75 1.05109 12.75 1.25V2H5.25V1.25C5.25 1.05109 5.17098 0.860322 5.03033 0.71967C4.88968 0.579018 4.69891 0.5 4.5 0.5C4.30109 0.5 4.11032 0.579018 3.96967 0.71967C3.82902 0.860322 3.75 1.05109 3.75 1.25V2H1.5C1.10218 2 0.720644 2.15804 0.43934 2.43934C0.158035 2.72064 0 3.10218 0 3.5V18.5C0 18.8978 0.158035 19.2794 0.43934 19.5607C0.720644 19.842 1.10218 20 1.5 20H16.5C16.8978 20 17.2794 19.842 17.5607 19.5607C17.842 19.2794 18 18.8978 18 18.5V3.5C18 3.10218 17.842 2.72064 17.5607 2.43934C17.2794 2.15804 16.8978 2 16.5 2ZM7.5 16.25C7.5 16.4489 7.42098 16.6397 7.28033 16.7803C7.13968 16.921 6.94891 17 6.75 17C6.55109 17 6.36032 16.921 6.21967 16.7803C6.07902 16.6397 6 16.4489 6 16.25V11.4631L5.58563 11.6713C5.4076 11.7603 5.2015 11.7749 5.01268 11.712C4.82385 11.649 4.66776 11.5137 4.57875 11.3356C4.48974 11.1576 4.47509 10.9515 4.53803 10.7627C4.60097 10.5739 4.73635 10.4178 4.91437 10.3287L6.41437 9.57875C6.52876 9.52151 6.65589 9.49448 6.78367 9.50022C6.91145 9.50596 7.03563 9.54429 7.14442 9.61155C7.25322 9.67882 7.343 9.77279 7.40523 9.88454C7.46747 9.99629 7.50009 10.1221 7.5 10.25V16.25ZM12.75 15.5C12.9489 15.5 13.1397 15.579 13.2803 15.7197C13.421 15.8603 13.5 16.0511 13.5 16.25C13.5 16.4489 13.421 16.6397 13.2803 16.7803C13.1397 16.921 12.9489 17 12.75 17H9.75C9.61072 17 9.47418 16.9612 9.3557 16.888C9.23722 16.8148 9.14147 16.71 9.07918 16.5854C9.01689 16.4608 8.99052 16.3214 9.00303 16.1826C9.01554 16.0439 9.06643 15.9114 9.15 15.8L11.8481 12.2028C11.9095 12.1211 11.9535 12.0277 11.9775 11.9284C12.0015 11.8291 12.0049 11.7259 11.9876 11.6252C11.9703 11.5245 11.9325 11.4284 11.8767 11.3428C11.8209 11.2572 11.7482 11.1839 11.6631 11.1274C11.5779 11.0709 11.4821 11.0324 11.3816 11.0143C11.281 10.9961 11.1778 10.9987 11.0783 11.0219C10.9788 11.0451 10.885 11.0884 10.8028 11.1491C10.7206 11.2098 10.6517 11.2867 10.6003 11.375C10.5525 11.463 10.4876 11.5406 10.4093 11.6031C10.3311 11.6656 10.2411 11.7118 10.1447 11.739C10.0483 11.7661 9.94745 11.7737 9.84807 11.7613C9.74869 11.7489 9.65281 11.7166 9.56609 11.6665C9.47936 11.6165 9.40355 11.5495 9.34312 11.4696C9.28269 11.3898 9.23887 11.2986 9.21424 11.2015C9.18962 11.1044 9.18468 11.0034 9.19973 10.9044C9.21478 10.8054 9.24951 10.7104 9.30188 10.625C9.54962 10.1963 9.93188 9.86124 10.3894 9.67184C10.8469 9.48245 11.3541 9.44926 11.8324 9.57743C12.3107 9.7056 12.7333 9.98797 13.0348 10.3808C13.3363 10.7736 13.4998 11.2548 13.5 11.75C13.5016 12.2391 13.3421 12.7152 13.0463 13.1047L11.25 15.5H12.75ZM1.5 6.5V3.5H3.75V4.25C3.75 4.44891 3.82902 4.63968 3.96967 4.78033C4.11032 4.92098 4.30109 5 4.5 5C4.69891 5 4.88968 4.92098 5.03033 4.78033C5.17098 4.63968 5.25 4.44891 5.25 4.25V3.5H12.75V4.25C12.75 4.44891 12.829 4.63968 12.9697 4.78033C13.1103 4.92098 13.3011 5 13.5 5C13.6989 5 13.8897 4.92098 14.0303 4.78033C14.171 4.63968 14.25 4.44891 14.25 4.25V3.5H16.5V6.5H1.5Z" fill="#F5F5F5"></path>
+          </svg>
+        </div>
+        <div class="user__date-title">Select date</div>
+      </div>
+      <div class="user__date-calendar"></div>
+    </div>
+    <div class="user__stats user__payments-stats">
+      <div class="user__stat">For the period: 1000 YT</div>
+    </div>
+  </div>
+  <div class="user__payments-right"><a class="p-btn p-btn_orange" href="#!">Download</a></div>
+</div>
+<div class="user__table-container">
+  <table class="user__table user__table_superadmin-payments" id="user__table_superadmin-payments">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Transaction ID</th>
+        <th>Client</th>
+        <th>Invoice</th>
+        <th>Status</th>
+        <th>Price</th>
+        <th>Date created</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>28012024-3</td>
+        <td>123456789</td>
+        <td>Aliaksandr Yanukovich</td>
+        <td>123456789</td>
+        <td>
+          <div class="user__status user__status--progress">Progress</div>
+        </td>
+        <td>100</td>
+        <td>13.04.2025 11:57:27</td>
+      </tr>
+      <tr>
+        <td>28012024-3</td>
+        <td>123456789</td>
+        <td>Aliaksandr Yanukovich</td>
+        <td>123456789</td>
+        <td>
+          <div class="user__status user__status--completed">Сompleted</div>
+        </td>
+        <td>100</td>
+        <td>13.04.2025 11:57:27</td>
+      </tr>
+      <tr>
+        <td>28012024-3</td>
+        <td>123456789</td>
+        <td>Aliaksandr Yanukovich</td>
+        <td>123456789</td>
+        <td>
+          <div class="user__status user__status--progress">Progress</div>
+        </td>
+        <td>100</td>
+        <td>13.04.2025 11:57:27</td>
+      </tr>
+      <tr>
+        <td>28012024-3</td>
+        <td>123456789</td>
+        <td>Aliaksandr Yanukovich</td>
+        <td>123456789</td>
+        <td>
+          <div class="user__status user__status--progress">Progress</div>
+        </td>
+        <td>100</td>
+        <td>13.04.2025 11:57:27</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="user__pagination"><a class="user__pagination-item user__pagination-item_arrow"><svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7.90344 14.8191C8.1043 14.6182 8.21714 14.3457 8.21714 14.0616C8.21714 13.7775 8.1043 13.505 7.90344 13.3041L2.59987 8.00054L7.90344 2.69697C8.09861 2.4949 8.20661 2.22425 8.20417 1.94333C8.20172 1.6624 8.08904 1.39367 7.89039 1.19502C7.69174 0.996368 7.42301 0.883689 7.14209 0.881248C6.86116 0.878806 6.59052 0.9868 6.38844 1.18197L0.327373 7.24304C0.126511 7.44396 0.0136728 7.71644 0.0136728 8.00054C0.0136728 8.28465 0.126511 8.55712 0.327372 8.75804L6.38844 14.8191C6.58937 15.02 6.86184 15.1328 7.14594 15.1328C7.43005 15.1328 7.70252 15.02 7.90344 14.8191Z" fill="#F56E0F"></path>
+    </svg></a><span class="user__pagination-item user__pagination-item--active">1</span><a class="user__pagination-item" href="#!">2</a><a class="user__pagination-item" href="#!">3</a><a class="user__pagination-item" href="#!">4</a><a class="user__pagination-item" href="#!">5</a><a class="user__pagination-item" href="#!">6</a><a class="user__pagination-item" href="#!">7</a><a class="user__pagination-item" href="#!">8</a><a class="user__pagination-item" href="#!">9</a><a class="user__pagination-item" href="#!">10</a><span class="user__pagination-item">.....</span><a class="user__pagination-item user__pagination-item_arrow"><svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.09656 1.18089C0.895696 1.38181 0.782858 1.65428 0.782858 1.93839C0.782858 2.22249 0.895696 2.49496 1.09656 2.69589L6.40013 7.99946L1.09656 13.303C0.901388 13.5051 0.793394 13.7758 0.795835 14.0567C0.798276 14.3376 0.910957 14.6063 1.10961 14.805C1.30826 15.0036 1.57699 15.1163 1.85791 15.1188C2.13884 15.1212 2.40948 15.0132 2.61156 14.818L8.67263 8.75696C8.87349 8.55604 8.98633 8.28356 8.98633 7.99946C8.98633 7.71535 8.87349 7.44288 8.67263 7.24196L2.61156 1.18089C2.41063 0.980025 2.13816 0.867187 1.85406 0.867187C1.56995 0.867187 1.29748 0.980025 1.09656 1.18089Z" fill="#F56E0F"></path>
+    </svg></a></div>
