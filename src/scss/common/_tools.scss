@@ -57,6 +57,7 @@ b {
   width: 100%;
   z-index: 3;
   max-width: var(--container-width, 1320px);
+  --padding: calc(100vw - 1320px) / 2;
   margin: 0 auto;
   padding: 0;
   position: relative;

@@ -3,6 +3,7 @@
   background: #151419;
   min-height: 100vh;
   padding-bottom: 100px;
+  overflow: hidden;
 
   &__container {
     display: flex;
@@ -293,6 +294,28 @@
   &__table-container {
     position: relative;
     margin-top: 18px;
+
+    &_users {
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--999999) #302e2e;
+      padding-right: var(--padding);
+      margin-right: calc(var(--padding) * -1);
+
+      &::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #302e2e;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--999999);
+        border-radius: 5px;
+        border: 3px solid #302e2e;
+      }
+    }
   }
 
   &__table {
@@ -397,6 +420,116 @@
 
         &:nth-child(6){
           width: 150px;
+        }
+      }
+
+      td {
+        &:nth-child(2){
+          text-align: center;
+        }
+      }
+    }
+
+    &_history {
+      th {
+        &:nth-child(1){
+          width: 100px;
+        }
+
+        &:nth-child(2){
+          width: 100px;
+        }
+
+        &:nth-child(3){
+          width: 149px;
+        }
+
+        &:nth-child(4){
+          width: 160px;
+        }
+
+        &:nth-child(5){
+          width: 148px;
+        }
+
+        &:nth-child(6){
+          width: 136px;
+        }
+
+        &:nth-child(7){
+          width: 154px;
+        }
+
+        &:nth-child(8){
+          width: 150px;
+        }
+      }
+
+      td {
+        &:nth-child(2){
+          text-align: center;
+        }
+      }
+    }
+
+    &_users {
+      width: max-content;
+
+      th {
+        &:nth-child(1){
+          width: 120px;
+        }
+
+        &:nth-child(2){
+          width: 234px;
+        }
+
+        &:nth-child(3){
+          width: 186px;
+        }
+
+        &:nth-child(4){
+          width: 186px;
+        }
+
+        &:nth-child(5){
+          width: 250px;
+        }
+
+        &:nth-child(6){
+          width: 150px;
+        }
+
+        &:nth-child(7){
+          width: 150px;
+        }
+
+        &:nth-child(8){
+          width: 160px;
+        }
+
+        &:nth-child(9){
+          width: 110px;
+        }
+
+        &:nth-child(10){
+          width: 132px;
+        }
+
+        &:nth-child(11){
+          width: 220px;
+        }
+
+        &:nth-child(12){
+          width: 130px;
+        }
+
+        &:nth-child(13){
+          width: 130px;
+        }
+
+        &:nth-child(14){
+          width: 169px;
         }
       }
 
@@ -1679,7 +1812,6 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
     }
 
     &-messages {

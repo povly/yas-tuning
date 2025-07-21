@@ -1,0 +1,226 @@
+.user
+  .container
+    include ../../templates/superadmin/header.pug
+
+    .user__content
+      include ../../templates/user/sidebar.pug
+      .user__main
+        .user__main-header
+          .user__main-header-left
+            h2.user__title users
+          .user__main-header-right
+            .user__stats
+              .user__stat Users: 450
+              .user__stat Companies: 317
+        .user__table-container.user__table-container_users
+          table.user__table.user__table_users#user__table-container
+            thead
+              tr
+                th ID
+                th Name
+                th Email
+                th Country
+                th Address
+                th Role
+                th Status
+                th Date of creation
+                th Balance
+                th Is company
+                th Company name
+                th Paypal
+                th Discount
+                th Update/Block
+            tbody
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+              tr
+                td 1234567
+                td Aliaksandr Yanukovich
+                td Aliaksandr@mail.ru
+                td Tallin
+                td Tallin
+                td Company
+                td Company
+                td 20.03.2025
+                td 300 YT
+                td Company
+                td Company
+                td Paupal EU
+                td
+                td
+                  button.color_green Update
+                  button.color_red Block
+
+        .user__pagination
+          a.user__pagination-item.user__pagination-item_arrow
+            <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.90344 14.8191C8.1043 14.6182 8.21714 14.3457 8.21714 14.0616C8.21714 13.7775 8.1043 13.505 7.90344 13.3041L2.59987 8.00054L7.90344 2.69697C8.09861 2.4949 8.20661 2.22425 8.20417 1.94333C8.20172 1.6624 8.08904 1.39367 7.89039 1.19502C7.69174 0.996368 7.42301 0.883689 7.14209 0.881248C6.86116 0.878806 6.59052 0.9868 6.38844 1.18197L0.327373 7.24304C0.126511 7.44396 0.0136728 7.71644 0.0136728 8.00054C0.0136728 8.28465 0.126511 8.55712 0.327372 8.75804L6.38844 14.8191C6.58937 15.02 6.86184 15.1328 7.14594 15.1328C7.43005 15.1328 7.70252 15.02 7.90344 14.8191Z" fill="#F56E0F" />
+            </svg>
+          span.user__pagination-item.user__pagination-item--active 1
+          a(href="#!").user__pagination-item 2
+          a(href="#!").user__pagination-item 3
+          a(href="#!").user__pagination-item 4
+          a(href="#!").user__pagination-item 5
+          a(href="#!").user__pagination-item 6
+          a(href="#!").user__pagination-item 7
+          a(href="#!").user__pagination-item 8
+          a(href="#!").user__pagination-item 9
+          a(href="#!").user__pagination-item 10
+          span.user__pagination-item .....
+          a.user__pagination-item.user__pagination-item_arrow
+            <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.09656 1.18089C0.895696 1.38181 0.782858 1.65428 0.782858 1.93839C0.782858 2.22249 0.895696 2.49496 1.09656 2.69589L6.40013 7.99946L1.09656 13.303C0.901388 13.5051 0.793394 13.7758 0.795835 14.0567C0.798276 14.3376 0.910957 14.6063 1.10961 14.805C1.30826 15.0036 1.57699 15.1163 1.85791 15.1188C2.13884 15.1212 2.40948 15.0132 2.61156 14.818L8.67263 8.75696C8.87349 8.55604 8.98633 8.28356 8.98633 7.99946C8.98633 7.71535 8.87349 7.44288 8.67263 7.24196L2.61156 1.18089C2.41063 0.980025 2.13816 0.867187 1.85406 0.867187C1.56995 0.867187 1.29748 0.980025 1.09656 1.18089Z" fill="#F56E0F" />
+            </svg>
+// Контейнер для модального окна заказа
+#order-modal-container

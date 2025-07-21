@@ -32,7 +32,6 @@ block footer
           ws.onmessage = receiveChatMessage;
       }
       initChat();
-
       function sendMessage(form) {
         if (!ws) { alert('Socket not ready'); return false; }
         let fileInput = form.querySelector('input[type="file"]');
@@ -61,7 +60,6 @@ block footer
         form.reset();
         return false;
       }
-
       function createMessage(content, time, status = '_unread', className = ''){
         let template = document.querySelector('#template-chat-message');
         let clone = template.content.cloneNode(true);
@@ -77,6 +75,8 @@ block footer
         metaTime.innerHTML = time;
         metaStatus.classList.add(status);
 
+
+        // Добавляем сообщение и скроллим вниз
         let chatMessages = document.getElementById('chat-messages');
         chatMessages.appendChild(clone);
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -105,5 +105,31 @@ block footer
 
         reader.readAsDataURL(file);
       }
+      //- // Создаем Intersection Observer для отслеживания видимости сообщений
+      //- const observer = new IntersectionObserver((entries) => {
+      //-   entries.forEach(entry => {
+      //-     if (entry.isIntersecting) {
+      //-       const messageElement = entry.target;
+      //-       const statusElement = messageElement.querySelector('.user__chat-meta-status');
+
+      //-       // Проверяем, что статус еще не прочитан
+      //-       if (statusElement && statusElement.classList.contains('_unread')) {
+      //-         statusElement.classList.replace('_unread', '_read');
+      //-       }
+      //-     }
+      //-   });
+      //- }, {
+      //-   root: document.getElementById('chat-messages'),
+      //-   threshold: 0.5 // Срабатывает когда 50% элемента видно
+      //- });
+
+      //- // Инициализация наблюдения за существующими сообщениями
+      //- function initMessageObserver() {
+      //-   document.querySelectorAll('#chat-messages > .user__chat-message:not(._date)').forEach(message => {
+      //-     observer.observe(message);
+      //-   });
+      //- }
+      //- initMessageObserver();
+      //- window.initMessageObserver = initMessageObserver;
       window.sendMessage = sendMessage;
     });
