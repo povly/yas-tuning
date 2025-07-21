@@ -52,4 +52,17 @@
     border-radius: 20px;
     margin: 50px auto;
   }
+
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: var(--f5f5f5);
+    margin-bottom: 20px;
+
+    &_center {
+      text-align: center;
+    }
+  }
 }

@@ -1,0 +1,28 @@
+.modal_notifications {
+  .modal {
+    &__content {
+      max-width: 723px;
+      padding: 50px 30px 30px;
+    }
+
+    &__close {
+      top: 20px;
+      right: 30px;
+    }
+  }
+
+  .user {
+    &__input {
+      &-el {
+        textarea {
+          height: 207px;
+        }
+      }
+    }
+  }
+
+  &__btn {
+    margin-top: 20px;
+  }
+
+}
