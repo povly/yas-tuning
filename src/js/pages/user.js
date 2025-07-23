@@ -95,9 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       displayMonthsCount: 2,
       monthsToSwitch: 2,
-      displayDatesOutside: false,
-      disableDatesPast: true,
-      enableEdgeDatesOnly: true,
       selectionDatesMode: 'multiple-ranged',
       onClickDate(self, event) {
         const selectedDates = self.context.selectedDates;
@@ -165,11 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  const menuBlock = document.querySelector('.user__menu-block');
-  if (menuBlock){
-    const button = menuBlock.querySelector('.user__menu-click');
-    button.addEventListener('click', () => {
-      menuBlock.classList.toggle('active');
-    });
+  function userUpdateMenu(){
+    const menuBlock = document.querySelector('.user__menu-block');
+    if (menuBlock) {
+      const button = menuBlock.querySelector('.user__menu-click');
+      button.addEventListener('click', () => {
+        menuBlock.classList.toggle('active');
+      });
+    }
   }
+  userUpdateMenu();
+  window.userUpdateMenu = userUpdateMenu;
 });

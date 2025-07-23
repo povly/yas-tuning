@@ -3,7 +3,8 @@
   background: #151419;
   min-height: 100vh;
   padding-bottom: 100px;
-  overflow: hidden;
+  position: relative;
+  z-index: 4;
 
   .header {
     &__logo {
@@ -310,6 +311,10 @@
     line-height: 114%;
     text-transform: uppercase;
     color: var(--f5f5f5);
+
+    &._mb {
+      display: none;
+    }
   }
 
   &__table-container {
@@ -1240,6 +1245,10 @@
   &__date {
     position: relative;
     margin-bottom: 20px;
+
+    &_invoices {
+      margin-top: 30px;
+    }
 
     &-item {
       background: var(--303038);
@@ -2192,6 +2201,12 @@
     flex-direction: column;
     background: #1c1b20;
     border-radius: 24px;
+
+    .user {
+      &__download {
+        margin: 0;
+      }
+    }
   }
 
   &__row {

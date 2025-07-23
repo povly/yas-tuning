@@ -4,7 +4,21 @@ header('Content-Type: text/html; charset=utf-8');
 <form class="user__order" hx-post="/php/order-handler-end.php" hx-trigger="submit" hx-target="#order-modal-container" hx-swap="innerHTML" hx-encoding='multipart/form-data' hx-validate="true">
   <div class="user__order-top">
     <div class="user__order-left">
-      <div class="user__breadcrumbs"><a href="#!">Orders</a><span class="separator">/</span><span class="current">New order</span></div>
+      <div class="user__breadcrumbs-block">
+        <div class="user__menu-block">
+          <div class="user__menu-click"><svg width="22" height="17" viewBox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.8125 15.4375H20.1875M1.8125 8.4375H20.1875M1.8125 1.4375H20.1875" stroke="#F56E0F" stroke-width="2.54545" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.08984 1.36377L18.6353 17.9092M18.6353 1.36377L2.08984 17.9092" stroke="#F56E0F" stroke-width="2.54545" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="user__menu">
+            <div class="user__menu-item user__menu-item--active"><span class="user__menu-title">Orders</span><span class="user__menu-count">12</span></div><a class="user__menu-item" href="#!"><span class="user__menu-title">Tickets</span><span class="user__menu-count">2</span></a><a class="user__menu-item" href="#!"><span class="user__menu-title">Invoices</span></a><a class="user__menu-item" href="#!"><span class="user__menu-title">Credit statistic</span></a>
+          </div>
+        </div>
+        <div class="user__breadcrumbs"><a href="#!">Orders</a><span class="separator">/</span><span class="current">New order</span></div>
+      </div>
       <div class="user__title">New order</div>
     </div>
     <div class="user__order-right">
@@ -14,37 +28,41 @@ header('Content-Type: text/html; charset=utf-8');
       </div>
     </div>
   </div>
+  <div class="user__title user__title _mb">New order</div>
+  <script>
+    userUpdateMenu();
+  </script>
   <div class="user__order-main">
     <div class="user__order-main-left">
       <div class="user__inputs">
         <div class="user__input">
           <div class="user__input-label">Vehicle Type</div>
           <div class="user__input-el">
-            <input type="text" name="vehicle-type" value="" required="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="vehicle-type" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Manufactured</div>
           <div class="user__input-el">
-            <input type="text" name="manufactured" value="" required="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="manufactured" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Model</div>
           <div class="user__input-el">
-            <input type="text" name="vehicle-model" value="" required="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="vehicle-model" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Engine</div>
           <div class="user__input-el">
-            <input type="text" name="engine" value="" required="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="engine" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Ecu Type</div>
           <div class="user__input-el">
-            <input type="text" name="ecu-type" value="" required="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="ecu-type" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
           </div>
         </div>
       </div>

@@ -5,6 +5,12 @@
       include ../../templates/user/sidebar.pug
 
       .user__main
+        .user__time-info._tablet
+          .user__time-block
+            .user__time
+              .user__current-time 19:25
+              .user__current-date 06.05.2025
+            .user__office-time Office close - 22-00
         form#user__order.user__order(
           hx-post="/php/order-handler.php"
           hx-trigger="change delay:500ms"
@@ -15,11 +21,12 @@
         )
           .user__order-top
             .user__order-left
-              include ../../templates/user/menu-block.pug
-              .user__breadcrumbs
-                a(href="#!") Orders
-                span.separator /
-                span.current New order
+              .user__breadcrumbs-block
+                include ../../templates/user/menu-block.pug
+                .user__breadcrumbs
+                  a(href="#!") Orders
+                  span.separator /
+                  span.current New order
               .user__title New order
             .user__order-right
               .user__stats
@@ -27,6 +34,7 @@
                   | Load: <span class="color_yellow">average</span>
                 .user__stat
                   | Balance: 317 YT
+          .user__title.user__title._mb New order
           .user__order-main
             .user__order-main-left
               .user__inputs

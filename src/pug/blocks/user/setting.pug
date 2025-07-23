@@ -7,6 +7,7 @@
       .user__main
         .user__main-header
           .user__main-header-left
+            include ../../templates/user/menu-block.pug
             h2.user__title User setting
           .user__main-header-right
         form(hx-post="/php/user-settings.php" hx-trigger="submit" hx-validate).user__settings
@@ -56,7 +57,7 @@
                 )
             .user__input.user__input_col-1#is_company_block
               .user__checkbox
-                input(type="checkbox" name="is_company" id="is_company" hx-include="this" hx-get="/build/php/is_company.php" hx-trigger="change" hx-target="#is_company_fields" hx-swap="innerHTML")
+                input(type="checkbox" name="is_company" id="is_company" hx-include="this" hx-get="/php/is_company.php" hx-trigger="change" hx-target="#is_company_fields" hx-swap="innerHTML")
                 label.user__checkbox-label(for="is_company")
                   .user__checkbox-square
                   .user__checkbox-title Is company?

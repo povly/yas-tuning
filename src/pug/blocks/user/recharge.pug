@@ -13,10 +13,12 @@
         )
           .user__order-top
             .user__order-left
-              .user__breadcrumbs
-                a(href="#!") Invoices
-                span.separator /
-                span.current Recharge account
+              .user__breadcrumbs-block
+                include ../../templates/user/menu-block.pug
+                .user__breadcrumbs
+                  a(href="#!") Invoices
+                  span.separator /
+                  span.current Recharge account
               .user__title Recharge account
             .user__order-right
           .user__recharge-block
