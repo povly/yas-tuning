@@ -109,10 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateChartJS(){
     const ctx = document.querySelector('#user__payments-canvas');
     if (ctx){
-      new Chart(ctx, {
+      const chart = new Chart(ctx, {
         type: 'line',
-        maintainAspectRatio: false,
-        responsive: false,
         data: {
           labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           datasets: [{
@@ -132,6 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         },
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               display: false,
@@ -159,6 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
         }
+      });
+
+      chart.resize();
+
+      window.addEventListener('resize', () => {
+        chart.resize();
       });
     }
   }

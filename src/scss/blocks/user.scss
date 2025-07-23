@@ -4,11 +4,20 @@
   min-height: 100vh;
   padding-bottom: 100px;
   position: relative;
+  overflow: hidden;
   z-index: 4;
 
   .header {
     &__logo {
       flex-shrink: 0;
+    }
+  }
+
+  &__company {
+    &-btn {
+      &._mb {
+        display: none;
+      }
     }
   }
 
@@ -30,6 +39,7 @@
 
   &__stats {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
   }
 
@@ -1227,6 +1237,12 @@
       }
     }
 
+    &-canvas {
+      &-block {
+        height: 318px;
+      }
+    }
+
     &-label {
       padding: 15px 12px;
       display: flex;
@@ -1474,6 +1490,12 @@
         }
       }
 
+      &-btn {
+        svg {
+          display: none;
+        }
+      }
+
       &-price {
         min-width: 42px;
         text-align: right;
@@ -1699,8 +1721,8 @@
       top: 100%;
       left: 0;
       width: 100%;
+      min-width: max-content;
       margin-top: -6px;
-      display: flex;
       flex-direction: column;
       padding: 10px;
       gap: 6px;
@@ -1778,7 +1800,7 @@
 
       &-items {
         padding-top: 22px;
-        height: 100%;
+        height: 619px;
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: var(--999999) #302e2e;
@@ -1908,6 +1930,10 @@
         line-height: 137%;
       }
 
+      &-return {
+        display: none;
+      }
+
       &-subtitle {
         margin-top: 1px;
       }
@@ -1990,6 +2016,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      justify-content: flex-end;
     }
 
     &-messages {

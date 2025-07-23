@@ -5,11 +5,13 @@
     .user__content
       include ../../templates/user/sidebar.pug
       .user__main
+        .user__company-menu
+          include ../../templates/user/menu-block.pug
         .user__main-header
           .user__main-header-left
             h2.user__title Notifications
           .user__main-header-right
-            .user__main-header-btns
+            .user__main-header-btns.user__main-header-btns_notifications
               button.p-btn.p-btn_orange(hx-get="/php/superadmin/notifications.php" hx-target="#order-modal-container") Create notifications
               a(href="#!").p-btn.p-btn_orange Email newsletter
         .user__table-container
@@ -242,5 +244,8 @@
             <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.09656 1.18089C0.895696 1.38181 0.782858 1.65428 0.782858 1.93839C0.782858 2.22249 0.895696 2.49496 1.09656 2.69589L6.40013 7.99946L1.09656 13.303C0.901388 13.5051 0.793394 13.7758 0.795835 14.0567C0.798276 14.3376 0.910957 14.6063 1.10961 14.805C1.30826 15.0036 1.57699 15.1163 1.85791 15.1188C2.13884 15.1212 2.40948 15.0132 2.61156 14.818L8.67263 8.75696C8.87349 8.55604 8.98633 8.28356 8.98633 7.99946C8.98633 7.71535 8.87349 7.44288 8.67263 7.24196L2.61156 1.18089C2.41063 0.980025 2.13816 0.867187 1.85406 0.867187C1.56995 0.867187 1.29748 0.980025 1.09656 1.18089Z" fill="#F56E0F" />
             </svg>
+        .user__main-header-btns.user__main-header-btns_notifications._mb
+          button.p-btn.p-btn_orange(hx-get="/php/superadmin/notifications.php" hx-target="#order-modal-container") Create notifications
+          a(href="#!").p-btn.p-btn_orange Email newsletter
 // Контейнер для модального окна заказа
 #order-modal-container

@@ -30,7 +30,7 @@
       <div class="user__stat">For the period: 1000 YT</div>
     </div>
   </div>
-  <div class="user__payments-right"><a class="p-btn p-btn_orange" href="#!">Download</a></div>
+  <div class="user__payments-right"><a class="p-btn p-btn_orange user__payments-download" href="#!">Download</a></div>
 </div>
 <div class="user__table-container">
   <table class="user__table user__table_superadmin-payments" id="user__table_superadmin-payments">

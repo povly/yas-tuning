@@ -7,10 +7,12 @@
       .user__main
         .user__order-top
           .user__order-left
-            .user__breadcrumbs
-              a(href="#!") Orders
-              span.separator /
-              span.current New order
+            .user__breadcrumbs-block
+              include ../../templates/user/menu-block.pug
+              .user__breadcrumbs
+                a(href="#!") Orders
+                span.separator /
+                span.current New order
             .user__super-order-title
               .user__title Order № 28012024-3
               .user__super-order-svg
@@ -116,8 +118,8 @@
               </div>
             </div>
           </div>
-          .user__btns
-            button(type="submit").user__super-btn.p-btn.p-btn_orange Save
-            a(href="#!").user__super-btn.p-btn.p-btn_red Cancel
+        .user__btns
+          button(type="submit").user__super-btn.p-btn.p-btn_orange Save
+          a(href="#!").user__super-btn.p-btn.p-btn_red Cancel
 // Контейнер для модального окна заказа
 #order-modal-container

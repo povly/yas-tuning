@@ -7,6 +7,7 @@
       .user__main
         .user__main-header
           .user__main-header-left
+            include ../../templates/user/menu-block.pug
             h2.user__title Payments
           .user__main-header-right
         .user__stats.user__payments-stats
@@ -31,7 +32,7 @@
             .user__stats.user__payments-stats
               .user__stat For the period: 1000 YT
           .user__payments-right
-            a(href="#!").p-btn.p-btn_orange Download
+            a(href="#!").p-btn.p-btn_orange.user__payments-download Download
         .user__table-container
           table.user__table.user__table_superadmin-payments#user__table_superadmin-payments
             thead

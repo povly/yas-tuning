@@ -57,6 +57,26 @@
       font-size: 20px;
     }
 
+    &__chat {
+      &-message {
+        max-width: 369px;
+      }
+
+      &-text {
+        height: 87px;
+
+        &-subtitle {
+          max-width: 300px;
+        }
+
+        &-btns {
+          top: 14px;
+          right: 14px;
+          transform: none;
+        }
+      }
+    }
+
     &__main {
       width: 100%;
 
@@ -76,12 +96,55 @@
             }
           }
         }
+
+        &-btns {
+          &_notifications {
+            gap: 6px;
+
+            .p-btn {
+              padding: 20px 16px;
+            }
+
+            &._mb {
+              display: none;
+            }
+          }
+        }
+
+        &_profile {
+          .user__menu-block {
+            margin-bottom: 0;
+          }
+
+          .user__breadcrumbs-block {
+            margin-bottom: 30px;
+          }
+        }
       }
+
+      &_user {
+        &-profile {
+          .user__payments-stats {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    &__company {
+      &-menu {
+        margin-bottom: 30px;
+      }
+
     }
 
     &__date {
       &_incoives {
         margin-bottom: 16px;
+      }
+
+      &-item {
+        padding: 20px 30px;
       }
     }
 
@@ -155,6 +218,7 @@
         overflow-x: auto;
         scrollbar-width: thin;
         scrollbar-color: var(--999999) #302e2e;
+        overflow-y: hidden;
 
         &::-webkit-scrollbar {
           width: 12px;
@@ -237,6 +301,54 @@
         gap: 8px;
       }
     }
+
+    &__set {
+      &-priority {
+        &-btn {
+          padding: 14px 30px;
+          font-size: 16px;
+          line-height: 137%;
+        }
+
+        &-abs {
+          right: 0;
+        }
+      }
+    }
+
+    &-select {
+      &__abs {
+        top: auto;
+        bottom: 100%;
+        margin-bottom: -6px;
+      }
+    }
+
+    &__tabs {
+      margin: 30px 0;
+    }
+
+    &__payments {
+      &-stats {
+        gap: 16px;
+      }
+
+      &-bottom {
+        align-items: flex-start;
+      }
+
+      &-left {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    &__profile {
+      &-btns {
+        right: 20px;
+        top: 20px;
+      }
+    }
   }
 
   .order {
@@ -248,6 +360,11 @@
         &__content {
           width: 100%;
           padding: 40px 16px;
+
+          &-table {
+            width: max-content;
+            min-width: 100%;
+          }
         }
 
         &__warnings {
@@ -291,6 +408,121 @@
     &__header {
       gap: 15px;
       margin-bottom: 30px;
+    }
+
+    &__tabs {
+      margin-bottom: 16px;
+      margin-top: 24px;
+    }
+
+    &__chat {
+      border-radius: 10px;
+
+      &-left, &-right {
+        display: none;
+        width: 100%;
+
+        &.active {
+          display: block;
+        }
+      }
+
+      &-filters {
+        justify-content: center;
+        gap: 20px;
+      }
+
+      &-tickets {
+        &-item {
+          padding: 16px;
+        }
+      }
+
+      &-text {
+        padding: 6px 52px;
+        height: 104px;
+
+        &-title {
+          font-size: 14px;
+          line-height: 143%;
+        }
+
+        &-return {
+          display: flex;
+          width: 40px;
+          height: 40px;
+          border-radius: 100%;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 6px;
+          left: 6px;
+          background: var(--f5f5f5);
+        }
+
+        &-subtitle {
+          font-size: 12px;
+          line-height: 117%;
+          max-width: 100%;
+        }
+
+        &-btns {
+          flex-direction: column;
+          gap: 6px;
+          top: 6px;
+          right: 6px;
+        }
+      }
+
+      &-bottom {
+        padding: 20px 10px;
+        gap: 6px;
+      }
+
+      &-input {
+        padding: 16px 12px;
+      }
+
+      &-messages {
+        padding: 10px 6px;
+      }
+
+      &-message {
+        max-width: 274px;
+        font-size: 10px;
+        line-height: 140%;
+      }
+    }
+
+    &__profile {
+      padding: 70px 16px 20px;
+      margin-bottom: 16px;
+
+      &-list {
+        grid-template-columns: auto;
+        gap: 10px;
+      }
+
+      &-title {
+        font-size: 20px;
+        line-height: 110%;
+        margin-bottom: 17px;
+      }
+
+      &-edit {
+        margin-top: 17px;
+      }
+    }
+
+    &__company {
+      &-btn {
+        display: none;
+
+        &._mb {
+          display: flex;
+          margin-top: 20px;
+        }
+      }
     }
 
     &__recharge {
@@ -392,6 +624,26 @@
       &-top {
         gap: 10px;
         margin-bottom: 24px;
+      }
+
+      &-header {
+        &_users {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+
+        &-btns {
+          &_notifications {
+            display: none;
+
+            &._mb {
+              display: flex;
+              margin-top: 20px;
+              gap: 10px;
+            }
+          }
+        }
       }
     }
 
@@ -590,6 +842,48 @@
       }
     }
 
+    &__payments {
+      &-block {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: var(--999999) #302e2e;
+
+        &::-webkit-scrollbar {
+          width: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #302e2e;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--999999);
+          border-radius: 5px;
+          border: 3px solid #302e2e;
+        }
+      }
+
+      &-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      &-left {
+        gap: 10px;
+      }
+
+      &-right {
+        gap: 10px;
+      }
+
+      &-download {
+        padding: 16px 30px;
+        font-size: 16px;
+        line-height: 137%;
+      }
+    }
+
     &__payment {
       margin-top: 24px;
       padding-top: 20px;
@@ -603,6 +897,13 @@
 
       &-items {
         margin-top: 16px;
+      }
+
+      &-canvas {
+        &-block {
+          height: 218px;
+          width: 720px;
+        }
       }
     }
 
@@ -655,6 +956,28 @@
       &-desc {
         font-size: 10px;
         line-height: 140%;
+      }
+    }
+
+    &__set {
+      &-priority {
+        &-btn {
+          padding: 0;
+          width: 40px;
+          height: 40px;
+          border-radius: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          span {
+            display: none;
+          }
+
+          svg {
+            display: flex;
+          }
+        }
       }
     }
   }
