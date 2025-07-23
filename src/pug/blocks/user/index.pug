@@ -5,7 +5,14 @@
     .user__content
       include ../../templates/user/sidebar.pug
       .user__main
+        .user__time-info._tablet
+          .user__time-block
+            .user__time
+              .user__current-time 19:25
+              .user__current-date 06.05.2025
+            .user__office-time Office close - 22-00
         .user__main-top
+          include ../../templates/user/menu-block.pug
           .user__stats
             .user__stat
               | Load: <span class="color_yellow">average</span>

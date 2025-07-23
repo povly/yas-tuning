@@ -5,6 +5,12 @@
   padding-bottom: 100px;
   overflow: hidden;
 
+  .header {
+    &__logo {
+      flex-shrink: 0;
+    }
+  }
+
   &__container {
     display: flex;
     flex-direction: column;
@@ -100,6 +106,10 @@
     display: flex;
     align-items: center;
     gap: 152px;
+
+    &._tablet {
+      display: none;
+    }
   }
 
   &__time-block {
@@ -212,6 +222,10 @@
     flex-direction: column;
     gap: 30px;
     position: relative;
+
+    &-block {
+      display: none;
+    }
 
     &-item {
       font-size: 20px;
@@ -1376,6 +1390,12 @@
 
     &-pay {
       margin-top: 24px;
+    }
+
+    &-btn {
+      svg {
+        display: none;
+      }
     }
 
   }

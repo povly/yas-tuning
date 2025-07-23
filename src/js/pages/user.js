@@ -164,4 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
   }
+
+  const menuBlock = document.querySelector('.user__menu-block');
+  if (menuBlock){
+    const button = menuBlock.querySelector('.user__menu-click');
+    button.addEventListener('click', () => {
+      menuBlock.classList.toggle('active');
+    });
+  }
 });
