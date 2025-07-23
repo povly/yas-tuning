@@ -31,6 +31,21 @@
         },
       ]
     })
+    +picture({
+      src: '/images/auth/mask_tablet.png',
+      width: 768,
+      height: 1024,
+      formats: [
+        {
+          type: 'avif',
+          src: '/images/auth/mask_tablet.avif',
+        },
+        {
+          type: 'webp',
+          src: '/images/auth/mask_tablet.webp',
+        },
+      ]
+    })
   .container
     .auth__item
       .auth__item-bg.img_full
@@ -56,10 +71,10 @@
           .auth__input
             label(for='email').auth__label
               span Email*
-              a(href='/restore.html') Forgot password?
             input.auth__input-field(type='email' id='email' name='email' required)
           .auth__input
             label(for='password').auth__label
               span Password*
+              a(href='/restore.html') Forgot password?
             input.auth__input-field(type='password' id='password' name='password' required)
         button.auth__btn.p-btn.p-btn_orange(type='submit') Log in

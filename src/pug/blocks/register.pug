@@ -31,6 +31,21 @@
         },
       ]
     })
+    +picture({
+      src: '/images/auth/mask_tablet.png',
+      width: 768,
+      height: 1024,
+      formats: [
+        {
+          type: 'avif',
+          src: '/images/auth/mask_tablet.avif',
+        },
+        {
+          type: 'webp',
+          src: '/images/auth/mask_tablet.webp',
+        },
+      ]
+    })
   .container
     .auth__item
       .auth__item-bg.img_full
@@ -62,11 +77,11 @@
                 label(for='email').auth__label
                   span Email*
                 input.auth__input-field(type='email' id='email' name='email' required)
-              .auth__input
+              .auth__input.auth__input_password
                 label(for='password').auth__label
                   span Password*
                 input.auth__input-field(type='password' id='password' name='password' required)
-              .auth__input
+              .auth__input.auth__input_password-repeat
                 label(for='password-repeat').auth__label
                   span Repeat password*
                 input.auth__input-field(type='password' id='password-repeat' name='password_repeat' required)
