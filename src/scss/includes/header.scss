@@ -43,6 +43,21 @@
   &__menu {
     display: none;
   }
+
+  &_main {
+    .header {
+      &__block {
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: 1s;
+
+        &.p-animate_active {
+          transform: none;
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1340px) {

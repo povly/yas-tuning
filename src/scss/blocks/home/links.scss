@@ -1,5 +1,15 @@
 .h-links {
   padding: 100px 0;
+  overflow: hidden;
+
+  &.p-animate_active {
+    .h-links {
+      &__left, &__right {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
 
   &__block {
     display: grid;
@@ -10,6 +20,16 @@
 
   &__left {
     position: relative;
+    transform: translateX(-100%);
+    transition: 1s;
+    opacity: 0;
+
+    &.p-animate {
+      &_active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
   }
 
   &__img {
@@ -30,6 +50,19 @@
   &__right,
   &__left {
     padding: 30px 0;
+  }
+
+  &__right {
+    transform: translateX(100%);
+    transition: 1s;
+    opacity: 0;
+
+    &.p-animate {
+      &_active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
   }
 
   &__item {

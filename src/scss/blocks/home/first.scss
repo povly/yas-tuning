@@ -3,6 +3,20 @@
   padding: 0;
   overflow: hidden;
 
+  &.p-animate_active {
+    :is(.h-first__bg-light-left, .h-first__bg-light-right){
+      animation: carLight 1s ease-out forwards;
+      animation-delay: 1.5s;
+    }
+
+    .h-first {
+      &__title, &__text {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
   &__bg {
     position: absolute;
     top: 0;
@@ -55,6 +69,17 @@
   }
 
   &__title {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: 1s;
+
+    &.p-animate {
+      &_active {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
     span {
       display: block;
       width: max-content;
@@ -87,17 +112,64 @@
       top: 144px;
       right: 0;
       width: 293px;
+      transform: translateX(100%);
+      opacity: 0;
+      transition: 1s;
+
+      &.p-animate {
+        &_active {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
     }
 
     &_left {
       left: 0;
       bottom: 108px;
       width: 272px;
+
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: 1s;
+
+      &.p-animate {
+        &_active {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
     }
   }
 
   &__btns {
     display: none;
+  }
+}
+
+@keyframes carLight {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+      opacity: 1;
+  }
+
+  40% {
+      opacity: 0;
+  }
+
+  60% {
+      opacity: 1;
+  }
+
+  80% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 0;
   }
 }
 

@@ -1,8 +1,19 @@
 .h-about {
+  overflow: hidden;
+
   &__items {
     gap: 23px 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+
+    &.p-animate_active {
+      .h-about {
+        &__item {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
   }
 
   &__item {
@@ -15,6 +26,17 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
+    opacity: 0;
+    transition: 1s;
+
+    &:nth-child(1), &:nth-child(3){
+      transform: translateX(-100%);
+    }
+
+    &:nth-child(2), &:nth-child(4){
+      transform: translateX(100%);
+    }
+
 
     &_img {
       position: relative;
