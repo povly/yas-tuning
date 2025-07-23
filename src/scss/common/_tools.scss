@@ -147,3 +147,28 @@ b {
     color: #6e9aff;
   }
 }
+
+@media screen and (max-width: 1340px){
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .section {
+    &__title {
+      font-size: 48px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  body {
+    font-size: 14px;
+    line-height: 143%;
+  }
+
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

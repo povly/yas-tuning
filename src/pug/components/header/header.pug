@@ -9,8 +9,8 @@ header.header
           alt: '',
         })
       .header__right
-        nav
-          ul.header__nav
+        nav.header__nav
+          ul.header__list
             li
               a(href='/') About
             li
@@ -22,3 +22,8 @@ header.header
         .header__btns
           a(href='#!').p-btn Login
           a(href='#!').p-btn.p-btn_orange Registration
+        .header__menu.modal__show(data-modal="menu")
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.8125 21.4375H23.1875M4.8125 14.4375H23.1875M4.8125 7.4375H23.1875" stroke="#F56E0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+

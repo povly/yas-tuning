@@ -1,9 +1,8 @@
 .h-about {
   &__items {
-    display: flex;
-    flex-wrap: wrap;
     gap: 23px 20px;
-    max-width: 1320px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   &__item {
@@ -19,6 +18,7 @@
 
     &_img {
       position: relative;
+      grid-column: span 2;
 
       &::before {
         content: '';
@@ -30,22 +30,6 @@
         background: rgb(27 27 28 / 30%);
         z-index: -1;
       }
-    }
-
-    &:nth-child(4n+1) {
-      width: 873px;
-    }
-
-    &:nth-child(4n+2) {
-      width: 427px;
-    }
-
-    &:nth-child(4n+3) {
-      width: 427px;
-    }
-
-    &:nth-child(4n+4) {
-      width: 873px;
     }
 
     &:nth-child(4) {
@@ -77,6 +61,101 @@
       &_second {
         max-width: 306px;
         margin-left: auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1340px) {
+  .h-about {
+    padding-bottom: 168px;
+
+    &__items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    &__item {
+      border-radius: 20px;
+      padding: 20px;
+      height: 326px;
+
+      &:nth-child(4n + 1), &:nth-child(4n + 4) {
+        width: calc(100% - 12px - 37.5vw);
+      }
+
+      &:nth-child(3n + 2), &:nth-child(3n + 3){
+        width: 37.5vw;
+      }
+
+      &_img {
+        grid-column: span 1;
+      }
+
+      &-title {
+        font-size: 48px;
+      }
+
+      &-text {
+        &_second {
+          margin-left: 0;
+          max-width: 380px;
+        }
+      }
+
+      &-num {
+        font-size: 72px;
+        line-height: 100%;
+        font-weight: 700;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 900px) {
+  .h-about {
+    &__item {
+      &-title {
+        font-size: 43px;
+      }
+
+      &-num {
+        font-size: 68px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .h-about {
+    padding-top: 100px;
+    padding-bottom: 0;
+
+    &__items {
+      gap: 14px;
+    }
+
+    &__item {
+      height: auto;
+      gap: 35px;
+
+      &:nth-child(n){
+        width: 100%;
+      }
+
+      &-title {
+        font-size: 30px;
+        line-height: 120%;
+      }
+
+      &-text {
+        max-width: 100%;
+      }
+
+      &-num {
+        font-size: 72px;
       }
     }
   }

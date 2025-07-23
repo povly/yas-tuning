@@ -13,8 +13,6 @@ footer.footer
           li
             a(href="#!") About
           li
-            a(href="#!") Last files
-          li
             a(href="#!") Catalog
           li
             a(href="#!") FAQ
@@ -42,3 +40,38 @@ footer.footer
           p Address: st Pae 25-47
           p Email: info@yastuning.com
       .footer__img
+        +img({
+          src: '/images/footer/license.jpg',
+          width: 310,
+          height: 146,
+          lazy: true
+        })
+.modal.modal_menu
+  .modal__table
+    .modal__ceil
+      .modal__content
+        .modal_menu__top
+          a.header__logo(href='/')
+            +img({
+              src: '/images/header/logo.webp',
+              width: 70,
+              height: 70,
+              alt: '',
+            })
+          .modal__close
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L14 14M14 1L1 14" stroke="#F56E0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        nav.header__nav
+          ul.header__list
+            li
+              a(href='/') About
+            li
+              a(href='/') Catalog
+            li
+              a(href='/') FAQ
+            li
+              a(href='/') Contacts
+        .header__btns
+          a(href='#!').p-btn Login
+          a(href='#!').p-btn.p-btn_orange Registration

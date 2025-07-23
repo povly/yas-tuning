@@ -491,3 +491,228 @@
     }
   }
 }
+
+@media screen and (max-width: 1324px) {
+  .h-car {
+    &__title {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    &__items {
+      gap: 12px;
+    }
+
+    &__item {
+      &-link {
+        height: 84px;
+        padding: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .h-car {
+    &__items {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &__steps {
+      grid-template-columns: auto;
+    }
+
+    &__step {
+      min-height: auto;
+
+      &:not(:last-child){
+        display: none;
+      }
+    }
+
+    &__breadcrumbs {
+      margin-top: 30px;
+      padding: 20px 31px;
+      gap: 40px;
+      font-size: 20px;
+      flex-wrap: wrap;
+      line-height: 120%;
+    }
+
+    &__table {
+      font-size: 20px;
+      line-height: 120%;
+
+      :is(th, td){
+        padding: 18px 20px;
+      }
+
+      th {
+        &:nth-child(1){
+          width: 111px;
+        }
+
+        &:nth-child(2){
+          width: 204px;
+        }
+
+        &:nth-child(3){
+          width: 204px;
+        }
+
+        &:nth-child(4){
+          width: 204px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px)  {
+  .h-car {
+    padding-top: 100px;
+
+    .container {
+      padding: 0;
+    }
+
+    &__title {
+      margin-bottom: 20px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    &__items {
+      gap: 10px 12px;
+      padding-left: 20px;
+      padding-right: 20px;
+      display: flex;
+      flex-wrap: wrap;
+
+      &.active {
+        display: flex;
+      }
+    }
+
+    &__item {
+      width: calc(100% / 3 - 8px);
+
+
+      &-link {
+        flex-direction: column;
+        gap: 10px;
+        height: 104px;
+        padding: 8px;
+      }
+
+      &-img {
+        min-height: 36px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      &-title {
+        margin-top: auto;
+      }
+    }
+
+    &__breadcrumbs {
+      margin-top: 20px;
+      padding: 16px;
+      gap: 20px;
+      font-size: 14px;
+      min-height: 92px;
+      line-height: 143%;
+      align-items: flex-start;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    &__steps {
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-top: 30px;
+    }
+
+    &__logo {
+      padding: 24px 29.5px;
+
+      &-title {
+        font-size: 24px;
+        line-height: 117%;
+      }
+    }
+
+    &__list {
+      font-size: 16px;
+      line-height: 125%;
+    }
+
+    &__data {
+      margin-top: 20px;
+
+      &-contents {
+        margin-top: 20px;
+      }
+
+      &-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--999999) #302e2e;
+        width: 100%;
+
+        &::-webkit-scrollbar {
+          width: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #302e2e;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--999999);
+          border-radius: 5px;
+          border: 3px solid #302e2e;
+        }
+      }
+
+      &-link {
+        padding: 16px 20px;
+      }
+
+      &-list {
+        gap: 7px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    &__table {
+      border-radius: 10px;
+      width: max-content;
+
+      :is(th, td){
+        padding: 20px;
+      }
+
+      th {
+        &:nth-child(n){
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .h-car {
+    &__item {
+      &-title {
+        font-size: 12px;
+      }
+    }
+  }
+}
