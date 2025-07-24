@@ -234,6 +234,20 @@
           border: 3px solid #302e2e;
         }
       }
+
+      &_companies {
+        :is(th, td){
+          text-align: left;
+          padding-left: 22px;
+          padding-right: 22px;
+        }
+
+        td {
+          &:nth-child(2){
+            text-align: left;
+          }
+        }
+      }
     }
 
     &__order {
@@ -417,6 +431,7 @@
 
     &__chat {
       border-radius: 10px;
+      margin-top: 0;
 
       &-left, &-right {
         display: none;
@@ -428,7 +443,7 @@
       }
 
       &-filters {
-        justify-content: center;
+        justify-content: space-between;
         gap: 20px;
       }
 
@@ -566,10 +581,13 @@
 
       &-radios {
         grid-template-columns: 1fr;
+        margin-top: 12px;
+        gap: 14px;
       }
 
       &-title {
         font-size: 20px;
+        margin-bottom: 12px;
         line-height: 120%;
       }
 
@@ -720,6 +738,10 @@
 
       &-right {
         margin-left: auto;
+
+        &_recharge {
+          display: none;
+        }
       }
 
       &-main, &-info {
@@ -756,6 +778,9 @@
     }
 
     &__date {
+      margin-top: 16px;
+      margin-bottom: 10px;
+
       &-item {
         padding: 14px;
         font-size: 16px;
@@ -848,6 +873,7 @@
         overflow-y: hidden;
         scrollbar-width: thin;
         scrollbar-color: var(--999999) #302e2e;
+        margin-top: 16px;
 
         &::-webkit-scrollbar {
           width: 12px;
@@ -882,6 +908,10 @@
         font-size: 16px;
         line-height: 137%;
       }
+
+      &-stats {
+        margin-top: 15px;
+      }
     }
 
     &__payment {
@@ -913,6 +943,30 @@
         padding-right: 20px;
         margin-left: -20px;
         margin-right: -20px;
+      }
+
+      &_companies {
+        th {
+          &:nth-child(1){
+            width: 225px;
+          }
+
+          &:nth-child(2){
+            width: 187px;
+          }
+
+          &:nth-child(3){
+            width: 259px;
+          }
+
+          &:nth-child(4){
+            width: 117px;
+          }
+
+          &:nth-child(5){
+            width: 109px;
+          }
+        }
       }
     }
 
@@ -972,6 +1026,11 @@
 
           span {
             display: none;
+          }
+
+          &:hover {
+            background: var(--f56e0f);
+            border-color: var(--f56e0f);
           }
 
           svg {

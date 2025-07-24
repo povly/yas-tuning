@@ -298,6 +298,10 @@
         align-items: center;
         gap: 26px;
         flex-wrap: wrap;
+
+        &._mb {
+          display: none;
+        }
       }
     }
 
@@ -570,6 +574,8 @@
       }
 
       td {
+        padding: 16px;
+        
         &:nth-child(2){
           text-align: center;
         }
@@ -1435,6 +1441,16 @@
         }
       }
 
+      &-input {
+        display: none;
+
+        &:checked {
+          ~.user__set-priority-square {
+              background-image: url("/images/user/icons/checkbox.svg");
+          }
+        }
+      }
+
       &-abs {
         position: absolute;
         top: 100%;
@@ -1515,6 +1531,9 @@
         width: 20px;
         height: 20px;
         margin-right: -12px;
+        background-size: 14px;
+        background-repeat: no-repeat;
+        background-position: center center;
       }
 
       &-edit {
