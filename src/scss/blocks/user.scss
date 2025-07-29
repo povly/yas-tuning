@@ -1753,6 +1753,7 @@
       }
     }
 
+
     &_input {
       width: 100%;
 
@@ -1801,6 +1802,13 @@
         flex-shrink: 0;
         transition: .3s;
       }
+    }
+
+    &__input {
+      position: absolute; opacity: 0; pointer-events: none; height: 0; width: 0;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     &__abs {

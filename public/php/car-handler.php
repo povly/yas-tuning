@@ -179,21 +179,33 @@ function renderBreadcrumbs($brand_name = '', $model = '', $year = '', $motor = '
 // Функция для рендера шагов выбора
 function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name = '', $model = '', $year = '')
 {
+    // Подсчитываем количество активных шагов, которые будут отображены
+    $active_steps_count = 1; // Всегда есть шаг бренда
+    if ($model && ($step === 'year' || $step === 'motor')) {
+        $active_steps_count++;
+    }
+    if ($year && $step === 'motor') {
+        $active_steps_count++;
+    }
+
     echo '<div class="h-car__steps active">';
+
     // Всегда показываем шаг бренда
-    echo '<div class="h-car__step h-car__step_model active">';
+    // Устанавливаем opacity=0 только для последнего активного шага
+    $brand_step_opacity = ($active_steps_count == 1) ? '0' : '1';
+    echo '<div class="h-car__step h-car__step_model active" style="opacity: ' . $brand_step_opacity . ';">';
     echo '<div class="h-car__logo">';
     if ($img) {
         echo '<div class="h-car__logo-img"><img src="' . htmlspecialchars($img) . '" width="58" height="58" loading="lazy"></div>';
     }
     echo '<div class="h-car__logo-title">' . htmlspecialchars($brand_name) . '</div>';
     echo '</div>';
+
     // Показываем модели если это step=model или если мы на дальнейших шагах
     if ($step === 'model') {
         echo '<ul class="h-car__list">';
         foreach ($data as $item) {
             echo '<li class="h-car__list-li">';
-            // Добавлен href="#choose-your-car"
             echo '<a href="#choose-your-car" class="h-car__list-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_model","brand_id":"' . $brand_id . '","brand_name":"' . $brand_name . '","brand_img":"' . $img . '","model":"' . htmlspecialchars($item['model']) . '"}\' href="#choose-your-car">' . htmlspecialchars($item['model']) . '</a>';
             echo '</li>';
         }
@@ -206,7 +218,6 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
             foreach ($models_data as $item) {
                 $selected_class = ($item['model'] === $model) ? ' selected' : '';
                 echo '<li class="h-car__list-li">';
-                // Добавлен href="#choose-your-car"
                 echo '<a href="#choose-your-car" class="h-car__list-link' . $selected_class . '" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_model","brand_id":"' . $brand_id . '","brand_name":"' . $brand_name . '","brand_img":"' . $img . '","model":"' . htmlspecialchars($item['model']) . '"}\' href="#choose-your-car">' . htmlspecialchars($item['model']) . '</a>';
                 echo '</li>';
             }
@@ -214,20 +225,23 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
         }
     }
     echo '</div>';
+
     // Показываем шаг модели если есть модель
     if ($model && ($step === 'year' || $step === 'motor')) {
-        echo '<div class="h-car__step h-car__step_year active">';
+        // Устанавливаем opacity=0 только для последнего активного шага
+        $model_step_opacity = ($active_steps_count == 2) ? '0' : '1';
+        echo '<div class="h-car__step h-car__step_year active" style="opacity: ' . $model_step_opacity . ';">';
         echo '<div class="h-car__logo">';
         if ($img) {
             echo '<div class="h-car__logo-img"><img src="' . htmlspecialchars($img) . '" width="58" height="58" loading="lazy"></div>';
         }
         echo '<div class="h-car__logo-title">' . htmlspecialchars($model) . '</div>';
         echo '</div>';
+
         if ($step === 'year') {
             echo '<ul class="h-car__list">';
             foreach ($data as $item) {
                 echo '<li class="h-car__list-li">';
-                // Добавлен href="#choose-your-car"
                 echo '<a href="#choose-your-car" class="h-car__list-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_year","brand_id":"' . $brand_id . '","brand_name":"' . $brand_name . '","brand_img":"' . $img . '","model":"' . $model . '","year":"' . htmlspecialchars($item['year']) . '"}\' href="#choose-your-car">' . htmlspecialchars($item['year']) . '</a>';
                 echo '</li>';
             }
@@ -240,7 +254,6 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
                 foreach ($years_data as $item) {
                     $selected_class = ($item['year'] === $year) ? ' selected' : '';
                     echo '<li class="h-car__list-li">';
-                    // Добавлен href="#choose-your-car"
                     echo '<a href="#choose-your-car" class="h-car__list-link' . $selected_class . '" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_year","brand_id":"' . $brand_id . '","brand_name":"' . $brand_name . '","brand_img":"' . $img . '","model":"' . $model . '","year":"' . htmlspecialchars($item['year']) . '"}\' href="#choose-your-car">' . htmlspecialchars($item['year']) . '</a>';
                     echo '</li>';
                 }
@@ -249,9 +262,11 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
         }
         echo '</div>';
     }
+
     // Показываем шаг года если есть год
     if ($year && $step === 'motor') {
-        echo '<div class="h-car__step h-car__step_motor active">';
+        // Последний шаг всегда имеет opacity=0
+        echo '<div class="h-car__step h-car__step_motor active" style="opacity: 0;">';
         echo '<div class="h-car__logo">';
         if ($img) {
             echo '<div class="h-car__logo-img"><img src="' . htmlspecialchars($img) . '" width="58" height="58" loading="lazy"></div>';
@@ -261,7 +276,6 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
         echo '<ul class="h-car__list">';
         foreach ($data as $item) {
             echo '<li class="h-car__list-li">';
-            // Добавлен href="#choose-your-car"
             echo '<a href="#choose-your-car" class="h-car__list-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_engine","brand_id":"' . $brand_id . '","brand_name":"' . $brand_name . '","brand_img":"' . $img . '","model":"' . $model . '","year":"' . $year . '","car_id":"' . htmlspecialchars($item['id']) . '","motor":"' . htmlspecialchars($item['motor'] . ' ' . $item['hp']) . '"}\'>' .
                 '<span>' . htmlspecialchars($item['motor']) . '</span><span>' . htmlspecialchars($item['hp']) . '</span></a>';
             echo '</li>';
@@ -269,6 +283,7 @@ function renderSteps($step, $data, $title, $img = '', $brand_id = 0, $brand_name
         echo '</ul>';
         echo '</div>';
     }
+
     echo '</div>';
 }
 // Функция для рендера данных автомобиля
@@ -505,5 +520,32 @@ switch ($action) {
         renderInitialState();
         break;
 }
+
+echo '<script>
+    setTimeout(function() {
+        // Получаем все элементы с классом h-car__step.active
+        let steps = document.querySelectorAll(".h-car__step.active");
+
+        // Устанавливаем прозрачность для всех элементов, кроме последнего
+        steps.forEach((step, index) => {
+            if (index < steps.length - 1) {
+                step.style.opacity = "1"; // Устанавливаем прозрачность
+            } else {
+                // Последний элемент анимируем
+                step.style.transition = "opacity 1.3s ease, transform 1.3s ease";
+                step.style.opacity = "1";
+                step.style.transform = "translateY(0)";
+            }
+        });
+
+        // Анимируем все элементы с классом h-car__data.active
+        document.querySelectorAll(".h-car__data.active").forEach(el => {
+            el.style.transition = "opacity 1.3s ease, transform 1.3s ease";
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+        });
+    }, 100);
+</script>';
+
 // Отправляем буферизованный вывод
 ob_end_flush();

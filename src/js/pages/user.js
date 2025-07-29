@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     headerOverlay.classList.toggle('active');
   });
 
-  if (notificationsBtn){
+  if (notificationsBtn) {
     // Уведомления
     notificationsBtn.addEventListener('click', () => {
       notificationsBtn.classList.toggle('active');
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const isClickInsideSearch =
       searchBtn.contains(e.target) || searchContainer.contains(e.target);
     const isClickInsideNotifications =
-    notificationsBtn && notificationsBtn.contains(e.target) ||
-    notificationsPopup && notificationsPopup.contains(e.target);
+      notificationsBtn && notificationsBtn.contains(e.target) ||
+      notificationsPopup && notificationsPopup.contains(e.target);
 
     if (!isClickInsideSearch) {
       searchBtn.classList.remove('active');
@@ -46,11 +46,51 @@ document.addEventListener('DOMContentLoaded', () => {
     e.stopPropagation();
   });
 
-  if (notificationsPopup){
+  if (notificationsPopup) {
     notificationsPopup.addEventListener('click', (e) => {
       e.stopPropagation();
     });
   }
+
+
+  document.body.addEventListener('htmx:confirm', function (evt) {
+    evt.preventDefault();
+
+    const target = evt.detail.target;
+    const modalName = target.dataset.confirmName;
+    const modal = document.querySelector(`.modal_${modalName}`);
+
+    let isValid = true;
+
+    // Проверка кастомных селектов
+    const customSelects = evt.detail.target.querySelectorAll('.user-select');
+    customSelects.forEach(select => {
+      const hiddenInput = select.querySelector('.user-select__input');
+
+      if (!hiddenInput.value) {
+        isValid = false;
+        // Устанавливаем кастомное сообщение для скрытого поля
+        const customMessage = select.dataset.error;
+        hiddenInput.setCustomValidity(customMessage);
+      } else {
+        hiddenInput.setCustomValidity("");
+      }
+
+      hiddenInput.reportValidity();
+    });
+
+
+    // Если форма невалидна, показываем сообщения об ошибках
+    if (isValid) {
+      window.Modal.showModal(modal);
+
+      const btnActionYes = modal.querySelector('[data-action="yes"]');
+      btnActionYes.addEventListener('click', () => {
+        evt.detail.issueRequest();
+      })
+    }
+
+  });
 
   const files = document.querySelectorAll('.user__file');
   if (files[0]) {
@@ -161,11 +201,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const selects = document.querySelectorAll('.user-select');
-  if (selects[0]){
-    selects.forEach((select)=>{
+  if (selects[0]) {
+    selects.forEach((select) => {
       const current = select.querySelector('.user-select__current');
       const title = select.querySelector('.user-select__current-title');
-      const input = select.querySelector('input');
+      const input = select.querySelector('.user-select__input');
 
       current.addEventListener('click', () => {
         select.classList.toggle('active');
@@ -176,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         option.addEventListener('click', () => {
           title.textContent = option.textContent;
           input.value = option.dataset.value;
+          input.setCustomValidity("");
           select.classList.remove('active');
 
           options.forEach((opt) => {
@@ -189,8 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const tabs = document.querySelectorAll('.user__tabs');
-  if (tabs[0]){
-    tabs.forEach((tab)=>{
+  if (tabs[0]) {
+    tabs.forEach((tab) => {
       const btns = tab.querySelectorAll('.user__tab');
       btns.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -203,14 +244,14 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.dispatchEvent(new CustomEvent('userTabSelected', {
             detail: {
               tab: btn
-             }
+            }
           }));
         });
       });
     })
   }
 
-  function userUpdateMenu(){
+  function userUpdateMenu() {
     const menuBlock = document.querySelector('.user__menu-block');
     if (menuBlock) {
       const button = menuBlock.querySelector('.user__menu-click');

@@ -1,7 +1,7 @@
 .user
   .container
     include ../../templates/user/header.pug
-
+    .user__header-overlay
     .user__content
       include ../../templates/user/sidebar.pug
       .user__main
@@ -10,7 +10,7 @@
             include ../../templates/user/menu-block.pug
             h2.user__title User setting
           .user__main-header-right
-        form(hx-post="/php/user-settings.php" hx-trigger="submit" hx-validate).user__settings
+        form(hx-post="/php/user-settings.php" hx-trigger="submit" data-confirm-name="update" hx-confirm hx-validate).user__settings
           .user__inputs
             .user__input
               .user__input-label First name
@@ -64,7 +64,7 @@
             .user__input.user__input_col-1#is_company_fields
             .user__input.user__input_col-1
               button.p-btn.p-btn_orange Update
-        form(hx-post="/php/user-settings.php" hx-trigger="submit" hx-validate).user__settings
+        form(hx-post="/php/user-settings.php" hx-trigger="submit" data-confirm-name="update" hx-confirm hx-validate).user__settings
           .user__title.user__settings-title CHANGE PASSWORD
           .user__inputs
             .user__input

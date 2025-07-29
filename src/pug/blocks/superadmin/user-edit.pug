@@ -1,0 +1,95 @@
+.user
+  .container
+    include ../../templates/superadmin/header.pug
+    .user__header-overlay
+
+    .user__content
+      include ../../templates/superadmin/sidebar.pug
+      .user__main
+        .user__main-header.user__main-header_profile
+          .user__main-header-left
+            .user__breadcrumbs-block
+              include ../../templates/superadmin/menu-block.pug
+              .user__breadcrumbs
+                a(href="#!") Users
+                span.separator /
+                span.current User profile
+            h2.user__title USER profile
+          .user__main-header-right
+          .user__main-header-right
+        form(hx-post="/php/user-settings.php" hx-trigger="submit" data-confirm-name="update" hx-confirm hx-validate).user__settings
+          .user__inputs
+            .user__input
+              .user__input-label First name
+              .user__input-el
+                input(type="text"
+                name="first-name"
+                value=""
+                required
+                )
+            .user__input
+              .user__input-label Last name
+              .user__input-el
+                input(type="text" name="last-name" value="" required
+                )
+            .user__input
+              .user__input-label Email
+              .user__input-el
+                input(type="email" name="email" value=""
+                )
+            .user__input
+              .user__input-label Country
+              .user__input-el
+                input(type="text" name="country" value=""
+                )
+            .user__input
+              .user__input-label Address
+              .user__input-el
+                input(type="text" name="Address" value=""
+                )
+            .user__input
+              .user__input-label Phone number
+              .user__input-el
+                input(type="tel" name="tel" value=""
+                )
+            .user__input
+              .user__input-label Zip code
+              .user__input-el
+                input(type="text" name="zip-code" value=""
+                )
+            .user__input
+              .user__input-label EVC number
+              .user__input-el
+                input(type="text" name="evc" value=""
+                )
+            .user__input
+              .user__input-label Discount
+              .user__input-el
+                input(type="text" name="discount" value=""
+                )
+            .user__input
+              .user__input-label Role
+              .user__input-el
+                .user-select.user-select_default(data-error="Select the role")
+                  input(type="text").user-select__input
+                  .user-select__current
+                    .user-select__current-title Select the role
+                    .user-select__current-svg
+                      <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.2488 6.5946C16.0479 6.39374 15.7754 6.2809 15.4913 6.2809C15.2072 6.2809 14.9347 6.39374 14.7338 6.5946L9.43023 11.8982L4.12666 6.5946C3.92458 6.39943 3.65394 6.29144 3.37301 6.29388C3.09209 6.29632 2.82336 6.409 2.62471 6.60765C2.42606 6.80631 2.31338 7.07503 2.31094 7.35596C2.30849 7.63688 2.41649 7.90753 2.61166 8.1096L8.67273 14.1707C8.87365 14.3715 9.14612 14.4844 9.43023 14.4844C9.71433 14.4844 9.98681 14.3715 10.1877 14.1707L16.2488 8.1096C16.4497 7.90868 16.5625 7.63621 16.5625 7.3521C16.5625 7.068 16.4497 6.79553 16.2488 6.5946Z" fill="#1B1B1C" />
+                      </svg>
+                  .user-select__abs
+                    .user-select__option(data-value="1") User
+                    .user-select__option(data-value="2") Admin
+                    .user-select__option(data-value="3") Staff
+            .user__input.user__input_col-1#is_company_block
+              .user__checkbox
+                input(type="checkbox" name="is_company" id="is_company" hx-include="this" hx-get="/php/is_company.php" hx-trigger="change" hx-target="#is_company_fields" hx-swap="innerHTML")
+                label.user__checkbox-label(for="is_company")
+                  .user__checkbox-square
+                  .user__checkbox-title Is company?
+            .user__input.user__input_col-1#is_company_fields
+            .user__input.user__input_col-1
+              button.p-btn.p-btn_orange Update
+// Контейнер для модального окна заказа
+#order-modal-container

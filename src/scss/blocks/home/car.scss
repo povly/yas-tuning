@@ -419,9 +419,11 @@
     border-radius: 20px;
     min-height: 609px;
     display: none;
+    opacity: 0;
 
     &.active {
       display: block;
+      transform: translateY(10px);
     }
   }
 
@@ -449,9 +451,10 @@
   &__data {
     display: none;
     margin-top: 30px;
-
+    
     &.active {
       display: block;
+      transform: translateY(10px);
     }
 
     &-list {

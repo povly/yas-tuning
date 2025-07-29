@@ -6,16 +6,15 @@ include ../mixins/video
 include ../mixins/iframe
 
 block variables
-  - var title = 'Ordered files';
+  - var title = 'superadmin Companies';
   - var description = '';
   - var pageCss = ['index', 'user'];  // Страничные стили /pages/index.scss
   - var pageJs = ['pages/user'];
   //- - var blocks = ['user'];
-  //- - var libsJs = ['swiper']; -- Сюда добавляем скрипты библиотек для страницы
-  //- - var libsCss = ['swiper']; -- Сюда добавляем стили библиотек для страницы
-
+  //- - var libsJs = ['simplebar'];
+  //- - var libsCss = ['simplebar'];
 block content
-  include ../blocks/superadmin/orders
+  include ../blocks/superadmin/company
 
 block footer
   include ../components/footer/footer
@@ -27,4 +26,7 @@ block footer
           document.body.style.overflow = 'hidden';
         }
       });
+
+      //- let userTable = document.querySelector('.user__table-container_user');
+      //- new SimpleBar(userTable);
     });

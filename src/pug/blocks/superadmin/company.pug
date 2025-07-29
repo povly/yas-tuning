@@ -1,0 +1,72 @@
+.user
+  .container
+    include ../../templates/superadmin/header.pug
+    .user__header-overlay
+
+    .user__content
+      include ../../templates/superadmin/sidebar.pug
+      .user__main
+        .user__main-header.user__main-header_profile
+          .user__main-header-left
+            .user__breadcrumbs-block
+              include ../../templates/superadmin/menu-block.pug
+              .user__breadcrumbs
+                a(href="#!") Companies
+                span.separator /
+                span.current Create company
+            h2.user__title Create company
+          .user__main-header-right
+        form(hx-post="/php/superadmin/company.php" hx-trigger="submit" data-confirm-name="update" hx-confirm hx-validate).user__settings
+          .user__inputs
+            .user__input
+              .user__input-label Name
+              .user__input-el
+                input(type="text"
+                name="first-name"
+                value=""
+                required
+                )
+            .user__input
+              .user__input-label Country
+              .user__input-el
+                input(type="text" name="country" value=""
+                )
+            .user__input
+              .user__input-label City
+              .user__input-el
+                input(type="text" name="city" value=""
+                )
+            .user__input
+              .user__input-label Address
+              .user__input-el
+                input(type="text" name="address" value=""
+                )
+            .user__input
+              .user__input-label Zip-code
+              .user__input-el
+                input(type="text" name="zip-code" value=""
+                )
+            .user__input
+              .user__input-label Main email
+              .user__input-el
+                input(type="text" name="main-email" value=""
+                )
+            .user__input
+              .user__input-label Support email
+              .user__input-el
+                input(type="text" name="support-email" value=""
+                )
+            .user__input
+              .user__input-label Billing email
+              .user__input-el
+                input(type="text" name="billing-email" value=""
+                )
+            .user__input
+              .user__input-label VAT
+              .user__input-el
+                input(type="text" name="vat" value=""
+                )
+            .user__input.user__input_col-1
+              button.p-btn.p-btn_orange Save
+// Контейнер для модального окна заказа
+#order-modal-container

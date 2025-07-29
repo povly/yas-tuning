@@ -1,0 +1,50 @@
+.modal_message {
+  .modal {
+    &__block {
+      background: var(--303038);
+      border-radius: 20px;
+      padding: 50px 132px;
+      max-width: 723px;
+      margin: 50px auto;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 114%;
+    text-transform: uppercase;
+    color: var(--f5f5f5);
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__btns {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  &__btn {
+    position: relative;
+    top: auto;
+    right: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal_message {
+    padding: 20px;
+
+    .modal {
+      &__block {
+        max-width: 100%;
+        padding: 50px 25px;
+      }
+    }
+
+    &__title {
+      font-size: 24px;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 .user
   .container
     include ../../templates/superadmin/header.pug
+    .user__header-overlay
 
     .user__content
       include ../../templates/superadmin/sidebar.pug
@@ -89,7 +90,8 @@
                 td
                   .user__ticket-btn Create
                 td
-                  span.color_red Cancel
+                  form( hx-post="/php/test" hx-trigger="submit" data-confirm-name="order-cancel" hx-confirm).user__btn-crud.color_red
+                    button(type="submit").color_red Cancel
               tr
                 td 28012024-3
                 td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
@@ -103,7 +105,8 @@
                 td
                   .user__ticket-btn Create
                 td
-                  span.color_red Cancel
+                  form( hx-post="/php/test" hx-trigger="submit" data-confirm-name="order-cancel" hx-confirm).user__btn-crud.color_red
+                    button(type="submit").color_red Cancel
               tr
                 td 28012024-3
                 td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
@@ -117,7 +120,8 @@
                 td
                   .user__ticket-btn Create
                 td
-                  span.color_red Cancel
+                  form( hx-post="/php/test" hx-trigger="submit" data-confirm-name="order-cancel" hx-confirm).user__btn-crud.color_red
+                    button(type="submit").color_red Cancel
               tr
                 td 28012024-3
                 td Opel Vectra-C 1.9 CDTI Bosch EDC16C39
@@ -131,7 +135,8 @@
                 td
                   .user__ticket-btn Create
                 td
-                  span.color_red Cancel
+                  form( hx-post="/php/test" hx-trigger="submit" data-confirm-name="order-cancel" hx-confirm).user__btn-crud.color_red
+                    button(type="submit").color_red Cancel
 
         .user__pagination
           a.user__pagination-item.user__pagination-item_arrow
