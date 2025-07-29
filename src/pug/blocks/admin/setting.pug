@@ -1,0 +1,55 @@
+.user
+  .container
+    include ../../templates/admin/header.pug
+    .user__header-overlay
+
+    .user__content
+      include ../../templates/admin/sidebar.pug
+      .user__main
+        .user__main-header
+          .user__main-header-left
+            include ../../templates/admin/menu-block.pug
+            h2.user__title Admin SETTING
+          .user__main-header-right
+        form(hx-post="/php/superadmin/settings.php" data-confirm-name="update" hx-confirm hx-trigger="submit" hx-validate).user__settings
+          .user__inputs
+            .user__input
+              .user__input-label First name
+              .user__input-el
+                input(type="text"
+                name="first-name"
+                value=""
+                required
+                )
+            .user__input
+              .user__input-label Last name
+              .user__input-el
+                input(type="text" name="last-name" value="" required
+                )
+            .user__input
+              .user__input-label Email
+              .user__input-el
+                input(type="email" name="email" value="" required
+                )
+            .user__input.user__input_col-1
+              button.p-btn.p-btn_orange Update
+        form(hx-post="/php/superadmin/settings.php" data-confirm-name="update" hx-confirm hx-trigger="submit" hx-validate).user__settings
+          .user__title.user__settings-title CHANGE PASSWORD
+          .user__inputs
+            .user__input
+              .user__input-label New password
+              .user__input-el
+                input(type="password"
+                name="password"
+                value=""
+                required
+                )
+            .user__input
+              .user__input-label Confirm password
+              .user__input-el
+                input(type="password" name="confirm-password" value="" required
+                )
+            .user__input.user__input_col-1
+              button.p-btn.p-btn_orange Update
+// Контейнер для модального окна заказа
+#order-modal-container
