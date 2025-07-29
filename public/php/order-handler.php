@@ -38,31 +38,54 @@ header('Content-Type: text/html; charset=utf-8');
         <div class="user__input">
           <div class="user__input-label">Vehicle Type</div>
           <div class="user__input-el">
-            <input type="text" name="vehicle-type" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <div class="user-select user-select_input">
+              <input class="user-select__input" type="hidden">
+              <div class="user-select__current">
+                <div class="user-select__current-title">Agriculture</div>
+                <div class="user-select__current-svg"><svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.2488 6.5946C16.0479 6.39374 15.7754 6.2809 15.4913 6.2809C15.2072 6.2809 14.9347 6.39374 14.7338 6.5946L9.43023 11.8982L4.12666 6.5946C3.92458 6.39943 3.65394 6.29144 3.37301 6.29388C3.09209 6.29632 2.82336 6.409 2.62471 6.60765C2.42606 6.80631 2.31338 7.07503 2.31094 7.35596C2.30849 7.63688 2.41649 7.90753 2.61166 8.1096L8.67273 14.1707C8.87365 14.3715 9.14612 14.4844 9.43023 14.4844C9.71433 14.4844 9.98681 14.3715 10.1877 14.1707L16.2488 8.1096C16.4497 7.90868 16.5625 7.63621 16.5625 7.3521C16.5625 7.068 16.4497 6.79553 16.2488 6.5946Z" fill="#1B1B1C"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="user-select__abs">
+                <div class="user-select__option selected" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Production machines/Construction</div>
+                <div class="user-select__option" data-value="2">Production machines/Construction</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Manufactured</div>
           <div class="user__input-el">
-            <input type="text" name="manufactured" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="manufactured" value="" required="">
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Model</div>
           <div class="user__input-el">
-            <input type="text" name="vehicle-model" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="vehicle-model" value="" required="">
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Engine</div>
           <div class="user__input-el">
-            <input type="text" name="engine" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="engine" value="" required="">
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Ecu Type</div>
           <div class="user__input-el">
-            <input type="text" name="ecu-type" value="" hx-post="/build/php/order-handler.php" hx-trigger="input changed delay:500ms" hx-target="#user__order" hx-swap="outerHTML" hx-include="[name='vehicle-type'],[name='manufactured'],[name='vehicle-model'],[name='engine'],[name='ecu-type']">
+            <input type="text" name="ecu-type" value="" required="">
           </div>
         </div>
       </div>
@@ -70,91 +93,91 @@ header('Content-Type: text/html; charset=utf-8');
     <div class="user__order-main-right">
       <div class="user__checkboxes">
         <div class="user__checkbox">
-          <input type="checkbox" name="dpf-fap" id="dpf-fap">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="dpf-fap" id="dpf-fap">
           <label class="user__checkbox-label" for="dpf-fap">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">DPF/FAP Delete&nbsp;(150 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="scr-adblue" id="scr-adblue">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="scr-adblue" id="scr-adblue">
           <label class="user__checkbox-label" for="scr-adblue">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">SCR/AdBlue OFF&nbsp;(240 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="dtc-selectivity" id="dtc-selectivity">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="dtc-selectivity" id="dtc-selectivity">
           <label class="user__checkbox-label" for="dtc-selectivity">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">DTC's selectivity OFF&nbsp;(80 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="egr-agr" id="egr-agr">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="egr-agr" id="egr-agr">
           <label class="user__checkbox-label" for="egr-agr">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">EGR/AGR Removal&nbsp;(105 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="checksumm-correction" id="checksumm-correction">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="checksumm-correction" id="checksumm-correction">
           <label class="user__checkbox-label" for="checksumm-correction">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">Checksumm correction&nbsp;(80 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="stage-1-tuning" id="stage-1-tuning">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="stage-1-tuning" id="stage-1-tuning">
           <label class="user__checkbox-label" for="stage-1-tuning">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">Stage 1 tuning file&nbsp;(160 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="dpf-fap" id="dpf-fap1">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="dpf-fap" id="dpf-fap1">
           <label class="user__checkbox-label" for="dpf-fap1">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">DPF/FAP Delete&nbsp;(150 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="scr-adblue" id="scr-adblue2">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="scr-adblue" id="scr-adblue2">
           <label class="user__checkbox-label" for="scr-adblue2">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">SCR/AdBlue OFF&nbsp;(240 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="dtc-selectivity" id="dtc-selectivity2">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="dtc-selectivity" id="dtc-selectivity2">
           <label class="user__checkbox-label" for="dtc-selectivity2">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">DTC's selectivity OFF&nbsp;(80 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="egr-agr" id="egr-agr2">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="egr-agr" id="egr-agr2">
           <label class="user__checkbox-label" for="egr-agr2">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">EGR/AGR Removal&nbsp;(105 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="checksumm-correction" id="checksumm-correction2">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="checksumm-correction" id="checksumm-correction2">
           <label class="user__checkbox-label" for="checksumm-correction2">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">Checksumm correction&nbsp;(80 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="stage-1-tuning" id="stage-1-tuning2">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="stage-1-tuning" id="stage-1-tuning2">
           <label class="user__checkbox-label" for="stage-1-tuning2">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">Stage 1 tuning file&nbsp;(160 YT)</div>
           </label>
         </div>
         <div class="user__checkbox">
-          <input type="checkbox" name="checksumm-correction" id="checksumm-correction3">
+          <input hx-get="/php/order-handler-payment.php" hx-trigger="change delay:500ms" hx-target="#payment" type="checkbox" name="checksumm-correction" id="checksumm-correction3">
           <label class="user__checkbox-label" for="checksumm-correction3">
             <div class="user__checkbox-square"></div>
             <div class="user__checkbox-title">Checksumm correction&nbsp;(80 YT)</div>
@@ -230,29 +253,5 @@ header('Content-Type: text/html; charset=utf-8');
       </div>
     </div>
   </div>
-  <div class="user__payment">
-    <div class="user__payment-price"><ins>700 YT in total</ins>
-      <del>760 YT in total</del>
-    </div>
-    <div class="user__payment-items">
-      <div class="user__payment-item">
-        <input type="radio" name="payment" id="payment-1">
-        <label class="user__payment-label" for="payment-1">
-          <span class="user__payment-svg"><img class="lazy" width="30" height="30" src="/images/user/payments/credits.png" alt="Credits" loading="lazy"></span><span class="user__payment-title">Credits</span></label>
-      </div>
-      <div class="user__payment-item">
-        <input type="radio" name="payment" id="payment-2">
-        <label class="user__payment-label" for="payment-2"><span class="user__payment-svg"><img width="30" height="27" src="/images/user/payments/credit-card.png" alt="Credit card" loading="lazy"></span><span class="user__payment-title">Credit card</span></label>
-      </div>
-      <div class="user__payment-item">
-        <input type="radio" name="payment" id="payment-3">
-        <label class="user__payment-label" for="payment-3"><span class="user__payment-svg"><img width="66" height="18" src="/images/user/payments/paypal.png" alt="PayPal" loading="lazy"></span><span class="user__payment-title">PayPal</span></label>
-      </div>
-    </div>
-  </div>
-  <div class="user__order-btns">
-    <button type="submit" name="submit_auto" class="user__order-btn p-btn p-btn_orange">Create order auto</button>
-    <button type="submit" name="submit_manual" class="user__order-btn p-btn p-btn_white">Create order manual
-    </button>
-  </div>
+  <div id="payment"></div>
 </form>

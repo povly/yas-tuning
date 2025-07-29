@@ -41,6 +41,17 @@
       img {
         object-position: bottom;
       }
+
+      &::after {
+        content: '';
+        background: linear-gradient(180deg, rgba(27, 27, 28, 0) 2.119%, rgba(0, 0, 0, 0) 17.153%, rgba(0, 0, 0, 0) 73.591%, rgb(27, 27, 28) 93.15%);
+        width: 100%;
+        display: block;
+        height: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
     }
 
     &-light {

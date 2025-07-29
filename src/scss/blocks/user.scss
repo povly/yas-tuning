@@ -1,10 +1,36 @@
+.user__header-overlay {
+  background: rgba(21, 20, 25, 0.5);
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.vc-reset {
+  color: var(--f5f5f5);
+  background: var(--f56e0f);
+  border-color: var(--f56e0f);
+  font-weight: 500;
+  border-radius: 75px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  display: block;
+}
+
 .user {
   padding-top: 40px;
   background: #151419;
   min-height: 100vh;
   padding-bottom: 100px;
   position: relative;
-  overflow: hidden;
   z-index: 4;
 
   .header {
@@ -60,7 +86,7 @@
     left: 50%;
     transform: translateX(-50%);
     display: none;
-    z-index: 5;
+    z-index: 6;
   }
 
   &__search-arrow {
@@ -303,6 +329,17 @@
           display: none;
         }
       }
+
+      &_download {
+        margin-bottom: 20px;
+        margin-top: 30px;
+
+        .user {
+          &__date {
+            margin: 0;
+          }
+        }
+      }
     }
 
     &-top {
@@ -339,8 +376,7 @@
       overflow-x: auto;
       scrollbar-width: thin;
       scrollbar-color: var(--999999) #302e2e;
-      padding-right: var(--padding);
-      margin-right: calc(var(--padding) * -1);
+      border-radius: 24px;
 
       &::-webkit-scrollbar {
         width: 12px;
@@ -575,7 +611,7 @@
 
       td {
         padding: 16px;
-        
+
         &:nth-child(2){
           text-align: center;
         }
@@ -1712,6 +1748,39 @@
             border-radius: 6px;
             padding: 6px;
             text-align: center;
+          }
+        }
+      }
+    }
+
+    &_input {
+      width: 100%;
+
+      .user {
+        &-select {
+          &__current {
+            padding: 13.5px 12px;
+            background: var(--f5f5f5);
+            justify-content: space-between;
+            color: #151419;
+          }
+
+          &__abs {
+            background: var(--f5f5f5);
+            color: #1b1b1c;
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
+            min-width: auto;
+          }
+
+          &__option {
+            padding: 1px 10px;
+
+            &.selected {
+              background: var(--f56e0f);
+              color: var(--f5f5f5);
+            }
           }
         }
       }

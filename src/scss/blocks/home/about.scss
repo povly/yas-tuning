@@ -28,6 +28,8 @@
     gap: 20px;
     opacity: 0;
     transition: 1s;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     &:nth-child(1), &:nth-child(3){
       transform: translateX(-100%);

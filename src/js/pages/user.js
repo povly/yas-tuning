@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const searchBtn = document.querySelector('.user__icon-btn--search');
   const searchContainer = document.querySelector('.user__search-container');
+  const headerOverlay = document.querySelector('.user__header-overlay');
   const notificationsBtn = document.querySelector(
     '.user__icon-btn--notifications'
   );
@@ -11,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Поиск
   searchBtn.addEventListener('click', () => {
     searchBtn.classList.toggle('active');
+
+    headerOverlay.classList.toggle('active');
   });
 
   if (notificationsBtn){
@@ -30,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!isClickInsideSearch) {
       searchBtn.classList.remove('active');
+      headerOverlay.classList.remove('active');
     }
 
     if (!isClickInsideNotifications && notificationsBtn) {
@@ -82,6 +86,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const _calendar = dateElement.querySelector('.user__date-calendar');
 
     const calendar = new Calendar(_calendar, {
+      layouts: {
+        multiple: `
+          <div class="vc-controls" data-vc="controls" role="toolbar">
+            <#ArrowPrev [month] />
+            <#ArrowNext [month] />
+          </div>
+          <div class="vc-grid" data-vc="grid">
+            <#Multiple>
+              <div class="vc-column" data-vc="column" role="region">
+                <div class="vc-header" data-vc="header">
+                  <div class="vc-header__content" data-vc-header="content">
+                    <#Month />
+                    <#Year />
+                  </div>
+                </div>
+                <div class="vc-wrapper" data-vc="wrapper">
+                  <#WeekNumbers />
+                  <div class="vc-content" data-vc="content">
+                    <#Week />
+                    <#Dates />
+                  </div>
+                </div>
+              </div>
+            <#/Multiple>
+            <#DateRangeTooltip />
+          </div>
+          <#ControlTime />
+          <button type="button" class="vc-reset">Reset</button>
+        `,
+      },
       type: 'multiple',
       locale: {
         months: {
@@ -93,8 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
           long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         }
       },
-      displayMonthsCount: 2,
-      monthsToSwitch: 2,
       selectionDatesMode: 'multiple-ranged',
       onClickDate(self, event) {
         const selectedDates = self.context.selectedDates;
@@ -116,6 +148,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     calendar.init();
     dateElement.dataset.calendarInitialized = 'true';
+
+    // Используем делегирование событий для кнопки reset
+    _calendar.addEventListener('click', function (event) {
+      if (event.target.classList.contains('vc-reset')) {
+        calendar.context.selectedDates = [];
+        calendar.update();
+        title.textContent = 'Select dates';
+        input.value = '';
+      }
+    });
   }
 
   const selects = document.querySelectorAll('.user-select');
@@ -135,6 +177,12 @@ document.addEventListener('DOMContentLoaded', () => {
           title.textContent = option.textContent;
           input.value = option.dataset.value;
           select.classList.remove('active');
+
+          options.forEach((opt) => {
+            opt.classList.remove('selected');
+          });
+
+          option.classList.add('selected');
         });
       });
     })

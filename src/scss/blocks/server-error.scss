@@ -17,7 +17,7 @@
     font-size: var(--error-title-size, 320px);
     line-height: 100%;
     text-transform: uppercase;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(4px);
     background: linear-gradient(139.74deg, rgb(217 217 217 / 50%) 0%, rgb(115 115 115 / 0%) 120.308%);
     background-clip: text;
     -webkit-text-stroke: 4px transparent;
@@ -32,7 +32,7 @@
     border: 1px solid rgb(255 255 255 / 10%);
     border-radius: 20px;
     padding: 40px 90px;
-    backdrop-filter: blur(5.400000095367432px);
+    backdrop-filter: blur(3.400000095367432px);
     background: rgb(255 255 255 / 8%);
     max-width: var(--error-item-width, 639px);
     width: 100%;

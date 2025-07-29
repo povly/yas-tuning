@@ -131,7 +131,7 @@ function loadCarData($type, $params) {
 function renderBreadcrumbs($brand_name = '', $model = '', $year = '', $motor = '', $brand_id = 0, $brand_img = '') {
     echo '<ul class="h-car__breadcrumbs active">';
     echo '<li class="h-car__breadcrumb h-car__breadcrumb_wagens">';
-    echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"back_to_brands"}\'>Waganes</button>';
+    echo '<button type="button" class="h-car__breadcrumb-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"back_to_brands"}\'>Cars</button>';
     echo '</li>';
 
     if ($brand_name) {

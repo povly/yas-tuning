@@ -26,7 +26,7 @@
               .user__recharge-title Choose from the proposed tariffs
               .user__recharge-radios
                 label.user__recharge-radio
-                  input(type="radio" name="pod" value="premium-1" required hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML")
+                  input(type="radio" name="pod" onclick="var amount = this.closest('.user__recharge').querySelector('input[name=amount]'); if (amount){amount.value=''}" value="premium-1" required hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML")
                   .user__recharge-radio-item
                     .user__recharge-radio-title Premium
                     .user__recharge-radio-desc (10% DISCOUNT)
@@ -38,7 +38,7 @@
                         </svg>
                       .user__recharge-price-text 1000 $ = 1100 YT
                 label.user__recharge-radio
-                  input(type="radio" name="pod" value="premium-2" required hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML")
+                  input(type="radio" name="pod" onclick="var amount = this.closest('.user__recharge').querySelector('input[name=amount]'); if (amount){amount.value=''}" value="premium-2" required hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML")
                   .user__recharge-radio-item
                     .user__recharge-radio-title Premium
                     .user__recharge-radio-desc (20% DISCOUNT)
@@ -50,7 +50,7 @@
                         </svg>
                       .user__recharge-price-text 1000 $ = 1100 YT
                 label.user__recharge-radio
-                  input(type="radio" name="pod" value="premium-3" required hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML" )
+                  input(type="radio" name="pod" onclick="var amount = this.closest('.user__recharge').querySelector('input[name=amount]'); if (amount){amount.value=''}" value="premium-3" required hx-get="/php/recharge-payment.php" hx-target="#user__payment" hx-swap="outerHTML" )
                   .user__recharge-radio-item
                     .user__recharge-radio-title Premium
                     .user__recharge-radio-desc (30% DISCOUNT)
@@ -66,7 +66,7 @@
               .user__recharge-amount
                 .user__recharge-amount-title In the field below enter the amount to be replenished
                 .user__input-el.user__recharge-amount-input
-                  input(type="text" name="amount")
+                  input(type="text" name="amount" oninput="var radio = this.closest('.user__recharge').querySelector('input[name=pod]:checked'); if (radio){radio.checked=false}")
                 .user__recharge-price
                   .user__recharge-price-svg(hx-get="/php/recharge-price-sec.php" hx-target="closest .user__recharge-price" hx-swap="outerHTML")
                     <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
