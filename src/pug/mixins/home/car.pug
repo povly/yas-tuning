@@ -1,7 +1,7 @@
 mixin hCarItem(img, title, classes)
   .h-car__item(class=classes)&attributes(attributes)
-    button(
-      type="button"
+    a(
+      href="#choose-your-car"
       class="h-car__item-link"
       hx-post="/php/car-handler.php"
       hx-target="#car-section"
