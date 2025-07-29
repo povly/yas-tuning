@@ -4,7 +4,9 @@
 
   &.p-animate_active {
     .footer {
-      &__logo, &__nav, &__center {
+      &__logo,
+      &__nav,
+      &__center {
         opacity: 1;
         transform: none;
       }
@@ -85,7 +87,7 @@
   }
 }
 
-@media screen and (max-width: 1340px){
+@media screen and (width <= 1340px) {
   .footer {
     padding: 60px 0;
 
@@ -111,7 +113,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .footer {
     padding: 50px 0;
 

@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const isClickInsideSearch =
       searchBtn.contains(e.target) || searchContainer.contains(e.target);
     const isClickInsideNotifications =
-      notificationsBtn && notificationsBtn.contains(e.target) ||
-      notificationsPopup && notificationsPopup.contains(e.target);
+      (notificationsBtn && notificationsBtn.contains(e.target)) ||
+      (notificationsPopup && notificationsPopup.contains(e.target));
 
     if (!isClickInsideSearch) {
       searchBtn.classList.remove('active');
@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
   document.body.addEventListener('htmx:confirm', function (evt) {
     evt.preventDefault();
 
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Проверка кастомных селектов
       const customSelects = evt.detail.target.querySelectorAll('.user-select');
-      customSelects.forEach(select => {
+      customSelects.forEach((select) => {
         const hiddenInput = select.querySelector('.user-select__input');
 
         if (!hiddenInput.value) {
@@ -74,12 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const customMessage = select.dataset.error;
           hiddenInput.setCustomValidity(customMessage);
         } else {
-          hiddenInput.setCustomValidity("");
+          hiddenInput.setCustomValidity('');
         }
 
         hiddenInput.reportValidity();
       });
-
 
       // Если форма невалидна, показываем сообщения об ошибках
       if (isValid) {
@@ -88,12 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnActionYes = modal.querySelector('[data-action="yes"]');
         btnActionYes.addEventListener('click', () => {
           evt.detail.issueRequest();
-        })
+        });
       }
     } else {
       evt.detail.issueRequest();
     }
-
   });
 
   const files = document.querySelectorAll('.user__file');
@@ -163,31 +160,77 @@ document.addEventListener('DOMContentLoaded', () => {
       type: 'multiple',
       locale: {
         months: {
-          short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          long: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+          short: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+          ],
+          long: [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+          ],
         },
         weekdays: {
           short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-          long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        }
+          long: [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+          ],
+        },
       },
       selectionDatesMode: 'multiple-ranged',
       onClickDate(self, event) {
         const selectedDates = self.context.selectedDates;
         if (selectedDates.length !== 2) return;
 
-        const formatOptions = { day: 'numeric', month: 'numeric', year: 'numeric' };
-        const dateStr1 = new Date(selectedDates[0]).toLocaleDateString('ru-RU', formatOptions);
-        const dateStr2 = new Date(selectedDates[1]).toLocaleDateString('ru-RU', formatOptions);
+        const formatOptions = {
+          day: 'numeric',
+          month: 'numeric',
+          year: 'numeric',
+        };
+        const dateStr1 = new Date(selectedDates[0]).toLocaleDateString(
+          'ru-RU',
+          formatOptions
+        );
+        const dateStr2 = new Date(selectedDates[1]).toLocaleDateString(
+          'ru-RU',
+          formatOptions
+        );
 
         title.textContent = `${dateStr1} - ${dateStr2}`;
         input.value = `${dateStr1} - ${dateStr2}`;
 
         dateElement.classList.remove('active');
-        dateElement.dispatchEvent(new CustomEvent('userDateSelected', {
-          detail: { value: input.value }
-        }));
-      }
+        dateElement.dispatchEvent(
+          new CustomEvent('userDateSelected', {
+            detail: { value: input.value },
+          })
+        );
+      },
     });
 
     calendar.init();
@@ -220,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
         option.addEventListener('click', () => {
           title.textContent = option.textContent;
           input.value = option.dataset.value;
-          input.setCustomValidity("");
+          input.setCustomValidity('');
           select.classList.remove('active');
 
           options.forEach((opt) => {
@@ -230,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
           option.classList.add('selected');
         });
       });
-    })
+    });
   }
 
   const tabs = document.querySelectorAll('.user__tabs');
@@ -245,14 +288,16 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           btn.classList.add('active');
 
-          btn.dispatchEvent(new CustomEvent('userTabSelected', {
-            detail: {
-              tab: btn
-            }
-          }));
+          btn.dispatchEvent(
+            new CustomEvent('userTabSelected', {
+              detail: {
+                tab: btn,
+              },
+            })
+          );
         });
       });
-    })
+    });
   }
 
   function userUpdateMenu() {

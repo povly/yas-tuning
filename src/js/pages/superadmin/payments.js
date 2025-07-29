@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set Text
     if (tooltip.body) {
       const titleLines = tooltip.title || [];
-      const bodyLines = tooltip.body.map(b => b.lines);
+      const bodyLines = tooltip.body.map((b) => b.lines);
 
       const tableHead = document.createElement('thead');
 
-      titleLines.forEach(title => {
+      titleLines.forEach((title) => {
         const tr = document.createElement('tr');
         tr.style.borderWidth = 0;
 
@@ -101,33 +101,49 @@ document.addEventListener('DOMContentLoaded', () => {
     // Display, position, and set styles for font
     tooltipEl.style.opacity = 1;
     tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-    tooltipEl.style.top =tooltip.caretY + 'px';
+    tooltipEl.style.top = tooltip.caretY + 'px';
     tooltipEl.style.font = tooltip.options.bodyFont.string;
-    tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
+    tooltipEl.style.padding =
+      tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
   };
 
-  function updateChartJS(){
+  function updateChartJS() {
     const ctx = document.querySelector('#user__payments-canvas');
-    if (ctx){
+    if (ctx) {
       const chart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          datasets: [{
-            label: '',
-            data: JSON.parse(ctx.dataset.sets),
-            borderColor: '#F5F5F5',
-            showLine: true,
-            pointRadius: 5,
-            pointHoverRadius: 5,
-            pointStyle: 'circle',
-            backgroundColor: '#F5F5F5'
-          }]
+          labels: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+          ],
+          datasets: [
+            {
+              label: '',
+              data: JSON.parse(ctx.dataset.sets),
+              borderColor: '#F5F5F5',
+              showLine: true,
+              pointRadius: 5,
+              pointHoverRadius: 5,
+              pointStyle: 'circle',
+              backgroundColor: '#F5F5F5',
+            },
+          ],
         },
         elements: {
           line: {
-            borderWidth: 1
-          }
+            borderWidth: 1,
+          },
         },
         options: {
           responsive: true,
@@ -143,22 +159,22 @@ document.addEventListener('DOMContentLoaded', () => {
               ticks: {
                 color: '#F5F5F5',
                 font: {
-                  size: 14
+                  size: 14,
                 },
-              }
+              },
             },
           },
           plugins: {
             legend: {
-              display: false
+              display: false,
             },
             tooltip: {
               enabled: false,
               position: 'nearest',
-              external: externalTooltipHandler
-            }
-          }
-        }
+              external: externalTooltipHandler,
+            },
+          },
+        },
       });
 
       chart.resize();
@@ -172,6 +188,4 @@ document.addEventListener('DOMContentLoaded', () => {
   updateChartJS();
 
   window.updateChartJS = updateChartJS;
-
-
 });

@@ -1,4 +1,4 @@
-@media screen and (max-width: 1340px) {
+@media screen and (width <= 1340px) {
   .user {
     &__time {
       gap: 15px;
@@ -27,10 +27,9 @@
       }
     }
   }
-
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (width <= 1200px) {
   .user {
     padding-top: 27.5px;
     padding-bottom: 60px;
@@ -139,7 +138,6 @@
       &-menu {
         margin-bottom: 30px;
       }
-
     }
 
     &__date {
@@ -177,7 +175,7 @@
                 svg {
                   display: none;
 
-                  &:nth-child(2){
+                  &:nth-child(2) {
                     display: flex;
                   }
                 }
@@ -240,14 +238,14 @@
       }
 
       &_companies {
-        :is(th, td){
+        :is(th, td) {
           text-align: left;
           padding-left: 22px;
           padding-right: 22px;
         }
 
         td {
-          &:nth-child(2){
+          &:nth-child(2) {
             text-align: left;
           }
         }
@@ -280,11 +278,11 @@
 
         .user {
           &__input {
-            &:nth-child(4){
+            &:nth-child(4) {
               order: 1;
             }
 
-            &:nth-child(6){
+            &:nth-child(6) {
               order: 2;
             }
           }
@@ -385,7 +383,8 @@
           grid-template-columns: 138px 1fr;
         }
 
-        &__label, &__value {
+        &__label,
+        &__value {
           padding: 16px 20px;
         }
 
@@ -411,7 +410,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .user {
     padding-top: 14px;
 
@@ -436,7 +435,8 @@
       border-radius: 10px;
       margin-top: 0;
 
-      &-left, &-right {
+      &-left,
+      &-right {
         display: none;
         width: 100%;
 
@@ -595,7 +595,8 @@
       }
 
       &-radio {
-        &-title, &-desc {
+        &-title,
+        &-desc {
           display: inline-block;
           font-size: 16px;
           line-height: 125%;
@@ -747,7 +748,8 @@
         }
       }
 
-      &-main, &-info {
+      &-main,
+      &-info {
         gap: 10px;
       }
 
@@ -810,7 +812,8 @@
       }
 
       &-el {
-        input, textarea {
+        input,
+        textarea {
           font-size: 12px;
           line-height: 117%;
         }
@@ -943,23 +946,23 @@
     &__table {
       &_companies {
         th {
-          &:nth-child(1){
+          &:nth-child(1) {
             width: 225px;
           }
 
-          &:nth-child(2){
+          &:nth-child(2) {
             width: 187px;
           }
 
-          &:nth-child(3){
+          &:nth-child(3) {
             width: 259px;
           }
 
-          &:nth-child(4){
+          &:nth-child(4) {
             width: 117px;
           }
 
-          &:nth-child(5){
+          &:nth-child(5) {
             width: 109px;
           }
         }
@@ -1077,13 +1080,14 @@
       grid-template-columns: 118px 1fr;
     }
 
-    &__label, &__value {
+    &__label,
+    &__value {
       padding: 10px 16px;
     }
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (width <= 400px) {
   .user {
     &__notifications {
       &-popup {
@@ -1091,13 +1095,13 @@
       }
 
       &-arrow {
-          right: 109px;
+        right: 109px;
       }
     }
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (width <= 360px) {
   .user {
     .header {
       &__logo {

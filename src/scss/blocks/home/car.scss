@@ -1,7 +1,8 @@
 .h-car {
   &.p-animate_active {
     .h-car {
-      &__title, &__items {
+      &__title,
+      &__items {
         opacity: 1;
       }
 
@@ -39,7 +40,7 @@
     }
   }
 
-  [data-car-brand-name="Alfa Romeo"] {
+  [data-car-brand-name='Alfa Romeo'] {
     --h-car-item-img-width: 58px;
   }
 
@@ -329,7 +330,6 @@
     &:nth-child(72) {
       --h-car-item-img-width: 45px;
     }
-
   }
 
   &__btn {
@@ -451,7 +451,7 @@
   &__data {
     display: none;
     margin-top: 30px;
-    
+
     &.active {
       display: block;
       transform: translateY(10px);
@@ -524,7 +524,7 @@
   }
 }
 
-@media screen and (max-width: 1324px) {
+@media screen and (width <= 1324px) {
   .h-car {
     &__title {
       text-align: left;
@@ -544,7 +544,7 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (width <= 1200px) {
   .h-car {
     &__items {
       grid-template-columns: repeat(4, 1fr);
@@ -557,7 +557,7 @@
     &__step {
       min-height: auto;
 
-      &:not(:last-child){
+      &:not(:last-child) {
         display: none;
       }
     }
@@ -575,24 +575,24 @@
       font-size: 20px;
       line-height: 120%;
 
-      :is(th, td){
+      :is(th, td) {
         padding: 18px 20px;
       }
 
       th {
-        &:nth-child(1){
+        &:nth-child(1) {
           width: 111px;
         }
 
-        &:nth-child(2){
+        &:nth-child(2) {
           width: 204px;
         }
 
-        &:nth-child(3){
+        &:nth-child(3) {
           width: 204px;
         }
 
-        &:nth-child(4){
+        &:nth-child(4) {
           width: 204px;
         }
       }
@@ -600,7 +600,7 @@
   }
 }
 
-@media screen and (max-width: 768px)  {
+@media screen and (width <= 768px) {
   .h-car {
     padding-top: 100px;
 
@@ -628,7 +628,6 @@
 
     &__item {
       width: calc(100% / 3 - 8px);
-
 
       &-link {
         flex-direction: column;
@@ -726,12 +725,12 @@
       border-radius: 10px;
       width: max-content;
 
-      :is(th, td){
+      :is(th, td) {
         padding: 20px;
       }
 
       th {
-        &:nth-child(n){
+        &:nth-child(n) {
           width: auto;
         }
       }
@@ -739,7 +738,7 @@
   }
 }
 
-@media screen and (max-width: 370px) {
+@media screen and (width <= 370px) {
   .h-car {
     &__item {
       &-title {

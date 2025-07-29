@@ -19,6 +19,8 @@ export default {
     'declaration-block-no-redundant-longhand-properties': null,
     'scss/operator-no-newline-after': null,
     'no-empty-source': null,
+    'custom-property-pattern': null,
+    'keyframes-name-pattern': null,
   },
   ignoreFiles: ['node_modules/**', 'build/**', 'dist/**'],
 };

@@ -125,7 +125,7 @@ function getSCSSEntries() {
           const entryKey = `css/blocks/${baseEntry}${name}`;
           const entryPath = resolve(process.cwd(), `${dir}/${item.name}`);
 
-                    entries[entryKey] = entryPath;
+          entries[entryKey] = entryPath;
         }
       });
     }
@@ -297,11 +297,12 @@ export default defineConfig(({ command, mode }) => {
           const scssEntries = getSCSSEntries();
 
           // Проверяем что все CSS блоки создались
-          Object.keys(scssEntries).forEach(entryKey => {
+          Object.keys(scssEntries).forEach((entryKey) => {
             if (entryKey.includes('blocks/')) {
               const expectedCssName = `${entryKey}.css`;
-              const hasCorrespondingCss = Object.keys(bundle).some(fileName =>
-                fileName === expectedCssName || fileName.includes(entryKey)
+              const hasCorrespondingCss = Object.keys(bundle).some(
+                (fileName) =>
+                  fileName === expectedCssName || fileName.includes(entryKey)
               );
 
               if (!hasCorrespondingCss) {
@@ -373,15 +374,20 @@ export default defineConfig(({ command, mode }) => {
             if (assetInfo.name?.endsWith('.css')) {
               const scssEntries = getSCSSEntries();
 
-                            // Найти подходящий entry для этого CSS
+              // Найти подходящий entry для этого CSS
               if (assetInfo.originalFileNames) {
                 for (const originalName of assetInfo.originalFileNames) {
                   const normalizedOrig = originalName.replace(/\\/g, '/');
 
-                  for (const [entryKey, entryPath] of Object.entries(scssEntries)) {
+                  for (const [entryKey, entryPath] of Object.entries(
+                    scssEntries
+                  )) {
                     const normalizedEntry = entryPath.replace(/\\/g, '/');
 
-                    if (normalizedOrig.includes(normalizedEntry) || normalizedEntry.includes(normalizedOrig)) {
+                    if (
+                      normalizedOrig.includes(normalizedEntry) ||
+                      normalizedEntry.includes(normalizedOrig)
+                    ) {
                       return `${entryKey}.css`;
                     }
                   }

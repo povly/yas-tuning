@@ -408,4 +408,5 @@ For specific issues, check the detailed guides:
 - [Images troubleshooting](IMAGES.md#troubleshooting)
 - [Fonts troubleshooting](FONTS.md#troubleshooting)
 - [Linting issues](LINTING.md#troubleshooting)
+
 # yas-tuning

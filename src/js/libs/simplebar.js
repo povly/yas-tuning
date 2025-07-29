@@ -1,2 +1,2 @@
-import SimpleBar from "simplebar";
+import SimpleBar from 'simplebar';
 window.SimpleBar = SimpleBar;
