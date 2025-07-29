@@ -58,36 +58,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const target = evt.detail.target;
     const modalName = target.dataset.confirmName;
-    const modal = document.querySelector(`.modal_${modalName}`);
+    if (target.dataset.confirmName) {
+      const modal = document.querySelector(`.modal_${modalName}`);
 
-    let isValid = true;
+      let isValid = true;
 
-    // Проверка кастомных селектов
-    const customSelects = evt.detail.target.querySelectorAll('.user-select');
-    customSelects.forEach(select => {
-      const hiddenInput = select.querySelector('.user-select__input');
+      // Проверка кастомных селектов
+      const customSelects = evt.detail.target.querySelectorAll('.user-select');
+      customSelects.forEach(select => {
+        const hiddenInput = select.querySelector('.user-select__input');
 
-      if (!hiddenInput.value) {
-        isValid = false;
-        // Устанавливаем кастомное сообщение для скрытого поля
-        const customMessage = select.dataset.error;
-        hiddenInput.setCustomValidity(customMessage);
-      } else {
-        hiddenInput.setCustomValidity("");
+        if (!hiddenInput.value) {
+          isValid = false;
+          // Устанавливаем кастомное сообщение для скрытого поля
+          const customMessage = select.dataset.error;
+          hiddenInput.setCustomValidity(customMessage);
+        } else {
+          hiddenInput.setCustomValidity("");
+        }
+
+        hiddenInput.reportValidity();
+      });
+
+
+      // Если форма невалидна, показываем сообщения об ошибках
+      if (isValid) {
+        window.Modal.showModal(modal);
+
+        const btnActionYes = modal.querySelector('[data-action="yes"]');
+        btnActionYes.addEventListener('click', () => {
+          evt.detail.issueRequest();
+        })
       }
-
-      hiddenInput.reportValidity();
-    });
-
-
-    // Если форма невалидна, показываем сообщения об ошибках
-    if (isValid) {
-      window.Modal.showModal(modal);
-
-      const btnActionYes = modal.querySelector('[data-action="yes"]');
-      btnActionYes.addEventListener('click', () => {
-        evt.detail.issueRequest();
-      })
+    } else {
+      evt.detail.issueRequest();
     }
 
   });
