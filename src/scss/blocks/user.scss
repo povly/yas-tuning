@@ -1859,6 +1859,13 @@
     overflow: hidden;
     height: 702px;
 
+    --chat-bottom: 80px;
+    --chat-text: 69px;
+
+    &._with-files {
+      --chat-bottom: 148px;
+    }
+
     &-left {
       width: 227px;
     }
@@ -2028,7 +2035,7 @@
       line-height: 129%;
       color: var(--f5f5f5);
       background: #ff8d21;
-      height: 69px;
+      height: var(--chat-text);
       position: relative;
 
       &-title {
@@ -2069,11 +2076,14 @@
 
     &-bottom {
       background: #302e2e;
+      padding: 20px 15px;
+      height: var(--chat-bottom);
+    }
+
+    &-fields {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 20px 15px;
-      height: 80px;
     }
 
     &-file {
@@ -2119,7 +2129,7 @@
     }
 
     &-content {
-      height: calc(100% - 80px - 69px);
+      height: calc(100% - var(--chat-text) - var(--chat-bottom));
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -2180,6 +2190,7 @@
         background: var(--f5f5f5);
         color: #1b1b1c;
 
+        --file-message-preview-bg: #d2d2d2;
         --ticket-status-image-unread: url('/images/user/tickets/unread-b.svg');
         --ticket-status-image-read: url('/images/user/tickets/read-b.svg');
       }

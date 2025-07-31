@@ -57,13 +57,13 @@
     }
 
     &__chat {
+      --chat-text: 87px;
+
       &-message {
         max-width: 369px;
       }
 
       &-text {
-        height: 87px;
-
         &-subtitle {
           max-width: 300px;
         }
@@ -435,6 +435,9 @@
       border-radius: 10px;
       margin-top: 0;
 
+      --chat-text: 104px;
+      --chat-bottom: 80px;
+
       &-left,
       &-right {
         display: none;
@@ -458,7 +461,6 @@
 
       &-text {
         padding: 6px 52px;
-        height: 104px;
 
         &-title {
           font-size: 14px;
