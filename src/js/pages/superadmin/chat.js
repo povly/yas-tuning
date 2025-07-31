@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Повесить .active на текущий
     ticketItem.classList.add('active');
 
+    document.querySelector('#user__chat').classList.remove('_with-files');
+
     ticketItem.dispatchEvent(
       new CustomEvent('selectTicket', {
         detail: {
