@@ -435,19 +435,19 @@ function renderAllBrands($showAll = false)
         $activeClass = $isActive ? ' active' : '';
         echo '<div class="h-car__item' . $activeClass . '" data-car-brand-id="' . $brand['id'] . '" data-car-brand-name="' . htmlspecialchars($brand['name']) . '">';
         // Добавлен href="#choose-your-car"
-        echo '<button type="button" class="h-car__item-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_brand","brand_id":"' . $brand['id'] . '","brand_name":"' . htmlspecialchars($brand['name']) . '","brand_img":"' . htmlspecialchars($brand['img']) . '"}\' href="#choose-your-car">';
+        echo '<a class="h-car__item-link" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"select_brand","brand_id":"' . $brand['id'] . '","brand_name":"' . htmlspecialchars($brand['name']) . '","brand_img":"' . htmlspecialchars($brand['img']) . '"}\' href="#choose-your-car">';
         echo '<div class="h-car__item-img">';
         echo '<img src="' . htmlspecialchars($brand['img']) . '" alt="' . htmlspecialchars($brand['name']) . '" width="58" height="58" loading="lazy">';
         echo '</div>';
         echo '<div class="h-car__item-title">' . htmlspecialchars($brand['name']) . '</div>';
-        echo '</button>';
+        echo '</a>';
         echo '</div>';
     }
     echo '</div>';
     // Показываем кнопку "Show more" только если не все элементы активны
     if (!$showAll) {
         // Добавлен href="#choose-your-car"
-        echo '<button type="button" class="h-car__btn p-btn p-btn_orange p-btn_center active" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"show_more_brands"}\' href="#choose-your-car">Show more</button>';
+        echo '<a class="h-car__btn p-btn p-btn_orange p-btn_center active" hx-post="/php/car-handler.php" hx-target="#car-section" hx-vals=\'{"action":"show_more_brands"}\' href="#choose-your-car">Show more</a>';
     }
 }
 // Функция для рендера начального состояния

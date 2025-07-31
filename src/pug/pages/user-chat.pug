@@ -1,0 +1,285 @@
+extends ../layout/base
+
+//- Include mixins
+include ../mixins/picture
+include ../mixins/video
+include ../mixins/iframe
+
+block variables
+  - var title = 'user chat';
+  - var description = '';
+  - var pageCss = ['index', 'user'];  // Страничные стили /pages/index.scss
+  - var pageJs = ['pages/user', 'pages/superadmin/chat'];
+  - var libsJs = ['swiper'];
+
+
+block content
+  include ../blocks/user/tickets
+
+block footer
+  include ../components/footer/footer
+  include ../components/modal/profile-exit
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('htmx:beforeSwap', function(evt) {
+        if (evt.detail.target.id === 'order-modal-container') {
+          document.body.style.overflow = 'hidden';
+        }
+      });
+
+      function initEventFiles(){
+        const fileInputs = document.querySelectorAll('#user__chat input[type="file"]');
+        fileInputs.forEach(input => {
+          input.addEventListener('change', function() {
+            if (this.files.length > 0) {
+              const form = this.closest('form');
+              showPreview(form, Array.from(this.files));
+            }
+          });
+        });
+      }
+
+      initEventFiles();
+
+      let ws;
+      function initChat() {
+          ws = new WebSocket("ws://localhost:8080");
+          ws.onmessage = receiveChatMessage;
+      }
+      initChat();
+      function sendMessage(form) {
+        if (!ws) { alert('Socket not ready'); return false; }
+        let fileInput = form.querySelector('input[type="file"]');
+        let files = Array.from(fileInput.files);
+        let text = form.message.value.trim();
+
+        // Создаем одно сообщение со всем содержимым
+        if (text || files.length > 0) {
+          createCombinedMessage(form, text, files);
+        }
+
+        form.reset();
+        clearPreview(form);
+        return false;
+      }
+
+      function createCombinedMessage(form, text, files) {
+        let messageContent = '';
+
+        // Добавляем текст, если есть
+        if (text) {
+          messageContent += `<p>${text}</p>`;
+        }
+
+        // Если нет файлов, создаем сообщение сразу
+        if (files.length === 0) {
+          createMessage(messageContent, getCurrentTime(), '_read', '_right');
+          return;
+        }
+
+        // Обрабатываем файлы
+        let imageFiles = files.filter(file => file.type.startsWith('image/'));
+        let otherFiles = files.filter(file => !file.type.startsWith('image/'));
+
+        // Добавляем не-изображения в содержимое
+        otherFiles.forEach(file => {
+          messageContent += `
+            <a href="#!" class="file-message-preview">
+              <div class="file-message-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" rx="20" fill="#999999"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M22 30H18C14.229 30 12.343 30 11.172 28.828C10.001 27.656 10 25.771 10 22V18C10 14.229 10 12.343 11.172 11.172C12.344 10.001 14.239 10 18.03 10C18.636 10 19.121 10 19.53 10.017C19.5167 10.097 19.51 10.1783 19.51 10.261L19.5 13.095C19.5 14.192 19.5 15.162 19.605 15.943C19.719 16.79 19.98 17.637 20.672 18.329C21.362 19.019 22.21 19.281 23.057 19.395C23.838 19.5 24.808 19.5 25.905 19.5H29.957C30 20.034 30 20.69 30 21.563V22C30 25.771 30 27.657 28.828 28.828C27.656 29.999 25.771 30 22 30Z" fill="#F5F5F5"/>
+                <path d="M27.352 15.6166L23.392 12.0536C22.265 11.0386 21.702 10.5306 21.009 10.2656L21 12.9996C21 15.3566 21 16.5356 21.732 17.2676C22.464 17.9996 23.643 17.9996 26 17.9996H29.58C29.218 17.2956 28.568 16.7116 27.352 15.6166Z" fill="#F5F5F5"/>
+                </svg>
+              </div>
+              <div class="file-message-info">
+                <div class="file-message-name">${file.name}</div>
+                <div class="file-message-subtitle">File</div>
+              </div>
+            </a>
+          `;
+        });
+
+        // Если нет изображений, создаем сообщение сразу
+        if (imageFiles.length === 0) {
+          createMessage(messageContent, getCurrentTime(), '_read', '_right');
+          return;
+        }
+
+        // Загружаем изображения и создаем сообщение
+        let loadedImages = 0;
+        let imageContents = [];
+
+        imageFiles.forEach((file, index) => {
+          let reader = new FileReader();
+          reader.onload = function(e) {
+            imageContents[index] = `<div class="message-image"><img src="${e.target.result}" style="max-width: 254px; max-height: 200px;"></div>`;
+            loadedImages++;
+
+            // Когда все изображения загружены, создаем сообщение
+            if (loadedImages === imageFiles.length) {
+              // Добавляем изображения к содержимому
+              imageContents.forEach(imgContent => {
+                messageContent += imgContent;
+              });
+              createMessage(messageContent, getCurrentTime(), '_read', '_right');
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function createMessage(content, time, status = '_unread', className = ''){
+        let template = document.querySelector('#template-chat-message');
+        let clone = template.content.cloneNode(true);
+
+        let message = clone.querySelector('.user__chat-message');
+        let cloneContent = message.querySelector('.user__chat-message-text');
+        let meta = message.querySelector('.user__chat-meta');
+        let metaTime = meta.querySelector('.user__chat-meta-time');
+        let metaStatus = meta.querySelector('.user__chat-meta-status');
+
+        cloneContent.innerHTML = content;
+        message.classList.add(className);
+        metaTime.innerHTML = time;
+        metaStatus.classList.add(status);
+
+
+        // Добавляем сообщение и скроллим вниз
+        let chatMessages = document.getElementById('chat-messages');
+        chatMessages.appendChild(clone);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+      function getCurrentTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+      }
+      function receiveChatMessage(event) {
+          let data = JSON.parse(event.data); // если сервер шлёт JSON
+          createMessage(event.data.message, event.data.time, '_unread', '_left');
+      }
+      function addMessageWithImage(form, file) {
+        let reader = new FileReader();
+
+        reader.onload = function(e) {
+          let img = `<img src="${e.target.result}" style="max-width: 254px; max-height: 200px;">`;
+          createMessage(img, getCurrentTime(), '_read', '_right');
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+      function addMessageWithFile(form, file) {
+        let filePreview = `
+          <a href="#!" class="file-message-preview">
+            <div class="file-message-info">
+              <div class="file-message-name">${file.name}</div>
+              <div class="file-message-subtitle">File</d
+            </div>
+          </a>
+        `;
+
+        createMessage(filePreview, getCurrentTime(), '_read', '_right');
+      }
+
+      function showPreview(form, files) {
+        let previewContainer = form.querySelector('.file-preview-container');
+        if (!previewContainer) {
+          previewContainer = document.createElement('div');
+          previewContainer.className = 'file-preview-container';
+          form.insertBefore(previewContainer, form.querySelector('.user__chat-fields'));
+          document.querySelector('#user__chat').classList.add('_with-files');
+        }
+
+        let previewHtml = '<div class="preview-list">';
+
+        files.forEach((file, index) => {
+          if (file.type.startsWith('image/')) {
+            // Для изображений создаем превью
+            previewHtml += `
+              <div class="preview-item preview-item_img" data-file-index="${index}">
+                <div class="preview-image-wrapper">
+                  <img src="" alt="Preview" class="preview-image" data-file-index="${index}">
+                </div>
+                <div class="preview-info">
+                  <div class="preview-filename">${file.name}</div>
+                </div>
+                <button type="button" class="preview-remove" onclick="removePreviewItem(this, ${index})">
+                  <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.712 1.712C7.73989 1.68411 7.76202 1.65099 7.77711 1.61455C7.79221 1.5781 7.79998 1.53904 7.79998 1.4996C7.79998 1.46015 7.79221 1.42109 7.77711 1.38465C7.76202 1.3482 7.73989 1.31509 7.712 1.2872C7.6841 1.2593 7.65099 1.23718 7.61455 1.22208C7.5781 1.20699 7.53904 1.19922 7.4996 1.19922C7.46015 1.19922 7.42109 1.20699 7.38465 1.22208C7.3482 1.23718 7.31509 1.2593 7.2872 1.2872L4.4996 4.0754L1.712 1.2872C1.68411 1.2593 1.65099 1.23718 1.61455 1.22208C1.5781 1.20699 1.53904 1.19922 1.4996 1.19922C1.46015 1.19922 1.42109 1.20699 1.38465 1.22208C1.3482 1.23718 1.31509 1.2593 1.2872 1.2872C1.2593 1.31509 1.23718 1.3482 1.22208 1.38465C1.20699 1.42109 1.19922 1.46015 1.19922 1.4996C1.19922 1.53904 1.20699 1.5781 1.22208 1.61455C1.23718 1.65099 1.2593 1.68411 1.2872 1.712L4.0754 4.4996L1.2872 7.2872C1.23087 7.34353 1.19922 7.41993 1.19922 7.4996C1.19922 7.57926 1.23087 7.65567 1.2872 7.712C1.34353 7.76833 1.41993 7.79998 1.4996 7.79998C1.57926 7.79998 1.65567 7.76833 1.712 7.712L4.4996 4.9238L7.2872 7.712C7.34353 7.76833 7.41993 7.79998 7.4996 7.79998C7.57926 7.79998 7.65567 7.76833 7.712 7.712C7.76833 7.65567 7.79998 7.57926 7.79998 7.4996C7.79998 7.41993 7.76833 7.34353 7.712 7.2872L4.9238 4.4996L7.712 1.712Z" fill="#1B1B1C"/>
+                  </svg>
+                </button>
+              </div>
+            `;
+          } else {
+            // Для файлов создаем превью с иконкой
+            previewHtml += `
+              <div class="preview-item preview-item_file" data-file-index="${index}">
+                <div class="preview-info">
+                  <div class="preview-filename">${file.name}</div>
+                  <div class="preview-subtitle">File</div>
+                </div>
+                <button type="button" class="preview-remove" onclick="removePreviewItem(this, ${index})">
+                  <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.712 1.712C7.73989 1.68411 7.76202 1.65099 7.77711 1.61455C7.79221 1.5781 7.79998 1.53904 7.79998 1.4996C7.79998 1.46015 7.79221 1.42109 7.77711 1.38465C7.76202 1.3482 7.73989 1.31509 7.712 1.2872C7.6841 1.2593 7.65099 1.23718 7.61455 1.22208C7.5781 1.20699 7.53904 1.19922 7.4996 1.19922C7.46015 1.19922 7.42109 1.20699 7.38465 1.22208C7.3482 1.23718 7.31509 1.2593 7.2872 1.2872L4.4996 4.0754L1.712 1.2872C1.68411 1.2593 1.65099 1.23718 1.61455 1.22208C1.5781 1.20699 1.53904 1.19922 1.4996 1.19922C1.46015 1.19922 1.42109 1.20699 1.38465 1.22208C1.3482 1.23718 1.31509 1.2593 1.2872 1.2872C1.2593 1.31509 1.23718 1.3482 1.22208 1.38465C1.20699 1.42109 1.19922 1.46015 1.19922 1.4996C1.19922 1.53904 1.20699 1.5781 1.22208 1.61455C1.23718 1.65099 1.2593 1.68411 1.2872 1.712L4.0754 4.4996L1.2872 7.2872C1.23087 7.34353 1.19922 7.41993 1.19922 7.4996C1.19922 7.57926 1.23087 7.65567 1.2872 7.712C1.34353 7.76833 1.41993 7.79998 1.4996 7.79998C1.57926 7.79998 1.65567 7.76833 1.712 7.712L4.4996 4.9238L7.2872 7.712C7.34353 7.76833 7.41993 7.79998 7.4996 7.79998C7.57926 7.79998 7.65567 7.76833 7.712 7.712C7.76833 7.65567 7.79998 7.57926 7.79998 7.4996C7.79998 7.41993 7.76833 7.34353 7.712 7.2872L4.9238 4.4996L7.712 1.712Z" fill="#1B1B1C"/>
+                  </svg>
+                </button>
+              </div>
+            `;
+          }
+        });
+
+        previewHtml += '</div>';
+        previewContainer.innerHTML = previewHtml;
+
+        // Загружаем изображения для превью
+        files.forEach((file, index) => {
+          if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              const img = previewContainer.querySelector(`.preview-image[data-file-index="${index}"]`);
+              if (img) {
+                img.src = e.target.result;
+              }
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+
+      function removePreviewItem(button, index) {
+        const previewItem = button.closest('.preview-item');
+        const form = button.closest('form');
+        const fileInput = form.querySelector('input[type="file"]');
+
+        previewItem.remove();
+
+        // Проверяем, остались ли еще превью
+        const remainingItems = form.querySelectorAll('.preview-item');
+        if (remainingItems.length === 0) {
+          clearPreview(form);
+        }
+      }
+
+      function clearPreview(form) {
+        const previewContainer = form.querySelector('.file-preview-container');
+        if (previewContainer) {
+          previewContainer.remove();
+          document.querySelector('#user__chat').classList.remove('_with-files');
+        }
+      }
+
+      window.sendMessage = sendMessage;
+      window.removePreviewItem = removePreviewItem;
+      window.createMessage = createMessage;
+      window.getCurrentTime = getCurrentTime;
+      window.receiveChatMessage = receiveChatMessage;
+      window.addMessageWithImage = addMessageWithImage;
+      window.addMessageWithImage = addMessageWithImage;
+      window.showPreview = showPreview;
+      window.removePreviewItem = removePreviewItem;
+      window.clearPreview = clearPreview;
+      window.initEventFiles = initEventFiles;
+    });
