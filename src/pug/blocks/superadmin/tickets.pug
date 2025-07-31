@@ -40,11 +40,14 @@
                 .user__chat-tickets-item.unread(hx-get="/php/superadmin/chat-ticket-view-2.php?ticket_id=123" hx-trigger="selectTicket" hx-target=".user__chat-right-content" hx-swap="innerHTML")
                   .user__chat-tickets-text #28012024-3
                   .user__chat-tickets-count 2
-          include tickets-chat.html
+          .user__chat-right
+            .user__chat-btn.p-btn.p-btn_center.p-btn_orange Please select a ticket
+            .user__chat-right-content
+          //- include tickets-chat.html
 #order-modal-container
 template#template-chat-message
   .user__chat-message
     .user__chat-message-text
     .user__chat-meta
       .user__chat-meta-time
-      .user__chat-meta-status 
+      .user__chat-meta-status

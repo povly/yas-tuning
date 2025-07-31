@@ -67,25 +67,117 @@ header('Content-Type: text/html; charset=utf-8');
         <div class="user__input">
           <div class="user__input-label">Manufactured</div>
           <div class="user__input-el">
-            <input type="text" name="manufactured" value="" required="">
+            <div class="user-select user-select_input">
+              <input class="user-select__input" type="hidden">
+              <div class="user-select__current">
+                <div class="user-select__current-title">Arbos</div>
+                <div class="user-select__current-svg"><svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.2488 6.5946C16.0479 6.39374 15.7754 6.2809 15.4913 6.2809C15.2072 6.2809 14.9347 6.39374 14.7338 6.5946L9.43023 11.8982L4.12666 6.5946C3.92458 6.39943 3.65394 6.29144 3.37301 6.29388C3.09209 6.29632 2.82336 6.409 2.62471 6.60765C2.42606 6.80631 2.31338 7.07503 2.31094 7.35596C2.30849 7.63688 2.41649 7.90753 2.61166 8.1096L8.67273 14.1707C8.87365 14.3715 9.14612 14.4844 9.43023 14.4844C9.71433 14.4844 9.98681 14.3715 10.1877 14.1707L16.2488 8.1096C16.4497 7.90868 16.5625 7.63621 16.5625 7.3521C16.5625 7.068 16.4497 6.79553 16.2488 6.5946Z" fill="#1B1B1C"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="user-select__abs">
+                <div class="user-select__option selected" data-value="1">Arbos</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Production machines/Construction</div>
+                <div class="user-select__option" data-value="2">Production machines/Construction</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Model</div>
           <div class="user__input-el">
-            <input type="text" name="vehicle-model" value="" required="">
+            <div class="user-select user-select_input">
+              <input class="user-select__input" type="hidden">
+              <div class="user-select__current">
+                <div class="user-select__current-title">Tractors Series 2xxx-7xxx</div>
+                <div class="user-select__current-svg"><svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.2488 6.5946C16.0479 6.39374 15.7754 6.2809 15.4913 6.2809C15.2072 6.2809 14.9347 6.39374 14.7338 6.5946L9.43023 11.8982L4.12666 6.5946C3.92458 6.39943 3.65394 6.29144 3.37301 6.29388C3.09209 6.29632 2.82336 6.409 2.62471 6.60765C2.42606 6.80631 2.31338 7.07503 2.31094 7.35596C2.30849 7.63688 2.41649 7.90753 2.61166 8.1096L8.67273 14.1707C8.87365 14.3715 9.14612 14.4844 9.43023 14.4844C9.71433 14.4844 9.98681 14.3715 10.1877 14.1707L16.2488 8.1096C16.4497 7.90868 16.5625 7.63621 16.5625 7.3521C16.5625 7.068 16.4497 6.79553 16.2488 6.5946Z" fill="#1B1B1C"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="user-select__abs">
+                <div class="user-select__option selected" data-value="1">Tractors Series 2xxx-7xxx</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Production machines/Construction</div>
+                <div class="user-select__option" data-value="2">Production machines/Construction</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Engine</div>
           <div class="user__input-el">
-            <input type="text" name="engine" value="" required="">
+            <div class="user-select user-select_input">
+              <input class="user-select__input" type="hidden">
+              <div class="user-select__current">
+                <div class="user-select__current-title">3.4L</div>
+                <div class="user-select__current-svg"><svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.2488 6.5946C16.0479 6.39374 15.7754 6.2809 15.4913 6.2809C15.2072 6.2809 14.9347 6.39374 14.7338 6.5946L9.43023 11.8982L4.12666 6.5946C3.92458 6.39943 3.65394 6.29144 3.37301 6.29388C3.09209 6.29632 2.82336 6.409 2.62471 6.60765C2.42606 6.80631 2.31338 7.07503 2.31094 7.35596C2.30849 7.63688 2.41649 7.90753 2.61166 8.1096L8.67273 14.1707C8.87365 14.3715 9.14612 14.4844 9.43023 14.4844C9.71433 14.4844 9.98681 14.3715 10.1877 14.1707L16.2488 8.1096C16.4497 7.90868 16.5625 7.63621 16.5625 7.3521C16.5625 7.068 16.4497 6.79553 16.2488 6.5946Z" fill="#1B1B1C"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="user-select__abs">
+                <div class="user-select__option selected" data-value="1">3.4L</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Production machines/Construction</div>
+                <div class="user-select__option" data-value="2">Production machines/Construction</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="user__input">
           <div class="user__input-label">Ecu Type</div>
           <div class="user__input-el">
-            <input type="text" name="ecu-type" value="" required="">
+            <div class="user-select user-select_input">
+              <input class="user-select__input" type="hidden">
+              <div class="user-select__current">
+                <div class="user-select__current-title">Bosch MD1CE101</div>
+                <div class="user-select__current-svg"><svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.2488 6.5946C16.0479 6.39374 15.7754 6.2809 15.4913 6.2809C15.2072 6.2809 14.9347 6.39374 14.7338 6.5946L9.43023 11.8982L4.12666 6.5946C3.92458 6.39943 3.65394 6.29144 3.37301 6.29388C3.09209 6.29632 2.82336 6.409 2.62471 6.60765C2.42606 6.80631 2.31338 7.07503 2.31094 7.35596C2.30849 7.63688 2.41649 7.90753 2.61166 8.1096L8.67273 14.1707C8.87365 14.3715 9.14612 14.4844 9.43023 14.4844C9.71433 14.4844 9.98681 14.3715 10.1877 14.1707L16.2488 8.1096C16.4497 7.90868 16.5625 7.63621 16.5625 7.3521C16.5625 7.068 16.4497 6.79553 16.2488 6.5946Z" fill="#1B1B1C"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="user-select__abs">
+                <div class="user-select__option selected" data-value="1">Bosch MD1CE101</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Agriculture</div>
+                <div class="user-select__option" data-value="2">Boat/JET SKI</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+                <div class="user-select__option" data-value="1">Production machines/Construction</div>
+                <div class="user-select__option" data-value="2">Production machines/Construction</div>
+                <div class="user-select__option" data-value="3">Bus</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

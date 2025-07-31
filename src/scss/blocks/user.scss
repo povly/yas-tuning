@@ -420,6 +420,15 @@
       }
     }
 
+    form {
+      display: inline-block;
+    }
+
+    svg {
+      display: inline;
+      vertical-align: middle;
+    }
+
     tr {
       &:first-child {
         th {
@@ -1816,7 +1825,7 @@
 
     &__abs {
       position: absolute;
-      z-index: 2;
+      z-index: 22;
       top: 100%;
       left: 0;
       width: 100%;

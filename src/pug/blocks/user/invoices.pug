@@ -20,7 +20,7 @@
         #user__table-container
           .user__main-header.user__main-header_download
             .user__main-header-left
-              .user__date.user__date_invoices(hx-get="/php/invoices-date.php" hx-target="#user__table-container" hx-swapp="outerHTML" hx-include=".user__date-input" hx-trigger="userDateSelected")
+              .user__date.user__date_invoices(data-start-date="2024-01-15" data-end-date="2024-01-25" hx-get="/php/invoices-date.php" hx-target="#user__table-container" hx-swapp="outerHTML" hx-include=".user__date-input" hx-trigger="userDateSelected")
                 .user__date-item
                   input(type="hidden" name="date").user__date-input
                   .user__date-icon

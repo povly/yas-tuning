@@ -142,7 +142,12 @@
     }
 
     &._405 {
-      --error-item-margin-top: -14px;
+      --error-item-margin-top: -6px;
+      --error-title-size: 20px;
+
+      .server-error__title {
+        -webkit-text-stroke-width: 2px;
+      }
     }
 
     &._user-block {

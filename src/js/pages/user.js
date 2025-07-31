@@ -119,6 +119,31 @@ document.addEventListener('DOMContentLoaded', () => {
     dateElement.classList.toggle('active');
   });
 
+  function checkAndApplyDatesFromAttributes(dateElement) {
+    const startDate = dateElement.dataset.startDate;
+    const endDate = dateElement.dataset.endDate;
+
+    if (startDate && endDate) {
+      // Преобразуем строки в объекты Date
+      const date1 = new Date(startDate);
+      const date2 = new Date(endDate);
+
+      // Обновляем отображение
+      const formatOptions = {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+      };
+      const dateStr1 = date1.toLocaleDateString('ru-RU', formatOptions);
+      const dateStr2 = date2.toLocaleDateString('ru-RU', formatOptions);
+
+      return {
+        selectDates: [startDate, endDate],
+        text: `${dateStr1} - ${dateStr2}`
+      };
+    }
+  }
+
   function initCalendar(dateElement) {
     if (dateElement.dataset.calendarInitialized) return;
 
@@ -126,7 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const title = dateElement.querySelector('.user__date-title');
     const _calendar = dateElement.querySelector('.user__date-calendar');
 
-    const calendar = new Calendar(_calendar, {
+    const selectedDates = checkAndApplyDatesFromAttributes(dateElement);
+
+    const options = {
       layouts: {
         multiple: `
           <div class="vc-controls" data-vc="controls" role="toolbar">
@@ -231,9 +258,15 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         );
       },
-    });
+      selectedDates: selectedDates?.selectDates ? [`${selectedDates.selectDates[0]}-${selectedDates.selectDates[1]}`] : [],
+    };
+
+    console.log(selectedDates);
+
+    const calendar = new Calendar(_calendar, options);
 
     calendar.init();
+
     dateElement.dataset.calendarInitialized = 'true';
 
     // Используем делегирование событий для кнопки reset
@@ -271,6 +304,10 @@ document.addEventListener('DOMContentLoaded', () => {
           });
 
           option.classList.add('selected');
+
+          // Создаём и отправляем событие change
+          const changeEvent = new Event('change', { bubbles: true });
+          input.dispatchEvent(changeEvent);
         });
       });
     });
