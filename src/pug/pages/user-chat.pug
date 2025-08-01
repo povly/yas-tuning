@@ -27,15 +27,25 @@ block footer
       });
 
       function initEventFiles(){
-        const fileInputs = document.querySelectorAll('#user__chat input[type="file"]');
-        fileInputs.forEach(input => {
-          input.addEventListener('change', function() {
-            if (this.files.length > 0) {
-              const form = this.closest('form');
-              showPreview(form, Array.from(this.files));
-            }
+          // Используем делегирование событий или переподписываемся каждый раз
+          const fileInputs = document.querySelectorAll('#user__chat input[type="file"]');
+          fileInputs.forEach(input => {
+              // Удалим предыдущие обработчики, чтобы избежать дублирования
+              input.removeEventListener('change', handleFileInputChange);
+              input.addEventListener('change', handleFileInputChange);
           });
-        });
+      }
+
+      function handleFileInputChange() {
+          if (this.files.length > 0) {
+              const form = this.closest('form');
+              // Инициализируем или обновляем наш пользовательский список файлов
+              this._selectedFiles = this._selectedFiles ? [...this._selectedFiles, ...Array.from(this.files)] : Array.from(this.files);
+              showPreview(form, this._selectedFiles); // Передаем весь актуальный список
+              // Обновляем input.files, чтобы он содержал все выбранные файлы
+              // (На случай, если showPreview вызван не из handleFileInputChange, например, из DnD)
+              updateInputFiles(this, this._selectedFiles);
+          }
       }
 
       initEventFiles();
@@ -185,27 +195,34 @@ block footer
 
       function showPreview(form, files) {
         let previewContainer = form.querySelector('.file-preview-container');
+        const fileInput = form.querySelector('input[type="file"]');
+        if (!fileInput) return; // На всякий случай
+
+        // Обновляем пользовательский список файлов в input
+        fileInput._selectedFiles = files;
+        // Обновляем и само свойство files input, чтобы изменения вступили в силу при submit
+        updateInputFiles(fileInput, files);
+
         if (!previewContainer) {
           previewContainer = document.createElement('div');
           previewContainer.className = 'file-preview-container';
           form.insertBefore(previewContainer, form.querySelector('.user__chat-fields'));
           document.querySelector('#user__chat').classList.add('_with-files');
         }
-
         let previewHtml = '<div class="preview-list">';
-
         files.forEach((file, index) => {
+          // Используем уникальный идентификатор или индекс из списка files
+          const dataIndex = index;
           if (file.type.startsWith('image/')) {
-            // Для изображений создаем превью
             previewHtml += `
-              <div class="preview-item preview-item_img" data-file-index="${index}">
+              <div class="preview-item preview-item_img" data-file-internal-index="${dataIndex}">
                 <div class="preview-image-wrapper">
-                  <img src="" alt="Preview" class="preview-image" data-file-index="${index}">
+                  <img src="" alt="Preview" class="preview-image" data-file-internal-index="${dataIndex}">
                 </div>
                 <div class="preview-info">
                   <div class="preview-filename">${file.name}</div>
                 </div>
-                <button type="button" class="preview-remove" onclick="removePreviewItem(this, ${index})">
+                <button type="button" class="preview-remove" onclick="removePreviewItem(this, ${dataIndex})">
                   <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M7.712 1.712C7.73989 1.68411 7.76202 1.65099 7.77711 1.61455C7.79221 1.5781 7.79998 1.53904 7.79998 1.4996C7.79998 1.46015 7.79221 1.42109 7.77711 1.38465C7.76202 1.3482 7.73989 1.31509 7.712 1.2872C7.6841 1.2593 7.65099 1.23718 7.61455 1.22208C7.5781 1.20699 7.53904 1.19922 7.4996 1.19922C7.46015 1.19922 7.42109 1.20699 7.38465 1.22208C7.3482 1.23718 7.31509 1.2593 7.2872 1.2872L4.4996 4.0754L1.712 1.2872C1.68411 1.2593 1.65099 1.23718 1.61455 1.22208C1.5781 1.20699 1.53904 1.19922 1.4996 1.19922C1.46015 1.19922 1.42109 1.20699 1.38465 1.22208C1.3482 1.23718 1.31509 1.2593 1.2872 1.2872C1.2593 1.31509 1.23718 1.3482 1.22208 1.38465C1.20699 1.42109 1.19922 1.46015 1.19922 1.4996C1.19922 1.53904 1.20699 1.5781 1.22208 1.61455C1.23718 1.65099 1.2593 1.68411 1.2872 1.712L4.0754 4.4996L1.2872 7.2872C1.23087 7.34353 1.19922 7.41993 1.19922 7.4996C1.19922 7.57926 1.23087 7.65567 1.2872 7.712C1.34353 7.76833 1.41993 7.79998 1.4996 7.79998C1.57926 7.79998 1.65567 7.76833 1.712 7.712L4.4996 4.9238L7.2872 7.712C7.34353 7.76833 7.41993 7.79998 7.4996 7.79998C7.57926 7.79998 7.65567 7.76833 7.712 7.712C7.76833 7.65567 7.79998 7.57926 7.79998 7.4996C7.79998 7.41993 7.76833 7.34353 7.712 7.2872L4.9238 4.4996L7.712 1.712Z" fill="#1B1B1C"/>
                   </svg>
@@ -213,14 +230,13 @@ block footer
               </div>
             `;
           } else {
-            // Для файлов создаем превью с иконкой
             previewHtml += `
-              <div class="preview-item preview-item_file" data-file-index="${index}">
+              <div class="preview-item preview-item_file" data-file-internal-index="${dataIndex}">
                 <div class="preview-info">
                   <div class="preview-filename">${file.name}</div>
                   <div class="preview-subtitle">File</div>
                 </div>
-                <button type="button" class="preview-remove" onclick="removePreviewItem(this, ${index})">
+                <button type="button" class="preview-remove" onclick="removePreviewItem(this, ${dataIndex})">
                   <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M7.712 1.712C7.73989 1.68411 7.76202 1.65099 7.77711 1.61455C7.79221 1.5781 7.79998 1.53904 7.79998 1.4996C7.79998 1.46015 7.79221 1.42109 7.77711 1.38465C7.76202 1.3482 7.73989 1.31509 7.712 1.2872C7.6841 1.2593 7.65099 1.23718 7.61455 1.22208C7.5781 1.20699 7.53904 1.19922 7.4996 1.19922C7.46015 1.19922 7.42109 1.20699 7.38465 1.22208C7.3482 1.23718 7.31509 1.2593 7.2872 1.2872L4.4996 4.0754L1.712 1.2872C1.68411 1.2593 1.65099 1.23718 1.61455 1.22208C1.5781 1.20699 1.53904 1.19922 1.4996 1.19922C1.46015 1.19922 1.42109 1.20699 1.38465 1.22208C1.3482 1.23718 1.31509 1.2593 1.2872 1.2872C1.2593 1.31509 1.23718 1.3482 1.22208 1.38465C1.20699 1.42109 1.19922 1.46015 1.19922 1.4996C1.19922 1.53904 1.20699 1.5781 1.22208 1.61455C1.23718 1.65099 1.2593 1.68411 1.2872 1.712L4.0754 4.4996L1.2872 7.2872C1.23087 7.34353 1.19922 7.41993 1.19922 7.4996C1.19922 7.57926 1.23087 7.65567 1.2872 7.712C1.34353 7.76833 1.41993 7.79998 1.4996 7.79998C1.57926 7.79998 1.65567 7.76833 1.712 7.712L4.4996 4.9238L7.2872 7.712C7.34353 7.76833 7.41993 7.79998 7.4996 7.79998C7.57926 7.79998 7.65567 7.76833 7.712 7.712C7.76833 7.65567 7.79998 7.57926 7.79998 7.4996C7.79998 7.41993 7.76833 7.34353 7.712 7.2872L4.9238 4.4996L7.712 1.712Z" fill="#1B1B1C"/>
                   </svg>
@@ -229,16 +245,15 @@ block footer
             `;
           }
         });
-
         previewHtml += '</div>';
         previewContainer.innerHTML = previewHtml;
-
         // Загружаем изображения для превью
         files.forEach((file, index) => {
           if (file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onload = function(e) {
-              const img = previewContainer.querySelector(`.preview-image[data-file-index="${index}"]`);
+              // Используем data-file-internal-index для поиска
+              const img = previewContainer.querySelector(`.preview-image[data-file-internal-index="${index}"]`);
               if (img) {
                 img.src = e.target.result;
               }
@@ -248,27 +263,203 @@ block footer
         });
       }
 
-      function removePreviewItem(button, index) {
+      function removePreviewItem(button, indexToRemove) {
         const previewItem = button.closest('.preview-item');
         const form = button.closest('form');
         const fileInput = form.querySelector('input[type="file"]');
 
-        previewItem.remove();
+        if (fileInput && fileInput._selectedFiles) {
+            // Создаем новый список файлов, исключая файл по indexToRemove
+            const newFileList = fileInput._selectedFiles.filter((_, index) => index !== indexToRemove);
+            // Обновляем пользовательский список и сам input.files
+            fileInput._selectedFiles = newFileList;
+            updateInputFiles(fileInput, newFileList);
 
-        // Проверяем, остались ли еще превью
-        const remainingItems = form.querySelectorAll('.preview-item');
-        if (remainingItems.length === 0) {
-          clearPreview(form);
+             // Обновляем превью с новым списком
+             showPreview(form, newFileList); // Это перерисует превью с правильными индексами
+
+             // Проверяем, остались ли еще превью (после обновления)
+             const remainingItems = form.querySelectorAll('.preview-item');
+             if (remainingItems.length === 0) {
+               clearPreview(form); // Это очистит контейнер и класс
+             }
+        } else {
+            // Если каким-то образом _selectedFiles нет, просто удаляем элемент DOM
+            // и проверяем на пустоту
+            if(previewItem) previewItem.remove();
+            const remainingItemsCheck = form.querySelectorAll('.preview-item');
+            if (remainingItemsCheck.length === 0) {
+               clearPreview(form);
+            }
         }
       }
 
       function clearPreview(form) {
         const previewContainer = form.querySelector('.file-preview-container');
+        const fileInput = form.querySelector('input[type="file"]');
         if (previewContainer) {
           previewContainer.remove();
           document.querySelector('#user__chat').classList.remove('_with-files');
         }
+        // Очищаем список файлов и сам input
+        if (fileInput) {
+            fileInput._selectedFiles = [];
+            // Очищаем input.files. Простое присваивание пустого массива не работает,
+            // нужно использовать DataTransfer.
+            const dataTransfer = new DataTransfer();
+            fileInput.files = dataTransfer.files;
+            // Или альтернативно, можно просто сбросить value, если файлы управляются только через _selectedFiles
+            // fileInput.value = '';
+        }
       }
+
+      function updateInputFiles(fileInput, fileList) {
+          const dataTransfer = new DataTransfer();
+          fileList.forEach(file => dataTransfer.items.add(file));
+          fileInput.files = dataTransfer.files;
+      }
+
+
+      // --- Drag and Drop функциональность ---
+      function initDragAndDrop() {
+        const chatBottomArea = document.querySelector('#user__chat .user__chat-right-content.active');
+
+        // Проверим, есть ли уже drop zone, чтобы не дублировать
+        if (chatBottomArea && !chatBottomArea.querySelector('.chat-drop-zone')) {
+          const chatForm = chatBottomArea.querySelector('form'); // Нам нужна форма для доступа к input и preview
+          const fileInput = chatForm ? chatForm.querySelector('input[type="file"]') : null;
+
+          if (!fileInput) {
+            console.warn('Input file not found for Drag and Drop initialization.');
+            return; // Если нет input, инициализация бессмысленна
+          }
+
+          // Создадим элемент для визуальной обратной связи при перетаскивании
+          const dropZone = document.createElement('div');
+          dropZone.className = 'chat-drop-zone';
+          dropZone.textContent = 'Drop files here';
+          dropZone.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(245, 110, 15, 0.6); /* Оранжевый оверлей */
+            border: 2px dashed #F56E0F;
+            border-radius: 10px; /* Скругление */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #000;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+          `;
+
+          // Вставим drop zone внутрь .user__chat-bottom
+          chatBottomArea.style.position = 'relative'; // Убедимся, что родитель позиционированный
+          chatBottomArea.appendChild(dropZone);
+
+          let dragCounter = 0; // Счетчик для корректной работы с вложенными элементами
+
+          // Функция для обработки файлов из drag and drop
+          function handleDroppedFiles(files) {
+            if (files.length > 0 && chatForm) { // Убедимся, что форма существует
+                // Используем существующую логику показа превью
+                showPreview(chatForm, Array.from(files));
+                // Обновляем оригинальный input, чтобы файлы отправлялись при submit
+                const dataTransfer = new DataTransfer();
+                for (let i = 0; i < files.length; i++) {
+                    dataTransfer.items.add(files[i]);
+                }
+                fileInput.files = dataTransfer.files;
+            }
+          }
+
+          // Предотвращаем стандартное поведение браузера
+          function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          // Подсветка при перетаскивании
+          function highlight(e) {
+            dragCounter++;
+            if (dragCounter === 1) { // Показываем только при первом входе в зону
+              dropZone.style.opacity = '1';
+            }
+          }
+
+          function unhighlight(e) {
+            dragCounter--;
+            if (dragCounter <= 0) { // Скрываем, когда окончательно вышли (<= на всякий случай)
+              dragCounter = 0; // Сбросим, если вдруг ушло в минус
+              dropZone.style.opacity = '0';
+            }
+          }
+
+          // Обработка сброшенных файлов
+          function handleDrop(e) {
+            dragCounter = 0; // Сбросим счетчик
+            dropZone.style.opacity = '0';
+
+            let dt = e.dataTransfer;
+            let files = dt.files;
+
+            handleDroppedFiles(files);
+          }
+
+          // --- Назначение обработчиков ---
+
+          // Предотвращаем стандартное поведение браузера на всей области чата или лучше на самой drop zone area?
+          // Лучше на самой области, куда добавляем drop zone, и на document на всякий случай
+          ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            chatBottomArea.addEventListener(eventName, preventDefaults, false);
+            // Также на document, чтобы избежать редиректа, если курсор выйдет за пределы области быстро
+            document.addEventListener(eventName, preventDefaults, false);
+          });
+
+          // Подсветка при перетаскивании
+          ['dragenter', 'dragover'].forEach(eventName => {
+            chatBottomArea.addEventListener(eventName, highlight, false);
+          });
+
+          ['dragleave', 'drop'].forEach(eventName => {
+            chatBottomArea.addEventListener(eventName, unhighlight, false);
+          });
+
+          // Обработка сброшенных файлов
+          chatBottomArea.addEventListener('drop', handleDrop, false);
+
+          // --- Конец назначения обработчиков ---
+
+          console.log('Drag and Drop initialized for chat area');
+        } else if(chatBottomArea) {
+            console.log('Drag and Drop already initialized for this chat area');
+        } else {
+            console.log('Chat area not found for Drag and Drop initialization');
+        }
+      }
+      // --- Конец Drag and Drop функциональность ---
+
+
+
+      // Инициализируем обработчики файлов и Drag and Drop при первой загрузке
+      // (маловероятно, что #user__chat уже есть, но на всякий случай)
+      initEventFiles();
+      initDragAndDrop(); // Попробуем инициализировать, если HTML уже есть
+
+      document.body.addEventListener('htmx:afterSettle', function(evt) {
+        if (document.querySelector('#user__chat') || document.querySelector('.user__chat-bottom')) {
+          // Переинициализируем обработчики файлов для новых input'ов
+          initEventFiles();
+          // Переинициализируем Drag and Drop для новых областей
+          initDragAndDrop();
+        }
+      });
 
       window.sendMessage = sendMessage;
       window.removePreviewItem = removePreviewItem;
@@ -281,4 +472,5 @@ block footer
       window.removePreviewItem = removePreviewItem;
       window.clearPreview = clearPreview;
       window.initEventFiles = initEventFiles;
+      window.initDragAndDrop = initDragAndDrop;
     });

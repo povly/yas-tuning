@@ -357,6 +357,21 @@
         top: 20px;
       }
     }
+
+    &-select {
+      &_status {
+        .user {
+          &-select {
+            &__abs {
+              top: auto;
+              bottom: 100%;
+              margin-bottom: -6px;
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
   }
 
   .order {
