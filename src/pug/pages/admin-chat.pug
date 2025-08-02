@@ -322,12 +322,15 @@ block footer
 
       // --- Drag and Drop функциональность ---
       function initDragAndDrop() {
-        const chatBottomArea = document.querySelector('#user__chat .user__chat-right-content.active');
+        const chatBottomArea = document.querySelector('#user__chat .user__chat-content');
+
 
         // Проверим, есть ли уже drop zone, чтобы не дублировать
         if (chatBottomArea && !chatBottomArea.querySelector('.chat-drop-zone')) {
-          const chatForm = chatBottomArea.querySelector('form'); // Нам нужна форма для доступа к input и preview
+          const chatForm = chatBottomArea.closest('.user__chat-right').querySelector('form'); // Нам нужна форма для доступа к input и preview
           const fileInput = chatForm ? chatForm.querySelector('input[type="file"]') : null;
+
+          console.log(chatForm);
 
           if (!fileInput) {
             console.warn('Input file not found for Drag and Drop initialization.');
@@ -337,26 +340,25 @@ block footer
           // Создадим элемент для визуальной обратной связи при перетаскивании
           const dropZone = document.createElement('div');
           dropZone.className = 'chat-drop-zone';
-          dropZone.textContent = 'Drop files here';
-          dropZone.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(245, 110, 15, 0.6); /* Оранжевый оверлей */
-            border: 2px dashed #F56E0F;
-            border-radius: 10px; /* Скругление */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 700;
-            color: #000;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+          dropZone.innerHTML = `
+            <div class="chat-drop-zone__content">
+              <div class="chat-drop-zone__content-inner">
+                  <div class="chat-drop-zone__content-title">Drop files here</div>
+                  <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0.5" width="40" height="40" rx="20" fill="#FF8D21"/>
+                  <g clip-path="url(#clip0_2190_9695)">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M14 12C13.4696 12 12.9609 12.2107 12.5858 12.5858C12.2107 12.9609 12 13.4696 12 14V26C12 26.5304 12.2107 27.0391 12.5858 27.4142C12.9609 27.7893 13.4696 28 14 28H20.29C19.9028 26.703 19.8998 25.3216 20.2816 24.0231C20.6633 22.7245 21.4134 21.5644 22.4409 20.6834C23.4684 19.8023 24.7293 19.2381 26.0709 19.0589C27.4125 18.8798 28.7773 19.0934 30 19.674V17C30 16.4696 29.7893 15.9609 29.4142 15.5858C29.0391 15.2107 28.5304 15 28 15H22.07C21.7408 15 21.4167 14.9188 21.1264 14.7636C20.8362 14.6083 20.5887 14.3838 20.406 14.11L19.594 12.89C19.4113 12.6162 19.1638 12.3917 18.8736 12.2364C18.5833 12.0812 18.2592 12 17.93 12H14Z" fill="#F5F5F5"/>
+                  <path d="M20.29 28V29C20.4456 28.9999 20.5991 28.9635 20.7382 28.8937C20.8773 28.8238 20.9982 28.7225 21.0912 28.5977C21.1842 28.4729 21.2468 28.3281 21.2741 28.1749C21.3013 28.0217 21.2924 27.8642 21.248 27.715L20.29 28ZM30 19.674L29.57 20.577C29.7224 20.6496 29.8908 20.6824 30.0593 20.6724C30.2279 20.6624 30.3912 20.6099 30.5339 20.5197C30.6767 20.4295 30.7943 20.3047 30.8758 20.1568C30.9573 20.009 31 19.8428 31 19.674H30ZM13 14C13 13.7348 13.1054 13.4804 13.2929 13.2929C13.4804 13.1054 13.7348 13 14 13V11C13.2044 11 12.4413 11.3161 11.8787 11.8787C11.3161 12.4413 11 13.2044 11 14H13ZM13 26V14H11V26H13ZM14 27C13.7348 27 13.4804 26.8946 13.2929 26.7071C13.1054 26.5196 13 26.2652 13 26H11C11 26.7956 11.3161 27.5587 11.8787 28.1213C12.4413 28.6839 13.2044 29 14 29V27ZM20.29 27H14V29H20.29V27ZM21.248 27.715C21.0828 27.1583 20.9992 26.5807 21 26H19C19 26.793 19.116 27.56 19.331 28.285L21.248 27.715ZM21 26C21 24.4087 21.6321 22.8826 22.7574 21.7574C23.8826 20.6321 25.4087 20 27 20V18C24.8783 18 22.8434 18.8429 21.3431 20.3431C19.8429 21.8434 19 23.8783 19 26H21ZM27 20C27.889 19.9983 28.7671 20.1954 29.57 20.577L30.43 18.77C29.3579 18.2622 28.1863 17.9992 27 18V20ZM29 17V19.674H31V17H29ZM28 16C28.2652 16 28.5196 16.1054 28.7071 16.2929C28.8946 16.4804 29 16.7348 29 17H31C31 16.2044 30.6839 15.4413 30.1213 14.8787C29.5587 14.3161 28.7956 14 28 14V16ZM22.07 16H28V14H22.07V16ZM19.574 14.664C19.8479 15.0749 20.2191 15.4119 20.6545 15.6449C21.0899 15.878 21.5761 16 22.07 16V14C21.9054 14 21.7434 13.9594 21.5982 13.8818C21.4531 13.8042 21.3293 13.6919 21.238 13.555L19.574 14.664ZM18.762 13.445L19.574 14.664L21.238 13.555L20.426 12.335L18.762 13.445ZM17.93 13C18.0946 13 18.2566 13.0406 18.4018 13.1182C18.5469 13.1958 18.6707 13.3081 18.762 13.445L20.426 12.335C20.152 11.9243 19.7808 11.5875 19.3453 11.3546C18.9099 11.1217 18.4238 10.9999 17.93 11V13ZM14 13H17.93V11H14V13Z" fill="#F5F5F5"/>
+                  <path d="M27 23V26M27 26V29M27 26H24M27 26H30" stroke="#F5F5F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_2190_9695">
+                  <rect width="24" height="24" fill="white" transform="translate(8.5 8)"/>
+                  </clipPath>
+                  </defs>
+                  </svg>
+              </div>
+            </div>
           `;
 
           // Вставим drop zone внутрь .user__chat-bottom
