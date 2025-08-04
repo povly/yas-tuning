@@ -38,13 +38,23 @@ block footer
 
       function handleFileInputChange() {
           if (this.files.length > 0) {
-              const form = this.closest('form');
-              // Инициализируем или обновляем наш пользовательский список файлов
-              this._selectedFiles = this._selectedFiles ? [...this._selectedFiles, ...Array.from(this.files)] : Array.from(this.files);
-              showPreview(form, this._selectedFiles); // Передаем весь актуальный список
-              // Обновляем input.files, чтобы он содержал все выбранные файлы
-              // (На случай, если showPreview вызван не из handleFileInputChange, например, из DnD)
-              updateInputFiles(this, this._selectedFiles);
+             const form = this.closest('form');
+
+            // 1. Получаем текущий список выбранных файлов из нашего пользовательского свойства
+            // Если его нет, инициализируем пустым массивом
+            let currentSelectedFiles = this._selectedFiles || [];
+
+            // 2. Добавляем новые файлы к существующему списку
+            // Используем Array.from для преобразования FileList в массив
+            // и ... для создания нового массива, объединяющего старые и новые файлы
+            this._selectedFiles = [...currentSelectedFiles, ...Array.from(this.files)];
+
+            // 3. Показываем превью для ВСЕХ файлов (старых и новых)
+            showPreview(form, this._selectedFiles);
+
+            // 4. Обновляем input.files, чтобы он содержал все выбранные файлы
+            // Это важно, например, если форма будет отправлена обычным способом
+            updateInputFiles(this, this._selectedFiles);
           }
       }
 
@@ -370,14 +380,20 @@ block footer
           // Функция для обработки файлов из drag and drop
           function handleDroppedFiles(files) {
             if (files.length > 0 && chatForm) { // Убедимся, что форма существует
-                // Используем существующую логику показа превью
-                showPreview(chatForm, Array.from(files));
-                // Обновляем оригинальный input, чтобы файлы отправлялись при submit
-                const dataTransfer = new DataTransfer();
-                for (let i = 0; i < files.length; i++) {
-                    dataTransfer.items.add(files[i]);
-                }
-                fileInput.files = dataTransfer.files;
+                // Получаем текущий список выбранных файлов
+                let currentSelectedFiles = fileInput._selectedFiles || [];
+
+                // Добавляем новые файлы к существующему списку
+                const newFileList = [...currentSelectedFiles, ...Array.from(files)];
+
+                // Обновляем пользовательский список файлов
+                fileInput._selectedFiles = newFileList;
+
+                // Показываем превью для ВСЕХ файлов (старых и новых)
+                showPreview(chatForm, newFileList);
+
+                // Обновляем input.files, чтобы он содержал все выбранные файлы
+                updateInputFiles(fileInput, newFileList);
             }
           }
 

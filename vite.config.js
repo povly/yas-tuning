@@ -425,11 +425,7 @@ export default defineConfig(({ command, mode }) => {
           drop_debugger: true,
           pure_funcs: ['console.log', 'console.info', 'console.debug'],
         },
-        mangle: {
-          // Безопасный mangling для избежания конфликтов
-          reserved: ['$', 'jQuery', 'window', 'document'],
-          properties: false,
-        },
+        mangle: false, // Полностью отключаем минификацию имен переменных
         format: {
           comments: false,
         },

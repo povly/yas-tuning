@@ -1916,22 +1916,22 @@
       &-items {
         padding-top: 22px;
         height: 619px;
-        overflow-y: auto;
+        overflow-y: scroll;
         scrollbar-width: thin;
-        scrollbar-color: var(--999999) #302e2e;
+        scrollbar-color: var(--999999) #F5F5F5;
 
         &::-webkit-scrollbar {
-          width: 12px;
+          width: 8px;
         }
 
         &::-webkit-scrollbar-track {
-          background: #302e2e;
+          background: #F5F5F5;
         }
 
         &::-webkit-scrollbar-thumb {
           background-color: var(--999999);
           border-radius: 5px;
-          border: 3px solid #302e2e;
+          border: 2px solid #F5F5F5;
         }
       }
 
