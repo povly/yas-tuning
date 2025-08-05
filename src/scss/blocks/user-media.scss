@@ -472,7 +472,10 @@
       &-filters {
         justify-content: space-between;
         gap: 20px;
-        border-right: 0;
+
+        &::after {
+          display: none;
+        }
       }
 
       &-tickets {
@@ -526,7 +529,9 @@
       }
 
       &-search {
-        border-right: 0;
+        &::after {
+          display: none;
+        }
       }
 
       &-messages {

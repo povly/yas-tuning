@@ -1907,7 +1907,16 @@
     &-search {
       padding: 10px;
       position: relative;
-      border-right: 4px solid #f5f5f5;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        right: 0;
+        top: 0;
+        background: #f5f5f5;
+      }
 
       input {
         background: var(--f5f5f5);
@@ -1977,11 +1986,21 @@
     }
 
     &-filters {
-      border-right: 4px solid #f5f5f5;
       padding: 6px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        right: 0;
+        top: 0;
+        background: #f5f5f5;
+      }
     }
 
     &-filter {
