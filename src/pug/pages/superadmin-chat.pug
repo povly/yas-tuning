@@ -18,7 +18,7 @@ block content
 block footer
   include ../components/footer/footer
   include ../components/modal/profile-exit
-  script.
+   script.
     document.addEventListener('DOMContentLoaded', function() {
       document.addEventListener('htmx:beforeSwap', function(evt) {
         if (evt.detail.target.id === 'order-modal-container') {
@@ -339,8 +339,6 @@ block footer
         if (chatBottomArea && !chatBottomArea.querySelector('.chat-drop-zone')) {
           const chatForm = chatBottomArea.closest('.user__chat-right').querySelector('form'); // Нам нужна форма для доступа к input и preview
           const fileInput = chatForm ? chatForm.querySelector('input[type="file"]') : null;
-
-          console.log(chatForm);
 
           if (!fileInput) {
             console.warn('Input file not found for Drag and Drop initialization.');

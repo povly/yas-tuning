@@ -429,6 +429,12 @@
   .user {
     padding-top: 14px;
 
+    .simplebar {
+      &-track {
+        background: transparent;
+      }
+    }
+
     &__download {
       &-btn {
         padding: 14px 20px;
@@ -466,6 +472,7 @@
       &-filters {
         justify-content: space-between;
         gap: 20px;
+        border-right: 0;
       }
 
       &-tickets {
@@ -516,6 +523,10 @@
 
       &-input {
         padding: 16px 12px;
+      }
+
+      &-search {
+        border-right: 0;
       }
 
       &-messages {

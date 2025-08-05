@@ -340,8 +340,6 @@ block footer
           const chatForm = chatBottomArea.closest('.user__chat-right').querySelector('form'); // Нам нужна форма для доступа к input и preview
           const fileInput = chatForm ? chatForm.querySelector('input[type="file"]') : null;
 
-          console.log(chatForm);
-
           if (!fileInput) {
             console.warn('Input file not found for Drag and Drop initialization.');
             return; // Если нет input, инициализация бессмысленна

@@ -20,13 +20,13 @@
                 </svg>
             .user__chat-tickets
               .user__chat-filters
-                .user__chat-filter(data-name="all" hx-get="/php/superadmin/tickets-list.php" hx-target=".user__chat-tickets-items" hx-trigger="filterChat" hx-swap="innerHTML")
+                .user__chat-filter(data-name="all" hx-get="/php/superadmin/tickets-list.php" hx-target=".user__chat-tickets-items .simplebar-content" hx-trigger="filterChat" hx-swap="innerHTML")
                   .user__chat-filter-title All
                   .user__chat-filter-count 2
-                .user__chat-filter(data-name="open" hx-get="/php/superadmin/tickets-list.php" hx-target=".user__chat-tickets-items" hx-trigger="filterChat" hx-swap="innerHTML")
+                .user__chat-filter(data-name="open" hx-get="/php/superadmin/tickets-list.php" hx-target=".user__chat-tickets-items .simplebar-content" hx-trigger="filterChat" hx-swap="innerHTML")
                   .user__chat-filter-title Open
                   .user__chat-filter-count 2
-                .user__chat-filter(data-name="close" hx-get="/php/superadmin/tickets-list.php" hx-target=".user__chat-tickets-items" hx-trigger="filterChat" hx-swap="innerHTML")
+                .user__chat-filter(data-name="close" hx-get="/php/superadmin/tickets-list.php" hx-target=".user__chat-tickets-items .simplebar-content" hx-trigger="filterChat" hx-swap="innerHTML")
                   .user__chat-filter-title Close
               .user__chat-tickets-items
                 .user__chat-tickets-item.unread(hx-get="/php/superadmin/chat-ticket-view.php?ticket_id=123" hx-trigger="selectTicket" hx-target=".user__chat-right-content" hx-swap="innerHTML")

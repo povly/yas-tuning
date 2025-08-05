@@ -33,6 +33,23 @@
   position: relative;
   z-index: 4;
 
+  .simplebar {
+    &-scrollbar {
+      &::before {
+        background: #999999;
+        opacity: 1;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    &-track {
+      width: 4px;
+      background: #F5F5F5;
+      visibility: visible!important;
+    }
+  }
+
   .header {
     &__logo {
       flex-shrink: 0;
@@ -1890,6 +1907,7 @@
     &-search {
       padding: 10px;
       position: relative;
+      border-right: 4px solid #f5f5f5;
 
       input {
         background: var(--f5f5f5);
@@ -1911,28 +1929,9 @@
     }
 
     &-tickets {
-      padding-top: 6px;
-
       &-items {
         padding-top: 22px;
         height: 619px;
-        overflow-y: scroll;
-        scrollbar-width: thin;
-        scrollbar-color: var(--999999) #F5F5F5;
-
-        &::-webkit-scrollbar {
-          width: 8px;
-        }
-
-        &::-webkit-scrollbar-track {
-          background: #F5F5F5;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background-color: var(--999999);
-          border-radius: 5px;
-          border: 2px solid #F5F5F5;
-        }
       }
 
       &-item {
@@ -1978,7 +1977,8 @@
     }
 
     &-filters {
-      padding: 0 20px;
+      border-right: 4px solid #f5f5f5;
+      padding: 6px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;

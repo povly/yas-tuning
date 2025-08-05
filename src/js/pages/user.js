@@ -1,3 +1,5 @@
+import SimpleBar from "simplebar";
+window.SimpleBar = SimpleBar;
 document.addEventListener('DOMContentLoaded', () => {
   const searchBtn = document.querySelector('.user__icon-btn--search');
   const searchContainer = document.querySelector('.user__search-container');
@@ -40,6 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
       notificationsBtn.classList.remove('active');
     }
   });
+
+  function ticketsScrollBarInit(){
+    const ticketsContainer = document.querySelector('.user__chat-tickets-items');
+    if (ticketsContainer) {
+      new SimpleBar(ticketsContainer, { autoHide: false });
+    }
+  }
+
+  ticketsScrollBarInit();
+
+  window.ticketsScrollBarInit = ticketsScrollBarInit;
 
   // Остановка всплытия событий внутри контейнеров
   searchContainer.addEventListener('click', (e) => {
@@ -261,7 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
       selectedDates: selectedDates?.selectDates ? [`${selectedDates.selectDates[0]}-${selectedDates.selectDates[1]}`] : [],
     };
 
-    console.log(selectedDates);
 
     const calendar = new Calendar(_calendar, options);
 
