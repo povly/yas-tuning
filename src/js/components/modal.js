@@ -12,8 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Lock/unlock body scroll
     toggleBodyScroll(lock) {
+      this.getScrollWidth();
       document.body.style.overflow = lock ? 'hidden' : '';
+      document.body.classList.toggle('scroll-lock', lock);
       this.bodyScrollLock = lock;
+    }
+
+    getScrollWidth() {
+      const documentWidth = parseInt(document.documentElement.clientWidth);
+      const windowWidth = parseInt(window.innerWidth);
+      const scrollbarWidth = windowWidth - documentWidth;
+      document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
     }
 
     // Show modal
