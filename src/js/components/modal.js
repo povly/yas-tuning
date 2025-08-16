@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Lock/unlock body scroll
     toggleBodyScroll(lock) {
       this.getScrollWidth();
-      document.body.style.overflow = lock ? 'hidden' : '';
+      // document.body.style.overflow = lock ? 'hidden' : '';
       document.body.classList.toggle('scroll-lock', lock);
       this.bodyScrollLock = lock;
     }

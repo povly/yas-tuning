@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     searchBtn.classList.toggle('active');
 
     headerOverlay.classList.toggle('active');
+
+    const input = searchBtn.querySelector('input');
+    input.focus();
   });
 
   if (notificationsBtn) {

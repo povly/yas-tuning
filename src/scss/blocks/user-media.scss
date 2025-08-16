@@ -385,7 +385,6 @@
           padding: 40px 16px;
 
           &-table {
-            width: max-content;
             min-width: 100%;
           }
         }
@@ -722,7 +721,8 @@
     &__new {
       &-order {
         &-btn {
-          display: none;
+          padding: 15px 30px;
+          font-size: 14px;
         }
       }
     }
@@ -1116,6 +1116,15 @@
     &__label,
     &__value {
       padding: 10px 16px;
+    }
+  }
+
+  .order-detail-modal {
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    &__label, &__value {
+      padding: 15px 10px;
     }
   }
 }
