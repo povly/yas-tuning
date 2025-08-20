@@ -286,6 +286,14 @@
       cursor: pointer;
       position: relative;
 
+      &:hover {
+        color: #fab280;
+        
+        &::before {
+          display: none;
+        }
+      }
+
       &--active {
         &::before {
           content: '';
